@@ -1,21 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Insta from './src/Insta.js'
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Welcome To insta</Text>
-      </View>
+        <Insta />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
