@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
 export default class Insta extends Component {
+        componentDidMount() {
+            alert(Dimensions.get('window').width)
+        }
 
         render() {
             return(
                 <View style={{ flex:1, width:100+'%', height:100+'%' }}>
                     <View 
                         style={styles.tempNav} >
-                        <Text>SteemitGramm </Text>
+                        <Text style={{ fontSize:20 }}>SteemitGramm </Text>
 
                     </View>
                     <View style={styles.userBar} >
@@ -19,8 +22,8 @@ export default class Insta extends Component {
                                 />
                                 <Text>kerimSelmi </Text>
                             </View>
-                            <View> 
-                            
+                            <View style={{}}> 
+                                <Text style={{ fontSize:30 }}>...</Text>
                             </View>
                     
                     </View>
@@ -50,7 +53,8 @@ const styles = StyleSheet.create({
         height:50  , 
         backgroundColor:'#fff',
         flexDirection: 'row',
-        
+        paddingHorizontal: 10,
+        justifyContent:'space-between',
       },
     image:{
         width: 100+'%', 
