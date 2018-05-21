@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
       },
     image:{
-        width: this.state.screenWidth, 
+        width: 54,//this.state.screenWidth, 
         height: 416,
         backgroundColor:'#256555',
 
