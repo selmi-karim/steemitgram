@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
 export default class Insta extends Component {
-        componentDidMount() {
-            alert(Dimensions.get('window').width)
-        }
+       
 
         render() {
             return(
