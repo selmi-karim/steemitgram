@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
 export default class Insta extends Component {
-       
-
+        
         render() {
+            Image.getSize('https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg', (width, height) => {
+                console.log('w: '+width)
+                console.log('h: '+height)
+                
+            });
+            
             return(
-                <View style={{ flex:1, width:100+'%', height:100+'%' }}>
+                <View style={{ flex:1 }}>
                     <View 
                         style={styles.tempNav} >
                         <Text style={{ fontSize:20 }}>SteemitGramm </Text>
@@ -21,14 +26,14 @@ export default class Insta extends Component {
                                 <Text>kerimSelmi </Text>
                             </View>
                             <View style={{}}> 
-                                <Text style={{ fontSize:30 }}>...</Text>
+                                <Text style={{ fontSize:32 }}>...</Text>
                             </View>
                     
                     </View>
 
                     <Image 
                     style={styles.image}
-                    source={{uri:'http://pngimg.com/uploads/penguin/pinguin_PNG15.png'}} 
+                    source={{uri:'https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg'}} 
                     />
                 </View>
             )
@@ -56,7 +61,10 @@ const styles = StyleSheet.create({
       },
     image:{
         width: 100+'%', 
-        height: 100+'%'
+        height: 416,
+        backgroundColor:'#256555',
+        resizeMode: Image.resizeMode.contain,
+
     },
     userPicture: {
         height:40,
