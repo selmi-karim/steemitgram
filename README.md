@@ -2,11 +2,19 @@
 
 # Installation
 git clone https://gitlab.com/steemitgram/steemitgram-mobile.git
+
+```
 npm install
 npm start
+```
+
 or
+
+```
 yarn install
 yarn start
+```
+
 
 # Features:
  - Login screen
