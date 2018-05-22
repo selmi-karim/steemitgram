@@ -9,16 +9,17 @@ export default class Insta extends Component {
                 screenWidth: Dimensions.get('window').width,
                 screenHeight: Dimensions.get('window').height
             };
-        }
-        render() {
-            Image.getSize('https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg', (width, height) => {
-                console.log('w: '+width)
-                console.log('h: '+height)
-                
-            });
             
+            
+        }
+        
+        
+            
+        render() {
+            
+
             return(
-                <View style={{ flex:1 }}>
+                <View style={{ flex:1,width:100+'%',height:100+'%' }}>
                     <View 
                         style={styles.tempNav} >
                         <Text style={{ fontSize:20 }}>SteemitGramm </Text>
@@ -39,8 +40,9 @@ export default class Insta extends Component {
                     </View>
 
                     <Image 
-                    style={{}}
-                    source={{uri:'https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg'}} 
+                    style={{width:this.state.screenWidth,height:this.state.screenHeight/1.7,resizeMode:Image.resizeMode.contain}}
+                    source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ'}} 
+                    
                     />
                 </View>
             )
