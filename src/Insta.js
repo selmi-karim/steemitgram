@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
-
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
+import config from './components/config/index.js' 
 export default class Insta extends Component {
         constructor() {
             super();
             this.state = {
-                screenWidth = Dimensions.get('window').width,
-                screenHeight = Dimensions.get('window').height,
-            }
-        }    
-
+                screenWidth: Dimensions.get('window').width,
+                screenHeight: Dimensions.get('window').height
+            };  
+        }
         render() {
-            Image.getSize('https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg', (width, height) => {
-                console.log('w: '+width)
-                console.log('h: '+height)
-                
-            });
-            
             return(
-                <View style={{ flex:1 }}>
+                <View style={{ flex:1,width:100+'%',height:100+'%' }}>
+                    {/* header: app name,dimension */}
                     <View 
                         style={styles.tempNav} >
                         <Text style={{ fontSize:20 }}>SteemitGramm </Text>
 
                     </View>
+                    {/* user bar (icon, username,config button */}
                     <View style={styles.userBar} >
                             <View style={{flexDirection:'row', alignItems:'center'}} > 
                                 <Image 
@@ -37,16 +32,22 @@ export default class Insta extends Component {
                             </View>
                     
                     </View>
-
+                    {/* images display */}    
                     <Image 
-                    style={styles.image}
-                    source={{uri:'https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg'}} 
+                    style={{width:this.state.screenWidth,height:this.state.screenHeight/1.7,resizeMode:Image.resizeMode.contain}}
+                    source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ'}}                     
                     />
+
+                    {/* footer msg,like,next buttons */}
+                    <View style={styles.iconBar} > 
+                            <Image style={styles.icon} source={config.images.heartIcon} />
+                            <Image style={styles.icon} source={config.images.bubbleIcon} />
+                            <Image style={styles.icon} source={config.images.arrowIcon} />
+
+                    </View>
                 </View>
             )
         }
-
-        
 }
 
 const styles = StyleSheet.create({
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
         width:100+'%',
         height:75  , 
         backgroundColor:'#e3e4e5',
-        borderBottomColor: '#93979b',
+        borderBottomColor: '#fff',
         borderBottomWidth: StyleSheet.hairlineWidth,
         justifyContent: 'center',
         alignItems:'center',
@@ -62,21 +63,30 @@ const styles = StyleSheet.create({
     },
     userBar: {
         width:100+'%',
-        height:50  , 
+        height:config.styleConstants.rowHeight , 
         backgroundColor:'#fff',
         flexDirection: 'row',
         paddingHorizontal: 10,
         justifyContent:'space-between',
       },
-    image:{
-        width: 54,//this.state.screenWidth, 
-        height: 416,
-        backgroundColor:'#256555',
-
-    },
     userPicture: {
         height:40,
         width:40,
         borderRadius: 20
+    },
+    iconBar: {
+        height: config.styleConstants.rowHeight,
+        width:100+'%',
+        borderBottomColor: '#fff',
+        borderTopColor: '#fff',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        flexDirection:'row',
+        backgroundColor:'#52faa5' // just for test
+    },
+    icon: {
+        height:40,
+        width:40,
+        paddingHorizontal: 5
     }
 })
