@@ -45,6 +45,8 @@ export default class Insta extends Component {
                 </View>
             )
         }
+
+        
 }
 
 const styles = StyleSheet.create({
