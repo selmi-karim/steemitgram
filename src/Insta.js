@@ -6,10 +6,20 @@ export default class Insta extends Component {
             super();
             this.state = {
                 screenWidth: Dimensions.get('window').width,
-                screenHeight: Dimensions.get('window').height
-            };  
+                screenHeight: Dimensions.get('window').height,
+                liked: false,
+            }
+        
         }
+
+        // function like 
+        likeToggle(){
+            this.setState({
+                liked: !this.state.liked
+            })
+        };
         render() {
+            const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
             return(
                 <View style={{ flex:1,width:100+'%',height:100+'%' }}>
                     {/* header: app name,dimension */}
@@ -33,18 +43,30 @@ export default class Insta extends Component {
                     
                     </View>
                     {/* images display */}    
-                    <Image 
-                    style={{width:this.state.screenWidth,height:this.state.screenHeight/1.7,resizeMode:Image.resizeMode.contain}}
-                    source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ'}}                     
-                    />
+                    <TouchableOpacity onLongPress={() =>{ this.likeToggle() } } >
+                        <Image 
+                        style={{width:this.state.screenWidth,height:this.state.screenHeight/1.9,resizeMode:Image.resizeMode.contain}}
+                        source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ'}}                     
+                        />
+                    </TouchableOpacity>    
 
                     {/* footer msg,like,next buttons */}
                     <View style={styles.iconBar} > 
-                            <Image style={styles.icon} source={config.images.heartIcon} />
+                        <TouchableOpacity onPress={() =>{ this.likeToggle() } } >
+                            <Image style={[styles.icon,{tintColor:heartIconColor} ]} source={config.images.heartIcon} />
+                        </TouchableOpacity>    
+                            
                             <Image style={styles.icon} source={config.images.bubbleIcon} />
                             <Image style={styles.icon} source={config.images.arrowIcon} />
 
                     </View>
+                    
+                    {/* comments */}
+                    <View style={styles.commentBar} > 
+                        <Image style={[styles.icon,{height:30,width:30} ]} source={config.images.heartIcon} />
+                    </View>
+
+                    
                 </View>
             )
         }
@@ -82,11 +104,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderTopWidth: StyleSheet.hairlineWidth,
         flexDirection:'row',
-        backgroundColor:'#52faa5' // just for test
+        alignItems:'center',
     },
     icon: {
         height:40,
         width:40,
-        paddingHorizontal: 5
+        marginLeft: 5,
+    },
+    commentBar: {
+        width:100+'%',
+        borderTopColor: '#fff',
+        borderBottomColor: '#fff',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderTopWidth: StyleSheet.hairlineWidth,
     }
 })
