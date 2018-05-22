@@ -19,6 +19,12 @@ export default class Post extends Component {
         };
         render() {
             const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
+            var imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
+            if(parseInt(this.props.item) %2 === 0)
+                imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
+            else 
+                imageSelection = 'https://planetbodyart.com/190/pingouin.jpg';
+            
             return(
                 <View >
                     {/* user bar (icon, username,config button */}
@@ -39,7 +45,7 @@ export default class Post extends Component {
                     <TouchableOpacity onLongPress={() =>{ this.likeToggle() } } >
                         <Image 
                         style={{width:this.state.screenWidth,height:this.state.screenHeight/1.9,resizeMode:Image.resizeMode.contain}}
-                        source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ'}}                     
+                        source={{uri:imageSelection}}                     
                         />
                     </TouchableOpacity>    
 
@@ -56,7 +62,7 @@ export default class Post extends Component {
                     
                     {/* comments */}
                     <View style={styles.commentBar} > 
-                        <Image style={[styles.icon,{height:25,width:25} ]} source={config.images.heartIcon} />
+                        <Image style={[styles.icon,{height:25,width:25} ]} source={config.images.blackHeartIcon} />
                         <Text>128 Likes</Text>
                     </View>
 

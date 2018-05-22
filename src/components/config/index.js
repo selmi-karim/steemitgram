@@ -6,6 +6,7 @@ export default{
         heartIcon: require('../../../assets/heart.png'),
         bubbleIcon: require('../../../assets/bubble.png'),
         arrowIcon: require('../../../assets/arrow.png'), 
+        blackHeartIcon: require('../../../assets/blackHeart.png'), 
     },
     // static styles
     styleConstants: {
