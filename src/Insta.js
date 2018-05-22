@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
 export default class Insta extends Component {
+        
         constructor() {
             super();
             this.state = {
-                screenWidth = Dimensions.get('window').width,
-                screenHeight = Dimensions.get('window').height,
-            }
-        }    
-
+                screenWidth: Dimensions.get('window').width,
+                screenHeight: Dimensions.get('window').height
+            };
+        }
         render() {
             Image.getSize('https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg', (width, height) => {
                 console.log('w: '+width)
@@ -39,7 +39,7 @@ export default class Insta extends Component {
                     </View>
 
                     <Image 
-                    style={styles.image}
+                    style={{}}
                     source={{uri:'https://medias.lequipe.fr/img-photo-jpg/encore-un-trophee-pour-messi/1500000000938685/129:61,2500:1643-624-416-75/fba64.jpg'}} 
                     />
                 </View>
@@ -66,12 +66,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         justifyContent:'space-between',
       },
-    image:{
-        width: 54,//this.state.screenWidth, 
-        height: 416,
-        backgroundColor:'#256555',
-
-    },
     userPicture: {
         height:40,
         width:40,
