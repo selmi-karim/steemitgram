@@ -1,4 +1,4 @@
-import Post from './post.js'
+import Post from './Post.js'
 
 export  {
     Post

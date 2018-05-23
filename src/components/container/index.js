@@ -1,4 +1,4 @@
-import PostFeed from './postfeed.js'
+import PostFeed from './PostFeed.js'
 export {
     PostFeed
 }

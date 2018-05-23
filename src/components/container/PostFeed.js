@@ -6,7 +6,6 @@ export default class PostFeed extends Component {
     
     constructor(){
         super();
-
         this.state = {
           data: [1,2,3,4,5,6,7],
         };
@@ -31,7 +30,6 @@ export default class PostFeed extends Component {
             onEndReachedThreshold={1}
             onEndReached={({ distanceFromEnd }) => {
                 console.log('on end reached ', distanceFromEnd);
-               
             }}
             />
         )
