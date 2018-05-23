@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity} from 'reac
 import config from './../config/index'
 import {PostFeed} from './../container'
 
-export default class Insta extends Component {      
+export default class MainFeed extends Component {      
     render() {
-            return(
+            return( 
                 <View style={{ flex:1,width:100+'%',height:100+'%' }}>
                     {/* header: app name,dimension */}
                     <View 
