@@ -10,7 +10,7 @@ export default class MainFeed extends Component {
                     {/* header: app name,dimension */}
                     <View 
                         style={styles.tempNav} >
-                        <Text style={{ fontSize:20 }}>SteemitGramm </Text>
+                        <Text styltouche={{ fontSize:20 }}>SteemitGramm </Text>
 
                     </View>
                 <PostFeed />    
