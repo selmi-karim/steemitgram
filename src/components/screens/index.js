@@ -1,11 +1,11 @@
 import MainFeed from './MainFeed'
 import Login from './Login'
 import Profile from './Profile'
-import Camera from './Camera'
+import CameraEx from './Camera'
 
 export {
     MainFeed,
     Login,
     Profile,
-    Camera,
+    CameraEx,
 }

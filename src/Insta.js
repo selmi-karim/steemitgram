@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
-import { MainFeed, Login, Profile, Camera } from './components/screens';
+import { MainFeed, Login, Profile, CameraEx } from './components/screens';
 
 const Tabs = createBottomTabNavigator({
         feed: MainFeed,
-        camera: Camera,
+        camera: CameraEx,
         profile: Profile
     }
     ,{
