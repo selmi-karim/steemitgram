@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Vibration } from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
 
 export default class CameraEx extends React.Component {
@@ -13,18 +13,26 @@ export default class CameraEx extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+
+
+  componentDidMount() {
+    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+      console.log(e, 'Directory exists');
+    });
+  }
+
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
-        /*FileSystem.moveAsync({
-          from: data,
+        FileSystem.moveAsync({
+          from: data.uri,
           to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
         }).then(() => {
           this.setState({
             photoId: this.state.photoId + 1,
           });
           Vibration.vibrate();
-        });*/
+        });
         console.log(data);
       });
     }
@@ -33,6 +41,7 @@ export default class CameraEx extends React.Component {
   render() {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
+      console.log('hascameraPermission is null')
       return null;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
