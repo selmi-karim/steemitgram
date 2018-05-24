@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions, FileSystem } from 'expo';
 
 export default class CameraEx extends React.Component {
   state = {
     hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
+    type: 'back',
   };
 
   async componentWillMount() {
@@ -13,16 +13,38 @@ export default class CameraEx extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+  takePicture = async function() {
+    if (this.camera) {
+      this.camera.takePictureAsync().then(data => {
+        /*FileSystem.moveAsync({
+          from: data,
+          to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
+        }).then(() => {
+          this.setState({
+            photoId: this.state.photoId + 1,
+          });
+          Vibration.vibrate();
+        });*/
+        console.log(data);
+      });
+    }
+  };
+
   render() {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
-      return <View />;
+      return null;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
+          <Camera
+            style={{ flex: 1 }}
+            type={this.state.type}
+            ref={ref => {
+              this.camera = ref;
+            }}>
             <View
               style={{
                 flex: 1,
@@ -30,28 +52,13 @@ export default class CameraEx extends React.Component {
                 flexDirection: 'row',
               }}>
               <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  });
-                }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}flip{' '}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[styles.flipButton, styles.picButton, { flex: 0.3, alignSelf: 'flex-end' }]}
+                style={[
+                  styles.flipButton,
+                  styles.picButton,
+                  { flex: 0.3, alignSelf: 'flex-end' },
+                ]}
                 onPress={this.takePicture.bind(this)}>
-                <Text style={styles.flipText}> Take </Text>
+                <Text style={styles.flipText}> SNAP </Text>
               </TouchableOpacity>
             </View>
           </Camera>
@@ -61,7 +68,7 @@ export default class CameraEx extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
   flipButton: {
     flex: 0.3,
     height: 40,
@@ -82,4 +89,4 @@ const styles = StyleSheet.create({
   picButton: {
     backgroundColor: 'darkseagreen',
   },
-})
+});
