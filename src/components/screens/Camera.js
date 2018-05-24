@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
 export default class CameraEx extends React.Component {
@@ -44,8 +44,14 @@ export default class CameraEx extends React.Component {
                 }}>
                 <Text
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flip{' '}
+                  {' '}flip{' '}
                 </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.flipButton, styles.picButton, { flex: 0.3, alignSelf: 'flex-end' }]}
+                onPress={this.takePicture.bind(this)}>
+                <Text style={styles.flipText}> Take </Text>
               </TouchableOpacity>
             </View>
           </Camera>
@@ -54,3 +60,26 @@ export default class CameraEx extends React.Component {
     }
   }
 }
+
+const styles = StyleSheet.create({  
+  flipButton: {
+    flex: 0.3,
+    height: 40,
+    marginHorizontal: 2,
+    marginBottom: 10,
+    marginTop: 20,
+    borderRadius: 8,
+    borderColor: 'white',
+    borderWidth: 1,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  flipText: {
+    color: 'white',
+    fontSize: 15,
+  },
+  picButton: {
+    backgroundColor: 'darkseagreen',
+  },
+})
