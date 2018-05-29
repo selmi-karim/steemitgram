@@ -9,8 +9,9 @@ export default class CameraEx extends React.Component {
   };
 
   async componentWillMount() {
-    console.log('component will mount')
-    console.log('route name: '+this.props.navigation.state.routeName)
+    console.log('component will mount');
+    console.log('route name: '+this.props.navigation.state.routeName);
+    console.log('is focused: '+this.props.navigation.isFocused());
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
