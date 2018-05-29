@@ -20,7 +20,7 @@ export default class PostFeed extends Component {
     }
 
     render() {
-        console.log(this.state.data)
+        //console.log(this.state.data)
         return(
             <FlatList 
             
@@ -29,7 +29,7 @@ export default class PostFeed extends Component {
             renderItem= { this._renderPost }
             onEndReachedThreshold={1}
             onEndReached={({ distanceFromEnd }) => {
-                console.log('on end reached ', distanceFromEnd);
+                //console.log('on end reached ', distanceFromEnd);
             }}
             />
         )

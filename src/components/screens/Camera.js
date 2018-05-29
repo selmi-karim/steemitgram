@@ -1,24 +1,32 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Vibration } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Vibration, AppState} from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
 
 export default class CameraEx extends React.Component {
   state = {
     hasCameraPermission: null,
-    type: 'back',
+    type: 'back'
   };
 
   async componentWillMount() {
+    console.log('component will mount')
+    console.log('route name: '+this.props.navigation.state.routeName)
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
-
 
 
   componentDidMount() {
     FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
       console.log(e, 'Directory exists');
     });
+    
+  }
+
+
+  componentWillUnmount() {
+    console.log('------')
+    //AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   takePicture = async function() {
