@@ -9,7 +9,7 @@ export default class CameraEx extends React.Component {
   };
 
   async componentWillMount() {
-    console.log('component will mount');
+
     console.log('route name: '+this.props.navigation.state.routeName);
     console.log('is focused: '+this.props.navigation.isFocused());
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -22,12 +22,6 @@ export default class CameraEx extends React.Component {
       console.log(e, 'Directory exists');
     });
     
-  }
-
-
-  componentWillUnmount() {
-    console.log('------')
-    //AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   takePicture = async function() {
