@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
-import { MainFeed, Login, Profile, CameraEx } from './components/screens';
+import { MainFeed, Login, Profile, CameraEx, Search, Favorite  } from './components/screens';
 
 const Tabs = createBottomTabNavigator({
         feed: MainFeed,
+        search: Search,
         camera: CameraEx,
+        favorite: Favorite,
         profile: Profile
     }
     ,{
         tabBarOptions: {
-            activeTintColor: '#e91e63',
-            labelStyle: {
-            fontSize: 23,
-            },
-            style: {
-            backgroundColor: '#e3e4e5',
-            },
+            showLabel: false,
+            showIcon: true
         }
 })
 

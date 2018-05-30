@@ -1,8 +1,19 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Vibration, AppState} from 'react-native';
-import { Camera, Permissions, FileSystem } from 'expo';
+import { Text, View, TouchableOpacity, StyleSheet, Image, Vibration, AppState} from 'react-native';
+import { Camera, Permissions, FileSystem, } from 'expo';
+import config from '../config/index'
 
 export default class CameraEx extends React.Component {
+
+  static navigationOptions = {
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={config.images.camera}
+        style={[styles.barIcon, {tintColor: tintColor}]}
+      />
+    ),
+  };
+  
   state = {
     hasCameraPermission: null,
     type: 'back'
@@ -100,5 +111,9 @@ const styles = StyleSheet.create({
   },
   picButton: {
     backgroundColor: 'darkseagreen',
+  },
+  barIcon: {
+    width: 26,
+    height: 26,
   },
 });

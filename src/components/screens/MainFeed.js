@@ -4,6 +4,16 @@ import config from './../config/index'
 import {PostFeed} from './../container'
 
 export default class MainFeed extends Component {      
+
+    static navigationOptions = {
+        tabBarIcon: ({ tintColor }) => (
+          <Image
+            source={config.images.accueil}
+            style={[styles.barIcon, {tintColor: tintColor}]}
+          />
+        ),
+    };
+
     render() {
             return( 
                 <View style={{ flex:1,width:100+'%',height:100+'%' }}>
@@ -29,5 +39,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems:'center',
         marginTop: 20
-    }
+    },
+    barIcon: {
+        width: 26,
+        height: 26,
+    },
 })

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native'
 import config from '../config/index'
-export default class Profile extends Component {  
+export default class Search extends Component {  
     
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
           <Image
-            source={config.images.profile}
+            source={config.images.search}
             style={[styles.barIcon, {tintColor: tintColor}]}
           />
         ),
@@ -14,7 +14,7 @@ export default class Profile extends Component {
 
     render() {
             return( 
-                <Text> Profile Page </Text>
+                <Text> Search Page </Text>
             )
         } 
 }
