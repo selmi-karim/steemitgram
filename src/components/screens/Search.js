@@ -21,7 +21,7 @@ export default class Search extends Component {
   static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
         <Image
-            source={config.images.Search}
+            source={config.images.search}
             style={[styles.barIcon, {tintColor: tintColor}]}
         />
         ),
