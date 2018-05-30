@@ -1,72 +1,148 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, Image, StyleSheet, Platform, StatusBar } from 'react-native'
+import { Text, StyleSheet, View, ListView, Image, TextInput, ActivityIndicator, Alert } from 'react-native';
 import config from '../config/index'
-import { SearchBar } from 'react-native-elements'
-import CompleteFlatList from 'react-native-complete-flatlist';
 
+export default class Search extends Component {
+ 
+  constructor(props) {
 
-const data = [
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Syah', status: 'Active', time: '9:14 PM', date: '1 Dec 2018' },
-  { name: 'Izzat', status: 'Active', time: '8:15 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  { name: 'Fattah', status: 'Active', time: '8:10 PM', date: '1 Jan 2018' },
-  {
-    name: 'Muhyiddeen',
-    status: 'Blocked',
-    time: '10:10 PM',
-    date: '9 Feb 2018',
-  },
-];
+    super(props);
 
+    this.state = {
 
-export default class Search extends Component {  
+      isLoading: true,
+      text: '',
     
-    static navigationOptions = {
+    }
+
+    this.arrayholder = [] ;
+  }
+
+  static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-          <Image
-            source={config.images.search}
+        <Image
+            source={config.images.Search}
             style={[styles.barIcon, {tintColor: tintColor}]}
-          />
-          
+        />
         ),
     };
-    cell(data) {
-        return <Text>{data.name}</Text>;
-      }
+
+ 
+  componentDidMount() {
+ 
+    return fetch('https://reactnativecode.000webhostapp.com/FruitsList.php')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.setState({
+          isLoading: false,
+          dataSource: ds.cloneWithRows(responseJson),
+        }, function() {
+
+          // In this block you can do something with new state.
+          this.arrayholder = responseJson ;
+
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      
+  }
+
+  GetListViewItem (fruit_name) {
     
-    render() {
-    const { navigation } = this.props;
+   Alert.alert(fruit_name);
+  
+  }
+  
+   SearchFilterFunction(text){
+     
+     const newData = this.arrayholder.filter(function(item){
+         const itemData = item.fruit_name.toUpperCase()
+         const textData = text.toUpperCase()
+         return itemData.indexOf(textData) > -1
+     })
+     this.setState({
+         dataSource: this.state.dataSource.cloneWithRows(newData),
+         text: text
+     })
+ }
+ 
+  ListViewItemSeparator = () => {
     return (
-        <CompleteFlatList
-        searchKey={['name', 'status', 'time', 'date']}
-        highlightColor="yellow"
-        pullToRefreshCallback={() => {
-        alert('refreshing');
+      <View
+        style={{
+          height: .5,
+          width: "100%",
+          backgroundColor: "#000",
         }}
-        data={data}
-        renderSeparator={null}
-        renderItem={this.cell.bind(this)}
-    />
+      />
     );
+  }
+ 
+ 
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
     }
+ 
+    return (
+ 
+      <View style={styles.MainContainer}>
+
+      <TextInput 
+       style={styles.TextInputStyleClass}
+       onChangeText={(text) => this.SearchFilterFunction(text)}
+       value={this.state.text}
+       underlineColorAndroid='transparent'
+       placeholder="Search Here"
+        />
+ 
+        <ListView
+ 
+          dataSource={this.state.dataSource}
+ 
+          renderSeparator= {this.ListViewItemSeparator}
+ 
+          renderRow={(rowData) => <Text style={styles.rowViewContainer} 
+
+          onPress={this.GetListViewItem.bind(this, rowData.fruit_name)} >{rowData.fruit_name}</Text>}
+
+          enableEmptySections={true}
+
+          style={{marginTop: 10}}
+ 
+        />
+ 
+      </View>
+    );
+  }
 }
-    
-
-
+ 
 const styles = StyleSheet.create({
-    barIcon: {
-      width: 26,
-      height: 26,
-    },
-});
+ 
+ MainContainer :{
+  justifyContent: 'center',
+  flex:1,
+  margin: 7,
+  },
+ 
+ rowViewContainer: {
+   fontSize: 17,
+   padding: 10
+  },
 
+  TextInputStyleClass:{
+   textAlign: 'center',
+   height: 40,
+   borderWidth: 1,
+   borderColor: '#009688',
+   borderRadius: 7 ,
+   backgroundColor : "#FFFFFF"    
+   }
+});
