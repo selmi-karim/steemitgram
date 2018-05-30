@@ -15,7 +15,13 @@ export default class Profile extends Component {
         const headers = { "X-API-Key": 'aab012b0' }
         fetch(`http://${domain}/profile.json`, { headers })
         .then(response => response.json())
-        .then(users => console.log(users))
+        .then((responseJson) => {
+            console.log(responseJson)
+            //return responseJson.movies;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     render() {
