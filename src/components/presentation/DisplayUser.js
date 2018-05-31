@@ -1,15 +1,17 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 export default (DisplayUser = props => (
-  <View style={styles.row}>
-    <Image style={styles.picture} source={{ uri: props.picture }} />
-    <View>
-      <Text style={styles.primaryText}>
-        {`${props.name} ${props.firstName}`}
-      </Text>
-      <Text style={styles.secondaryText}>{props.email}</Text>
-    </View>
+  <View>
+    <TouchableOpacity onPress={this._onPressButton} style={styles.row}>
+      <Image style={styles.picture} source={{ uri: props.picture }} />
+      <View>
+        <Text style={styles.primaryText}>
+          {`${props.name} ${props.firstName}`}
+        </Text>
+        <Text style={styles.secondaryText}>{props.email}</Text>
+      </View>
+    </TouchableOpacity>
   </View>
 ));
 

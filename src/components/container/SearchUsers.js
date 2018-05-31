@@ -5,7 +5,8 @@ import {
   View,
   ActivityIndicator,
   Button,
-  RefreshControl
+  RefreshControl,
+  Alert
 } from "react-native";
 import { DisplayUser } from '../presentation'
 
@@ -49,6 +50,11 @@ const _renderEmpty = () => (
     <Text>Aucun résultat</Text>
   </View>
 );
+
+_onPressItem = (name) => {
+  // updater functions are preferred for transactional updates
+  Alert('item: '+name)
+};
 
 export default (UserList = props => (
   <FlatList
