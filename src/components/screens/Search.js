@@ -107,5 +107,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20
-  }
+  },
+  barIcon: {
+    width: 26,
+    height: 26,
+  },
 });
