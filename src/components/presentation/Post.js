@@ -17,13 +17,13 @@ export default class Post extends Component {
             })
         };
         render() {
-            //console.log('item: '+this.props.item)
+            console.log('item: '+this.props.item)
             const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
             var imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
-            if(parseInt(this.props.item) %2 === 0)
+            //if(parseInt(this.props.item) %2 === 0)
                 imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
-            else 
-                imageSelection = 'https://planetbodyart.com/190/pingouin.jpg';
+           // else 
+              //  imageSelection = 'https://planetbodyart.com/190/pingouin.jpg';
             
             return(
                 <View >
