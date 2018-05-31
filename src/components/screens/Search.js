@@ -9,12 +9,9 @@ export default class Search extends Component {
     super(props);
 
     this.state = {
-
       isLoading: true,
       text: '',
-    
     }
-
     this.arrayholder = [] ;
   }
 
@@ -29,10 +26,14 @@ export default class Search extends Component {
 
  
   componentDidMount() {
- 
-    return fetch('https://reactnativecode.000webhostapp.com/FruitsList.php')
-      .then((response) => response.json())
-      .then((responseJson) => {
+    
+     fetch('https://my.api.mockaroo.com/users.json?key=aab012b0')
+      .then((response) => {
+          console.log('response----: '+JSON.stringify(response));
+      })
+      .then((id) => {
+        console.log(id);
+        /*
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({
           isLoading: false,
@@ -42,7 +43,7 @@ export default class Search extends Component {
           // In this block you can do something with new state.
           this.arrayholder = responseJson ;
 
-        });
+        });*/
       })
       .catch((error) => {
         console.error(error);
@@ -73,7 +74,7 @@ export default class Search extends Component {
     return (
       <View
         style={{
-          height: .8,
+          height: 1,
           width: "100%",
           backgroundColor: "#000",
         }}
@@ -94,13 +95,12 @@ export default class Search extends Component {
     return (
  
       <View style={styles.mainContainer}>
-
       <TextInput 
-       style={styles.textInputStyleClass}
-       onChangeText={(text) => this.SearchFilterFunction(text)}
-       value={this.state.text}
-       underlineColorAndroid='transparent'
-       placeholder="Search Here"
+          style={styles.textInputStyleClass}
+          onChangeText={(text) => this.SearchFilterFunction(text)}
+          value={this.state.text}
+          underlineColorAndroid='transparent'
+          placeholder="Search Here"
         />
  
         <ListView
@@ -126,18 +126,19 @@ export default class Search extends Component {
  
 const styles = StyleSheet.create({
  
- mainContainer :{
-  justifyContent: 'center',
-  flex:1,
-  margin: 7,
+  mainContainer :{
+    justifyContent: 'center',
+    flex:1,
+    margin: 7,
   },
  
- rowViewContainer: {
+  rowViewContainer: {
    fontSize: 17,
    padding: 10
   },
 
   textInputStyleClass:{
+   marginTop: 40,
    textAlign: 'center',
    height: 40,
    borderWidth: 1,

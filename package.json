@@ -23,6 +23,7 @@
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-camera": "^1.1.4",
+    "react-native-search-header": "^0.2.6",
     "react-navigation": "^2.0.1"
   }
 }
