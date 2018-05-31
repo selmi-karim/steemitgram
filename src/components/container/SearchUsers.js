@@ -51,10 +51,6 @@ const _renderEmpty = () => (
   </View>
 );
 
-_onPressItem = (name) => {
-  // updater functions are preferred for transactional updates
-  Alert('item: '+name)
-};
 
 export default (UserList = props => (
   <FlatList

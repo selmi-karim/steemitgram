@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 export default (DisplayUser = props => (
   <View>
-    <TouchableOpacity onPress={this._onPressButton} style={styles.row}>
+    <TouchableOpacity onPress={() => { Alert.alert('You tapped the button!'); }} style={styles.row}>
       <Image style={styles.picture} source={{ uri: props.picture }} />
       <View>
         <Text style={styles.primaryText}>
