@@ -27,13 +27,10 @@ export default class Search extends Component {
  
   componentDidMount() {
     
-     fetch('https://my.api.mockaroo.com/users.json?key=aab012b0')
-      .then((response) => {
-          console.log('response----: '+JSON.stringify(response));
-      })
-      .then((id) => {
-        console.log(id);
-        /*
+ 
+    return fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response) => response.json())
+      .then((responseJson) => {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({
           isLoading: false,
@@ -43,7 +40,7 @@ export default class Search extends Component {
           // In this block you can do something with new state.
           this.arrayholder = responseJson ;
 
-        });*/
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -60,7 +57,8 @@ export default class Search extends Component {
    SearchFilterFunction(text){
      
      const newData = this.arrayholder.filter(function(item){
-         const itemData = item.fruit_name.toUpperCase()
+         console.log('tem: '+item.name)
+         const itemData = item.name.toUpperCase()
          const textData = text.toUpperCase()
          return itemData.indexOf(textData) > -1
      })
@@ -109,9 +107,11 @@ export default class Search extends Component {
  
           renderSeparator= {this.ListViewItemSeparator}
  
-          renderRow={(rowData) => <Text style={styles.rowViewContainer} 
-
-          onPress={this.GetListViewItem.bind(this, rowData.fruit_name)} >{rowData.fruit_name}</Text>}
+          renderRow={(rowData) => 
+            
+                      <Text style={styles.rowViewContainer} 
+                      onPress={this.GetListViewItem.bind(this, rowData.name)} >{rowData.name}</Text>
+                    }
 
           enableEmptySections={true}
 
