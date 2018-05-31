@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-na
 
 export default (DisplayUser = props => (
   <View>
-    <TouchableOpacity onPress={() => { Alert.alert('You tapped the button!'); }} style={styles.row}>
+    <TouchableOpacity onPress={() => { Alert.alert(`${props.name} ${props.firstName}`); }} style={styles.row}>
       <Image style={styles.picture} source={{ uri: props.picture }} />
       <View>
         <Text style={styles.primaryText}>
