@@ -73,7 +73,7 @@ export default class Search extends Component {
     return (
       <View
         style={{
-          height: .5,
+          height: .8,
           width: "100%",
           backgroundColor: "#000",
         }}
@@ -86,17 +86,17 @@ export default class Search extends Component {
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
-          <ActivityIndicator />
+          <ActivityIndicator size="large" color="#0000ff" />
         </View>
       );
     }
  
     return (
  
-      <View style={styles.MainContainer}>
+      <View style={styles.mainContainer}>
 
       <TextInput 
-       style={styles.TextInputStyleClass}
+       style={styles.textInputStyleClass}
        onChangeText={(text) => this.SearchFilterFunction(text)}
        value={this.state.text}
        underlineColorAndroid='transparent'
@@ -126,7 +126,7 @@ export default class Search extends Component {
  
 const styles = StyleSheet.create({
  
- MainContainer :{
+ mainContainer :{
   justifyContent: 'center',
   flex:1,
   margin: 7,
@@ -137,12 +137,17 @@ const styles = StyleSheet.create({
    padding: 10
   },
 
-  TextInputStyleClass:{
+  textInputStyleClass:{
    textAlign: 'center',
    height: 40,
    borderWidth: 1,
    borderColor: '#009688',
    borderRadius: 7 ,
    backgroundColor : "#FFFFFF"    
-   }
+   },
+
+   barIcon: {
+    width: 26,
+    height: 26,
+  },
 });
