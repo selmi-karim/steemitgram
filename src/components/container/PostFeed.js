@@ -23,7 +23,6 @@ export default class PostFeed extends Component {
         //console.log(this.state.data)
         return(
             <FlatList 
-            
             data={this.state.data} 
             keyExtractor = { this._renderKey }
             renderItem= { this._renderPost }
