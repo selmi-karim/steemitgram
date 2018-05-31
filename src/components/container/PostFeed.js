@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Post } from '../presentation'
 import { FlatList } from 'react-native'
+import _ from "lodash";
 
 export default class PostFeed extends Component {
     
@@ -15,15 +16,13 @@ export default class PostFeed extends Component {
     async fetchData(page) {
     const uri = "https://randomuser.me/api/";
     const response = await fetch(
-        `${uri}?page=${page}&results=${this.state.results}&seeds=${this.state
-        .seed}`
+        `${uri}?page=${page}&results=20&seeds=demo`
     );
     const jsondata = await response.json();
     return jsondata.results;
     }
 
     async loadData(page) {
-    this.setState({ isFetching: true });
     const data = await this.fetchData(page);
     const nextPage = page + 1;
     const formatedData = this.fromArrayToSectionData(data);
@@ -32,6 +31,24 @@ export default class PostFeed extends Component {
         data: [...this.state.data, ...data],
     });
     }
+
+  fromArrayToSectionData(data) {
+    let ds = _.groupBy(data, d => d.name.last.charAt(0));
+    ds = _.reduce(
+      ds,
+      (acc, next, index) => {
+        acc.push({
+          key: index,
+          data: next
+        });
+        return acc;
+      },
+      []
+    );
+    ds = _.orderBy(ds, ["key"]);
+    return ds;
+  }
+
     
     async componentDidMount() {
         await this.loadData(this.state.page);
