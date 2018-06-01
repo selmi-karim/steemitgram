@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng 
  * @Date: 2018-05-22 10:23:56 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 14:46:55
+ * @Last Modified time: 2018-06-01 14:51:40
  */
 
 
@@ -103,6 +103,14 @@ export default class Search extends Component {
     await this.loadData(this.state.page);
   }
 
+  onChangeTextInput() {
+    console.log('change')
+  }
+
+  onClearTextInput() {
+    console.log('clear text')
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -110,6 +118,8 @@ export default class Search extends Component {
               
         <SearchBar
           lightTheme
+          onChangeText={onChangeTextInput}
+          onClear={onClearTextInput}   
           placeholder='Type Here...' 
         />
 
