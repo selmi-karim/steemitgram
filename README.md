@@ -1,8 +1,9 @@
 # Steemitgrame
+<div>
 <img src="screenshots/home.png" width="280" height="400">
 <img src="screenshots/search.png" width="280" height="400">
 <img src="screenshots/camera.png" width="280" height="400">
-
+</div>
 # Description
 Steemitgrame it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content, 
 curating quality content by upvoting and by holding Steem based currencies in a vest fund, which generates interest.
