@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:45 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 14:24:36
+ * @Last Modified time: 2018-06-01 14:47:31
  */
 
 import React from "react";
@@ -34,10 +34,7 @@ const _renderSeparator = () => (
 const _renderHeader = () => (
   <View
     style={{  backgroundColor: "#4fc3f7", justifyContent: "center" }}
-  >
-    <Text>Header</Text>
-    <Text>write here</Text>
-    
+  > 
     
   </View>
 );
@@ -74,7 +71,6 @@ export default (UserList = props => (
     renderItem={_renderItem}
     keyExtractor={item => item.email}
     ItemSeparatorComponent={_renderSeparator}
-    ListHeaderComponent={_renderHeader}
     ListFooterComponent={() =>
       _renderFooter(props.isFetching, props.hasMoreResult, props.loadMore)}
     ListEmptyComponent={_renderEmpty}
