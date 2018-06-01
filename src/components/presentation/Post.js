@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 11:22:47
+ * @Last Modified time: 2018-06-01 11:33:28
  */
 
 import React, { Component } from 'react';
@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
     userPicture: {
         height:40,
         width:40,
-        borderRadius: 20
+        borderRadius: 20,
+        marginRight: 5,
     },
     iconBar: {
         height: config.styleConstants.rowHeight,
