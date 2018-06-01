@@ -1,8 +1,8 @@
 /*
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-05-08 10:31:57 
- * @Last Modified by:   kerim-selmi, karimation 
- * @Last Modified time: 2018-06-01 10:31:57 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:48:39
  */
 
  import React from 'react';
@@ -20,21 +20,22 @@ export default class CameraEx extends React.Component {
       />
     ),
   };
-  
+  // states for permession and cam type
   state = {
     hasCameraPermission: null,
     type: 'back'
   };
 
+  // function lanched before components appeared, (ask user for cam-permission)
   async componentWillMount() {
-
     console.log('route name: '+this.props.navigation.state.routeName);
     console.log('is focused: '+this.props.navigation.isFocused());
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
-
+  // function lanched after components appeared, (we prepare phone local fs to store images)
+  // i will change it with our externel data base
   componentDidMount() {
     FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
       console.log(e, 'Directory exists');
@@ -42,6 +43,7 @@ export default class CameraEx extends React.Component {
     
   }
 
+  // async function to take picture and save it in phone local fs
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
@@ -54,7 +56,7 @@ export default class CameraEx extends React.Component {
           });
           Vibration.vibrate();
         });
-        console.log(data);
+        //console.log(data);
       });
     }
   };
