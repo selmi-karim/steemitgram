@@ -1,11 +1,11 @@
 /*
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
- * @Last Modified by:   kerim-selmi, karimation 
- * @Last Modified time: 2018-06-01 10:33:30 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:54:56
  */
 
- import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import config from '../config/index.js' 
 export default class Post extends Component {
@@ -17,12 +17,18 @@ export default class Post extends Component {
                 liked: false,
             }
         }
-        // function like 
+        // function picture like 
         likeToggle(){
             this.setState({
                 liked: !this.state.liked
             })
         };
+    /*
+     * we receive randomly data from postfeed (props) 
+     * with params: firstname, lastname, profile-picture and #take-picture#,  
+     *
+     */
+
         render() {
             console.log('item: '+JSON.stringify(this.props.item))
             const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null

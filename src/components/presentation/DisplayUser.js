@@ -1,13 +1,17 @@
 /*
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:38 
- * @Last Modified by:   kerim-selmi, karimation 
- * @Last Modified time: 2018-06-01 10:33:38 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:56:13
  */
 
  import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
+/*
+ * users details 
+ * feature: add clicked button -> user profile
+ */
 export default (DisplayUser = props => (
   <View>
     <TouchableOpacity onPress={() => { Alert.alert(`${props.name} ${props.firstName}`); }} style={styles.row}>
