@@ -1,8 +1,8 @@
 /*
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:45 
- * @Last Modified by:   kerim-selmi, karimation 
- * @Last Modified time: 2018-06-01 10:33:45 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:59:48
  */
 
 import React from "react";
@@ -25,9 +25,12 @@ const _renderItem = ({ item }) => (
     email={item.email}
   />
 );
+/** personalized separator in Flatlist */
 const _renderSeparator = () => (
   <View style={{ height: 1, backgroundColor: "grey", marginLeft: 80 }} />
 );
+
+/**personalized header in Flatlist */
 const _renderHeader = () => (
   <View
     style={{ height: 30, backgroundColor: "#4fc3f7", justifyContent: "center" }}
@@ -35,6 +38,7 @@ const _renderHeader = () => (
     <Text>Header</Text>
   </View>
 );
+/**footer (search other users if possible) */
 const _renderFooter = (isFetching, hasMoreResult, loadMore) => {
   if (isFetching) {
     return (
@@ -52,9 +56,11 @@ const _renderFooter = (isFetching, hasMoreResult, loadMore) => {
 
   return null;
 };
+
+/** show when  */
 const _renderEmpty = () => (
   <View style={{ height: 40, alignItems: "center", justifyContent: "center" }}>
-    <Text>Aucun résultat</Text>
+    <Text>No result,Please try another username</Text>
   </View>
 );
 
