@@ -2,11 +2,11 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 10:54:56
+ * @Last Modified time: 2018-06-01 11:18:35
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Alert} from 'react-native';
 import config from '../config/index.js' 
 export default class Post extends Component {
         constructor() {
@@ -15,6 +15,7 @@ export default class Post extends Component {
                 screenWidth: Dimensions.get('window').width,
                 screenHeight: Dimensions.get('window').height,
                 liked: false,
+                lastPress: 0
             }
         }
         // function picture like 
@@ -23,11 +24,27 @@ export default class Post extends Component {
                 liked: !this.state.liked
             })
         };
-    /*
-     * we receive randomly data from postfeed (props) 
-     * with params: firstname, lastname, profile-picture and #take-picture#,  
-     *
-     */
+        
+        /**Double press function */
+
+        onDoublePress = () => {
+            const time = new Date().getTime();
+            const delta = time - this.lastPress;
+        
+            const DOUBLE_PRESS_DELAY = 400;
+            if (delta < DOUBLE_PRESS_DELAY) {
+                // Success double press
+                alert.alert('double click :D ')
+                
+            }
+            this.lastPress = time;
+        };
+
+        /*
+        * we receive randomly data from postfeed (props) 
+        * with params: firstname, lastname, profile-picture and #take-picture#,  
+        *
+        */
 
         render() {
             console.log('item: '+JSON.stringify(this.props.item))
@@ -59,7 +76,7 @@ export default class Post extends Component {
 
                     {/* footer msg,like,next buttons */}
                     <View style={styles.iconBar} > 
-                        <TouchableOpacity onPress={() =>{ this.likeToggle() } } >
+                        <TouchableOpacity onDoublePress={() =>{ this.likeToggle() } } >
                             <Image style={[styles.icon,{tintColor:heartIconColor} ]} source={config.images.heartIcon} />
                         </TouchableOpacity>    
                             
