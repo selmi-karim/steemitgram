@@ -1,4 +1,11 @@
-import React from 'react';
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-05-08 10:31:57 
+ * @Last Modified by:   kerim-selmi, karimation 
+ * @Last Modified time: 2018-06-01 10:31:57 
+ */
+
+ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image, Vibration, AppState} from 'react-native';
 import { Camera, Permissions, FileSystem, } from 'expo';
 import config from '../config/index'

@@ -1,3 +1,10 @@
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-05-07 10:31:50 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:34:43
+ */
+
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'

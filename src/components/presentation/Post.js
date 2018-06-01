@@ -1,4 +1,11 @@
-import React, { Component } from 'react';
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-06-01 10:33:30 
+ * @Last Modified by:   kerim-selmi, karimation 
+ * @Last Modified time: 2018-06-01 10:33:30 
+ */
+
+ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import config from '../config/index.js' 
 export default class Post extends Component {

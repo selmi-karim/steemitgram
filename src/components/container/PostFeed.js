@@ -1,4 +1,11 @@
-import React, { Component } from 'react'
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-05-21 10:33:50 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:34:25
+ */
+
+ import React, { Component } from 'react'
 import { Post } from '../presentation'
 import { FlatList } from 'react-native'
 import _ from "lodash";

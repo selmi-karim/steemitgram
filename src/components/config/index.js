@@ -1,4 +1,11 @@
-// static resources (img,styles,color ...)
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-05-11 10:34:02 
+ * @Last Modified by:   kerim-selmi, karimation 
+ * @Last Modified time: 2018-06-01 10:34:02 
+ */
+
+ // static resources (img,styles,color ...)
 
 export default{
     // static images

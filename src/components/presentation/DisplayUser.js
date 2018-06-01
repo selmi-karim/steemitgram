@@ -1,4 +1,11 @@
-import React from "react";
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-06-01 10:33:38 
+ * @Last Modified by:   kerim-selmi, karimation 
+ * @Last Modified time: 2018-06-01 10:33:38 
+ */
+
+ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 export default (DisplayUser = props => (

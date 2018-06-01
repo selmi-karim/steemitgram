@@ -1,3 +1,10 @@
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-06-01 10:33:17 
+ * @Last Modified by:   kerim-selmi, karimation 
+ * @Last Modified time: 2018-06-01 10:33:17 
+ */
+
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native'
 import config from '../config/index'

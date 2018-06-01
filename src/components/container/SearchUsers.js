@@ -1,3 +1,10 @@
+/*
+ * @Author: kerim-selmi, karimation 
+ * @Date: 2018-06-01 10:33:45 
+ * @Last Modified by:   kerim-selmi, karimation 
+ * @Last Modified time: 2018-06-01 10:33:45 
+ */
+
 import React from "react";
 import {
   FlatList,
