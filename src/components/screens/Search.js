@@ -2,12 +2,12 @@
  * @Author: mikey.zhaopeng 
  * @Date: 2018-05-22 10:23:56 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 10:32:55
+ * @Last Modified time: 2018-06-01 14:26:01
  */
 
 
 import React, { Component } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, TextInput } from "react-native";
 import { SearchUsers } from "../container";
 import _ from "lodash";
 import config from '../config/index'
@@ -23,6 +23,7 @@ export default class Search extends Component {
     hasMoreResult: true,
     refreshing: false,
     formatedData: [],
+    textInput:'',
   };
 
   // navigation options (icon,title)
@@ -103,6 +104,12 @@ export default class Search extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {/* search users in database*/}
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+        />
         {/* we send all users data to Container to be handled*/}
         <SearchUsers
           data={this.state.data}
