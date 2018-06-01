@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 11:33:28
+ * @Last Modified time: 2018-06-01 12:32:25
  */
 
 import React, { Component } from 'react';
@@ -46,7 +46,7 @@ export default class Post extends Component {
         */
 
         render() {
-            console.log('item: '+JSON.stringify(this.props.item))
+            //console.log('item: '+JSON.stringify(this.props.item))
             const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
             var imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
             return(

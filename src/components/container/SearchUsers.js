@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:45 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 10:59:48
+ * @Last Modified time: 2018-06-01 13:12:33
  */
 
 import React from "react";
@@ -36,6 +36,7 @@ const _renderHeader = () => (
     style={{ height: 30, backgroundColor: "#4fc3f7", justifyContent: "center" }}
   >
     <Text>Header</Text>
+    
   </View>
 );
 /**footer (search other users if possible) */
@@ -51,7 +52,7 @@ const _renderFooter = (isFetching, hasMoreResult, loadMore) => {
     );
   }
   if (hasMoreResult) {
-    return <Button color="#4fc3f7" title="Afficher plus" onPress={loadMore} />;
+    return <Button color="#4fc3f7" title="Show more" onPress={loadMore} />;
   }
 
   return null;
