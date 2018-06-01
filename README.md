@@ -1,8 +1,7 @@
 # Steemitgrame
-<img src="screenshots/home.png" width="100" height="100">
-![image](screenshots/home.png "home page" {width=280px height=400px})
-![alt text](screenshots/search.png "search page" {width=280px height=400px})
-![alt text](screenshots/camera.png "camera page" {width=280px height=400px})
+<img src="screenshots/home.png" width="280" height="400">
+<img src="screenshots/search.png" width="280" height="400">
+<img src="screenshots/camera.png" width="280" height="400">
 
 # Description
 Steemitgrame it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content, 
