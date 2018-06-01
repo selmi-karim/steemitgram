@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 11:18:35
+ * @Last Modified time: 2018-06-01 11:22:47
  */
 
 import React, { Component } from 'react';
@@ -25,8 +25,7 @@ export default class Post extends Component {
             })
         };
         
-        /**Double press function */
-
+        /**Double press function- not used yet */
         onDoublePress = () => {
             const time = new Date().getTime();
             const delta = time - this.lastPress;
@@ -76,7 +75,7 @@ export default class Post extends Component {
 
                     {/* footer msg,like,next buttons */}
                     <View style={styles.iconBar} > 
-                        <TouchableOpacity onDoublePress={() =>{ this.likeToggle() } } >
+                        <TouchableOpacity onPress={() =>{ this.likeToggle() } } >
                             <Image style={[styles.icon,{tintColor:heartIconColor} ]} source={config.images.heartIcon} />
                         </TouchableOpacity>    
                             
