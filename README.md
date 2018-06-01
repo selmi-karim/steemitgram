@@ -1,5 +1,6 @@
 # Steemitgrame
-![alt text](screenshots/home.png "home page" {width=280px height=400px})
+<img src="screenshots/home.png" width="100" height="100">
+![image](screenshots/home.png "home page" {width=280px height=400px})
 ![alt text](screenshots/search.png "search page" {width=280px height=400px})
 ![alt text](screenshots/camera.png "camera page" {width=280px height=400px})
 
