@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng 
  * @Date: 2018-05-22 10:23:56 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 14:51:40
+ * @Last Modified time: 2018-06-01 15:15:33
  */
 
 
@@ -26,6 +26,7 @@ export default class Search extends Component {
     refreshing: false,
     formatedData: [],
     textInput:'',
+    fixedData: []
   };
 
   // navigation options (icon,title)
@@ -62,7 +63,8 @@ export default class Search extends Component {
       data: [...this.state.data, ...data],
       isFetching: false,
       hasMoreResult: nextPage <= this.state.totalPage,
-      formatedData: formatedData
+      formatedData: formatedData,
+      fixedData: data
     });
   }
 
@@ -98,17 +100,32 @@ export default class Search extends Component {
     return ds;
   }
 
-  // rn life cycle method, lanched whe component mounted and ready to be used.
+  /**rn life cycle method, lanched whe component 
+   * mounted and ready to be used. */
   async componentDidMount() {
     await this.loadData(this.state.page);
   }
 
-  onChangeTextInput() {
-    console.log('change')
-  }
 
-  onClearTextInput() {
-    console.log('clear text')
+  /** we would filter the JSON array according to given value pass as argument. 
+   * After filtering data we would set the newly data in dataSource state. */
+  onChangeTextInput = (text) => {
+          console.log('change: '+text);
+          const newData = this.state.fixedData.filter(function(item){
+              console.log('item: '+JSON.stringify(item))
+              const itemData = item.name.first.toUpperCase() + ' ' + item.name.last.toUpperCase()
+              const textData = text.toUpperCase()
+              return itemData.indexOf(textData) > -1
+          })
+          /**handle new data */
+          this.setState({
+            data: newData,
+          })
+  }
+  /** we would filter the JSON array according to given value pass as argument. 
+   * After filtering data we would set the newly data in dataSource state. */
+  onClearTextInput = () => {
+    console.log('clear')
   }
 
   render() {
@@ -118,8 +135,8 @@ export default class Search extends Component {
               
         <SearchBar
           lightTheme
-          onChangeText={onChangeTextInput}
-          onClear={onClearTextInput}   
+          onChangeText={(text) => this.onChangeTextInput(text)}
+          onClear={() => this.onClearTextInput(this)}   
           placeholder='Type Here...' 
         />
 
