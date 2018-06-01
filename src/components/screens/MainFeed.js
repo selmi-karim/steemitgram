@@ -1,8 +1,8 @@
 /*
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-05-22 10:32:36 
- * @Last Modified by:   kerim-selmi, karimation 
- * @Last Modified time: 2018-06-01 10:32:36 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-01 10:40:05
  */
 
 import React, { Component } from 'react';
@@ -31,6 +31,7 @@ export default class MainFeed extends Component {
                         <Text styltouche={{ fontSize:20 }}>SteemitGramm </Text>
 
                     </View>
+                {/* home page with some posts (randomly posts)*/}    
                 <PostFeed />    
                 </View>
             )
