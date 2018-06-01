@@ -1,7 +1,7 @@
 # Steemitgrame
-![alt text](screenshots/home.png "home page")
-![alt text](screenshots/search.png "search page")
-![alt text](screenshots/camera.png "camera page")
+![alt text](screenshots/home.png "home page" {width=280px height=400px})
+![alt text](screenshots/search.png "search page" {width=280px height=400px})
+![alt text](screenshots/camera.png "camera page" {width=280px height=400px})
 
 # Description
 Steemitgrame it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content, 
