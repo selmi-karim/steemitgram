@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:45 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 13:12:33
+ * @Last Modified time: 2018-06-01 14:01:59
  */
 
 import React from "react";
@@ -33,9 +33,11 @@ const _renderSeparator = () => (
 /**personalized header in Flatlist */
 const _renderHeader = () => (
   <View
-    style={{ height: 30, backgroundColor: "#4fc3f7", justifyContent: "center" }}
+    style={{  backgroundColor: "#4fc3f7", justifyContent: "center" }}
   >
     <Text>Header</Text>
+    <Text>write here</Text>
+    
     
   </View>
 );
@@ -61,7 +63,7 @@ const _renderFooter = (isFetching, hasMoreResult, loadMore) => {
 /** show when  */
 const _renderEmpty = () => (
   <View style={{ height: 40, alignItems: "center", justifyContent: "center" }}>
-    <Text>No result,Please try another username</Text>
+    <Text>No result</Text>
   </View>
 );
 
