@@ -47,9 +47,11 @@ yarn start
 
 
 # Features:
- - Login screen
- - Home screen (ready for tests)
+ - Login screen:
+        -> SteemConnect: Token based authentication for Steem made easy https://steemconnect.com/
+ - Home screen:(ready for tests)
  - Search screen (ready for tests)
+        -> string matching algorithm
  - Messaging/new message screens
  - Profile/profile edit & options screens
  - Preview of stories
