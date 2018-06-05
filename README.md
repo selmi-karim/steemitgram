@@ -26,7 +26,7 @@ Steem Power was implemented by the development team with the aim of attracting l
 
 
 # How it works
-So, you’ve published an picture on SteemitGrame. Other users can vote for it, raising its ranking. The users’ votes have different value, depending of number of SP they own. The more votes the images has, the more earn the author and the users who vote for it and actively comment (they are called curators). The end reward is distributed the following way: 75% for author and 25% for curators. Half of reward is paid in Steem Power, and half in Steem Dollars.
+So, you’ve published an picture on SteemitGramm. Other users can vote for it, raising its ranking. The users’ votes have different value, depending of number of SP they own. The more votes the images has, the more earn the author and the users who vote for it and actively comment (they are called curators). The end reward is distributed the following way: 75% for author and 25% for curators. Half of reward is paid in Steem Power, and half in Steem Dollars.
 
 One must remember that the published images are stored in the blockchain, so they are impossible to delete. So one should think twice before publish something in the social network.
 
