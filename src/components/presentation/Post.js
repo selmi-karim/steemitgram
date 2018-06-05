@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-05 13:17:41
+ * @Last Modified time: 2018-06-05 14:34:48
  */
 
 import React, { Component } from 'react';
@@ -53,15 +53,19 @@ export default class Post extends Component {
             <View >
                 {/* user bar (icon, username,config button */}
                 <View style={styles.userBar} >
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }} >
-                        <Image
-                            style={styles.userPicture}
-                            source={{ uri: this.props.item.picture.thumbnail }}
-                        />
-                        <Text>{this.props.item.name.first}</Text>
-                    </View>
+                    <TouchableOpacity onPress={() => { Alert.alert('redirection to profile') }} >
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }} >
+                            <Image
+                                style={styles.userPicture}
+                                source={{ uri: this.props.item.picture.thumbnail }}
+                            />
+                            <Text>{this.props.item.name.first}</Text>
+                        </View>
+                    </TouchableOpacity>
                     <View style={{}}>
-                        <Text style={{ fontSize: 32 }}>...</Text>
+                        <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} >
+                            <Text style={{ fontSize: 32 }}>...</Text>
+                        </TouchableOpacity>
                     </View>
 
                 </View>
@@ -78,10 +82,12 @@ export default class Post extends Component {
                     <TouchableOpacity onPress={() => { this.likeToggle() }} >
                         <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
                     </TouchableOpacity>
-
-                    <Image style={styles.icon} source={config.images.bubbleIcon} />
-                    <Image style={styles.icon} source={config.images.arrowIcon} />
-
+                    <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
+                        <Image style={styles.icon} source={config.images.bubbleIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { Alert.alert('soon: share') }} >
+                        <Image style={styles.icon} source={config.images.arrowIcon} />
+                    </TouchableOpacity>
                 </View>
 
                 {/* comments */}
