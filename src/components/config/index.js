@@ -1,8 +1,8 @@
 /*
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-05-11 10:34:02 
- * @Last Modified by:   kerim-selmi, karimation 
- * @Last Modified time: 2018-06-01 10:34:02 
+ * @Last Modified by: kerim-selmi, karimation
+ * @Last Modified time: 2018-06-05 13:29:50
  */
 
  // static resources (img,styles,color ...)
@@ -19,6 +19,7 @@ export default{
         camera: require('../../../assets/camera.png'), 
         accueil: require('../../../assets/accueil.png'), 
         fav: require('../../../assets/fav.png'), 
+        param: require('../../../assets/config.png'), 
     },
     // static styles
     styleConstants: {
