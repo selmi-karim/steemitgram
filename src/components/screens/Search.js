@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng 
  * @Date: 2018-05-22 10:23:56 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 15:15:33
+ * @Last Modified time: 2018-06-05 12:13:19
  */
 
 
@@ -106,9 +106,9 @@ export default class Search extends Component {
     await this.loadData(this.state.page);
   }
 
-
   /** we would filter the JSON array according to given value pass as argument. 
    * After filtering data we would set the newly data in dataSource state. */
+  //TODO: add string matching algorithme
   onChangeTextInput = (text) => {
           console.log('change: '+text);
           const newData = this.state.fixedData.filter(function(item){
@@ -122,6 +122,7 @@ export default class Search extends Component {
             data: newData,
           })
   }
+  
   /** we would filter the JSON array according to given value pass as argument. 
    * After filtering data we would set the newly data in dataSource state. */
   onClearTextInput = () => {
