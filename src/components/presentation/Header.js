@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-05 13:17:33 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-05 14:22:05
+ * @Last Modified time: 2018-06-05 14:33:18
  */
 
 
@@ -18,8 +18,10 @@ export default (DisplayUser = props => (
         style={styles.tempNav} >
         <Text styltouche={{ fontSize: 23 }} style={{position: 'absolute'}}> SteemitGramm </Text>
         <View style={{flexDirection: 'row',
-        marginLeft: 'auto'}} >
-            <Image style={styles.configIcon} source={config.images.param} />
+            marginLeft: 'auto'}} >
+            <TouchableOpacity onPress={() => { Alert.alert('soon: profile config') }} >
+                <Image style={styles.configIcon} source={config.images.param} />
+            </TouchableOpacity>    
         </View>
     </View>
 ));
