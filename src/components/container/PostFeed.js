@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-05-21 10:33:50 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 13:26:53
+ * @Last Modified time: 2018-06-05 12:30:15
  */
 
  import React, { Component } from 'react'
@@ -24,7 +24,7 @@ export default class PostFeed extends Component {
     async fetchData(page) {
     const uri = "https://randomuser.me/api/";
     const response = await fetch(
-        `${uri}?page=${page}&results=3&seeds=demo`
+        `${uri}?page=${page}&results=10&seeds=demo`
     );
     const jsondata = await response.json();
     return jsondata.results;
