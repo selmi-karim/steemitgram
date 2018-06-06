@@ -61,4 +61,3 @@ yarn start
 
 This is just a theme, it does not have any backend. It only includes dummy data. 
 
-“Here is my work. I worked fucking hard. I’m proud of it, and I think you’ll like it. Read it, use it and enjoy it.”
