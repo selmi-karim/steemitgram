@@ -2,8 +2,9 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-05-11 10:34:02 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-05 13:29:50
+ * @Last Modified time: 2018-06-06 10:26:40
  */
+import { Dimensions } from 'react-native'
 
  // static resources (img,styles,color ...)
 
@@ -23,6 +24,9 @@ export default{
     },
     // static styles
     styleConstants: {
-        rowHeight: 50 
+        rowHeight: 50,
+        screenWidth: Dimensions.get('window').width,
+        screenHeight: Dimensions.get('window').height,
+        oneThirdWidth: Dimensions.get('window').width/3
     }  
 }
