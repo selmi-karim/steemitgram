@@ -2,11 +2,11 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-05-21 10:31:42 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-06 11:51:39
+ * @Last Modified time: 2018-06-06 12:05:14
  */
 
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, Image, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import config from '../config/index'
 
 export default class Profile extends Component {
@@ -48,9 +48,11 @@ export default class Profile extends Component {
                                         <Text>Following</Text>
                                     </View>
                                 </View>
-                                <View style={styles.editPro} >
-                                    <Text>Edit Profile</Text>
-                                </View>
+                                <TouchableOpacity style={styles.editPro} onPress={() => { Alert.alert('soon: edit interface') }} >
+                                    <View style={styles.editPro} >
+                                        <Text>Edit Profile</Text>
+                                    </View>
+                                </TouchableOpacity>
 
                             </View>
                         </View>
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         backgroundColor: 'red'
-    }, 
+    },
     barIcon: {
         width: 26,
         height: 26,
@@ -136,7 +138,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#efefef'
+        backgroundColor: '#efefef',
+        borderRadius: 5,
     },
     nameDisplay: {
         flexDirection: 'column',
