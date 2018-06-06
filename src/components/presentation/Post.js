@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-01 10:33:30 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-05 14:34:48
+ * @Last Modified time: 2018-06-06 10:30:05
  */
 
 import React, { Component } from 'react';
@@ -12,8 +12,6 @@ export default class Post extends Component {
     constructor() {
         super();
         this.state = {
-            screenWidth: Dimensions.get('window').width,
-            screenHeight: Dimensions.get('window').height,
             liked: false,
             lastPress: 0
         }
@@ -72,7 +70,7 @@ export default class Post extends Component {
                 {/* images display */}
                 <TouchableOpacity onLongPress={() => { this.likeToggle() }} >
                     <Image
-                        style={{ width: this.state.screenWidth, height: this.state.screenHeight / 1.9, resizeMode: Image.resizeMode.contain }}
+                        style={{ width: config.styleConstants.screenWidth, height: config.styleConstants.screenHeight / 1.9, resizeMode: Image.resizeMode.contain }}
                         source={{ uri: imageSelection }}
                     />
                 </TouchableOpacity>
