@@ -1,5 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "name": "steemitgramm",
+    "description": "Steemitgramm it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content curating quality content by upvoting and by holding Steem based currencies in a vest fund which generates interest.",
+
+    "privacy": "unlisted"
   }
 }
