@@ -2,7 +2,7 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-05 13:17:33 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-05 14:33:18
+ * @Last Modified time: 2018-06-06 11:47:05
  */
 
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 20,
     },
     configIcon: {
         height: 25,
