@@ -2,12 +2,12 @@
  * @Author: kerim-selmi, karimation 
  * @Date: 2018-06-05 13:17:33 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-06 15:22:04
+ * @Last Modified time: 2018-06-07 11:11:29
  */
 
 
 import React from "react"
-import { View, Text, Image, StyleSheet, TouchableOpacity, Alert, TouchableHighlight } from "react-native"
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native"
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
 import config from '../config/index'
 /*
@@ -39,17 +39,17 @@ export default (DisplayUser = props => (
         </View>
         <Menu
           ref={this.setMenuRef}
-          button={<TouchableHighlight onPress={this.showMenu}>
+          button={<TouchableOpacity onPress={this.showMenu}>
           <Image
             style={styles.configIcon}
             source={config.images.param}
           />
-        </TouchableHighlight>}
+        </TouchableOpacity>}
         >
           <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
           <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
           <MenuDivider />
-          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Exit</MenuItem>
         </Menu>
     </View>
 ));
