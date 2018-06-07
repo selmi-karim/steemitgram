@@ -67,5 +67,5 @@ This is just a theme, it does not have any backend. It only includes dummy data.
 
 # License:
 
-<a href="https://github.com/karimation/instaa/blob/master/LICENSE">MIT License</a> Copyright (c) 2018 karimation
+<a href="LICENSE">MIT License</a> Copyright (c) 2018 karimation
 
