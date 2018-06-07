@@ -65,3 +65,7 @@ yarn start
 
 This is just a theme, it does not have any backend. It only includes dummy data. 
 
+# License:
+
+<a href="http://www.quora.com/Adam-DAngelo">MIT License</a> Copyright (c) 2018 karimation
+
