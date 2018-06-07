@@ -51,6 +51,10 @@ yarn start
 
      - SteemConnect: Token based authentication for Steem made easy https://steemconnect.com/
  - Home screen:(ready for tests)
+    
+     - comments
+     - config
+     - like/share   
  - Search screen (ready for tests)
  
      - string matching algorithm
