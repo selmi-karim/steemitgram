@@ -6,6 +6,11 @@
 # dependencies
 /node_modules
 
+# files
+.env
+package-lock.json
+yarn.lock
+
 # misc
 .env.local
 .env.development.local
