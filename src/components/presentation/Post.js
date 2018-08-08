@@ -47,6 +47,7 @@ export default class Post extends Component {
         //console.log('item: '+JSON.stringify(this.props.item))
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
         var imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
+        //console.log('->'+JSON.stringify(this.props.item))
         return (
             <View >
                 {/* user bar (icon, username,config button */}
@@ -55,9 +56,9 @@ export default class Post extends Component {
                         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
                             <Image
                                 style={styles.userPicture}
-                                source={{ uri: this.props.item.picture.thumbnail }}
+                                source={{ uri: this.props.item.body[0] }}
                             />
-                            <Text>{this.props.item.name.first}</Text>
+                            <Text>{this.props.item.author}</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={{}}>
@@ -71,7 +72,7 @@ export default class Post extends Component {
                 <TouchableOpacity onLongPress={() => { this.likeToggle() }} >
                     <Image
                         style={{ width: config.styleConstants.screenWidth, height: config.styleConstants.screenHeight / 1.9, resizeMode: Image.resizeMode.contain }}
-                        source={{ uri: imageSelection }}
+                        source={{ uri: this.props.item.body[0] }}
                     />
                 </TouchableOpacity>
 
@@ -83,19 +84,16 @@ export default class Post extends Component {
                     <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
                         <Image style={styles.icon} source={config.images.bubbleIcon} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { Alert.alert('soon: share') }} >
-                        <Image style={styles.icon} source={config.images.arrowIcon} />
-                    </TouchableOpacity>
                 </View>
 
                 {/* comments */}
-                <View style={styles.commentBar} >
-                    <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.blackHeartIcon} />
-                    <Text>128 Likes</Text>
+                <View style={styles.footer}>
+                    <Text> {this.props.item.net_votes} J’aime</Text>
+                    <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
+                    <Text> {this.props.item.pending_payout_value} </Text>
                 </View>
-
-
             </View>
+
         )
     }
 }
@@ -138,5 +136,9 @@ const styles = StyleSheet.create({
         borderTopWidth: StyleSheet.hairlineWidth,
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    footer: {
+        flex:1,
+        flexDirection: 'row'
     }
 })
