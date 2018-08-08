@@ -53,10 +53,21 @@ export default class App extends Component {
 
 
   render() {
+    if (this.state.logged) {
       return (
         <Insta />
       );
+    } else {
+      return (
+        <SteemConnect
+          onLoggedIn={(auth) => this._signIn(auth)}
+          btnWidth={180}
+          btnHeight={80}
+          fontFamily={'System'}
+        />
+      )
     }
-  
+  }
+
 }
 
