@@ -37,16 +37,27 @@ export default class Post extends Component {
         this.lastPress = time;
     };
 
+    /**
+     * get user image profil
+     */
+    _getUserImgProfil(username) {
+        const uri = "https://steemend.herokuapp.com/api/users/imgprofil";
+        const response = await fetch(
+            `${uri}/${username}`
+        );
+        console.log('-------->'+response)
+        return response;
+    }
+    
+
     /*
     * we receive randomly data from postfeed (props) 
     * with params: firstname, lastname, profile-picture and #take-picture#,  
     *
     */
-
     render() {
         //console.log('item: '+JSON.stringify(this.props.item))
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
-        var imageSelection = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtRhS0il0UU65L4prJy0ZtbBP5iVWQQB7JyYYL4dtM9Q2BJ3yLQ';
         //console.log('->'+JSON.stringify(this.props.item))
         return (
             <View >
@@ -138,7 +149,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     footer: {
-        flex:1,
+        flex: 1,
         flexDirection: 'row'
     }
 })
