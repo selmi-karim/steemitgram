@@ -51,7 +51,7 @@ export default class App extends Component {
     })
   }
 
-
+/*
   render() {
     if (this.state.logged) {
       return (
@@ -67,7 +67,11 @@ export default class App extends Component {
         />
       )
     }
-  }
-
+  }*/
+  render() {
+      return (
+        <Insta />
+      );
+    }
 }
 
