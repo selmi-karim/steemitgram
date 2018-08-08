@@ -21,6 +21,7 @@ export default{
         accueil: require('../../../assets/accueil.png'), 
         fav: require('../../../assets/fav.png'), 
         param: require('../../../assets/config.png'), 
+        upArrow: require('../../../assets/uparrow1.png'), 
     },
     // static styles
     styleConstants: {
