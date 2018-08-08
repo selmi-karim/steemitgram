@@ -13,7 +13,8 @@ export default class Post extends Component {
         super();
         this.state = {
             liked: false,
-            lastPress: 0
+            lastPress: 0,
+            imgprofil: null
         }
     }
     // function picture like 
@@ -40,15 +41,43 @@ export default class Post extends Component {
     /**
      * get user image profil
      */
-    _getUserImgProfil(username) {
-        const uri = "https://steemend.herokuapp.com/api/users/imgprofil";
-        const response = await fetch(
-            `${uri}/${username}`
-        );
-        console.log('-------->'+response)
-        return response;
+    _getUserInfo = (username) => {
+        return fetch(URL)
+            .then((res) => res.json());
     }
-    
+    _getUserInfo = (username) => {
+        return fetch(URL)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log('-------->' + responseJson)
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+    /** we generate a fake data for home page */
+    async fetchData(username) {
+        const URL = `https://steemend.herokuapp.com/api/users/imgprofile/${username}`;
+        return fetch(URL)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson     
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
+
+    async componentDidMount() {
+        const username = this.props.item.author
+        const data = await this.fetchData(username)
+        this.setState({
+            imgprofil: data.Image,
+        });
+    }
 
     /*
     * we receive randomly data from postfeed (props) 
@@ -56,9 +85,7 @@ export default class Post extends Component {
     *
     */
     render() {
-        //console.log('item: '+JSON.stringify(this.props.item))
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
-        //console.log('->'+JSON.stringify(this.props.item))
         return (
             <View >
                 {/* user bar (icon, username,config button */}
@@ -67,7 +94,7 @@ export default class Post extends Component {
                         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
                             <Image
                                 style={styles.userPicture}
-                                source={{ uri: this.props.item.body[0] }}
+                                source={{ uri: this.state.imgprofil }}
                             />
                             <Text>{this.props.item.author}</Text>
                         </View>
