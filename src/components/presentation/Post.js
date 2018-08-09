@@ -62,7 +62,7 @@ export default class Post extends Component {
         return fetch(URL)
             .then((response) => response.json())
             .then((responseJson) => {
-                return responseJson     
+                return responseJson
             })
             .catch((error) => {
                 console.error(error);
@@ -75,7 +75,7 @@ export default class Post extends Component {
         const username = this.props.item.author
         const data = await this.fetchData(username)
         this.setState({
-            imgprofil: data.Image,
+            imgprofil: data.image,
         });
     }
 
