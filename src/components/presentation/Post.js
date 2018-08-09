@@ -56,13 +56,13 @@ export default class Post extends Component {
     render() {
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
         Image.getSize(this.props.item.body[0], (width, height) => {
-            const newHeight = height/(width/this.state.width)
+            const newHeight = height / (width / this.state.width)
             this.setState({
                 height: newHeight
             });
         })
         return (
-            <View >
+            <View style={{ paddingTop: 10 }} >
                 {/* user bar (icon, username,config button */}
                 < View style={styles.userBar} >
                     <TouchableOpacity onPress={() => { Alert.alert('redirection to profile') }} >
@@ -74,38 +74,44 @@ export default class Post extends Component {
                             <Text>{this.props.item.author}</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={{}}>
+                    <View style={{
+                         flex: 1,
+                         flexDirection: 'row',
+                         justifyContent: 'flex-end',
+                         alignItems: 'center',
+                         backgroundColor: 'red',
+                    }}>
                         <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} >
                             <Text style={{ fontSize: 32 }}>...</Text>
                         </TouchableOpacity>
-                    </View>
+            </View>
 
                 </View >
-                {/* images display */}
-                < TouchableOpacity onLongPress={() => { this.likeToggle() }} >
-                    <Image
-                        style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain}}
-                        source={{ uri: this.props.item.body[0] }}
-                    />
+            {/* images display */ }
+            < TouchableOpacity onLongPress = {() => { this.likeToggle() }
+    } >
+        <Image
+            style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain }}
+            source={{ uri: this.props.item.body[0] }}
+        />
 
                 </TouchableOpacity >
 
-                {/* footer msg,like,next buttons */}
-                < View style={styles.iconBar} >
-                    <TouchableOpacity onPress={() => { this.likeToggle() }} >
-                        <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
-                        <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
-                    </TouchableOpacity>
+    {/* footer msg,like,next buttons */ }
+    < View style = { styles.iconBar } >
+        <TouchableOpacity onPress={() => { this.likeToggle() }} >
+            <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
+            <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
+        </TouchableOpacity>
+        <View style={styles.footer} >
+            <Text> {this.props.item.net_votes} J’aime</Text>
+            <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
+            <Text> {this.props.item.pending_payout_value} </Text>
+        </View >
                 </View >
 
-                {/* comments */}
-                < View style={styles.footer} >
-                    <Text> {this.props.item.net_votes} J’aime</Text>
-                    <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
-                    <Text> {this.props.item.pending_payout_value} </Text>
-                </View >
             </View >
 
         )
@@ -153,6 +159,8 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     }
 })

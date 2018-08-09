@@ -7,7 +7,7 @@
 
 
 import React from "react"
-import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native"
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackAndroid } from "react-native"
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
 import config from '../config/index'
 /*
@@ -20,9 +20,18 @@ setMenuRef = ref => {
     this._menu = ref;
 };
 
+
 hideMenu = () => {
     this._menu.hide();
 };
+
+exit = async () => {
+    try {
+        await AsyncStorage.clear();
+    } catch (error) {
+    }
+    BackAndroid.exitApp()
+}
 
 showMenu = () => {
     this._menu.show();
@@ -35,21 +44,21 @@ export default (DisplayUser = props => (
             flexDirection: 'row',
             marginLeft: 'auto'
         }} >
-           
+
         </View>
         <Menu
-          ref={this.setMenuRef}
-          button={<TouchableOpacity onPress={this.showMenu}>
-          <Image
-            style={styles.configIcon}
-            source={config.images.param}
-          />
-        </TouchableOpacity>}
+            ref={this.setMenuRef}
+            button={<TouchableOpacity onPress={this.showMenu}>
+                <Image
+                    style={styles.configIcon}
+                    source={config.images.param}
+                />
+            </TouchableOpacity>}
         >
-          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
-          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
-          <MenuDivider />
-          <MenuItem onPress={this.hideMenu}>Exit</MenuItem>
+            <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
+            <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
+            <MenuDivider />
+            <MenuItem onPress={this.exit}>Exit</MenuItem>
         </Menu>
     </View>
 ));
