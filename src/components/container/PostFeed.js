@@ -24,7 +24,7 @@ export default class PostFeed extends Component {
     async fetchData(page) {
         const uri = "https://steemend.herokuapp.com/api/post/trending";
         const response = await fetch(
-            `${uri}?size=2`
+            `${uri}?size=5`
         );
         const jsondata = await response.json();
         return jsondata;
