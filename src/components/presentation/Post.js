@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import config from '../config/index.js'
 export default class Post extends Component {
     constructor() {
@@ -14,7 +14,9 @@ export default class Post extends Component {
         this.state = {
             liked: false,
             lastPress: 0,
-            imgprofil: null
+            imgprofil: null,
+            width: config.styleConstants.screenWidth,
+            height: config.styleConstants.screenHeight / 3
         }
     }
     // function picture like 
@@ -38,58 +40,31 @@ export default class Post extends Component {
         this.lastPress = time;
     };
 
-    /**
-     * get user image profil
-     */
-    _getUserInfo = (username) => {
-        return fetch(URL)
-            .then((res) => res.json());
-    }
-    _getUserInfo = (username) => {
-        return fetch(URL)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log('-------->' + responseJson)
-                return responseJson;
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-    /** we generate a fake data for home page */
-    async fetchData(username) {
-        const URL = `https://steemend.herokuapp.com/api/users/imgprofile/${username}`;
-        return fetch(URL)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return responseJson
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
-
 
     async componentDidMount() {
         const username = this.props.item.author
-        const data = await this.fetchData(username)
+
         this.setState({
-            imgprofil: data.image,
+            imgprofil: `https://steemitimages.com/u/${username}/avatar`,
         });
     }
 
     /*
     * we receive randomly data from postfeed (props) 
     * with params: firstname, lastname, profile-picture and #take-picture#,  
-    *
     */
     render() {
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
+        Image.getSize(this.props.item.body[0], (width, height) => {
+            const newHeight = height/(width/this.state.width)
+            this.setState({
+                height: newHeight
+            });
+        })
         return (
             <View >
                 {/* user bar (icon, username,config button */}
-                <View style={styles.userBar} >
+                < View style={styles.userBar} >
                     <TouchableOpacity onPress={() => { Alert.alert('redirection to profile') }} >
                         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
                             <Image
@@ -105,32 +80,33 @@ export default class Post extends Component {
                         </TouchableOpacity>
                     </View>
 
-                </View>
+                </View >
                 {/* images display */}
-                <TouchableOpacity onLongPress={() => { this.likeToggle() }} >
+                < TouchableOpacity onLongPress={() => { this.likeToggle() }} >
                     <Image
-                        style={{ width: config.styleConstants.screenWidth, height: config.styleConstants.screenHeight / 1.9, resizeMode: Image.resizeMode.contain }}
+                        style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain}}
                         source={{ uri: this.props.item.body[0] }}
                     />
-                </TouchableOpacity>
+
+                </TouchableOpacity >
 
                 {/* footer msg,like,next buttons */}
-                <View style={styles.iconBar} >
+                < View style={styles.iconBar} >
                     <TouchableOpacity onPress={() => { this.likeToggle() }} >
                         <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
-                        <Image style={styles.icon} source={config.images.bubbleIcon} />
+                        <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
                     </TouchableOpacity>
-                </View>
+                </View >
 
                 {/* comments */}
-                <View style={styles.footer}>
+                < View style={styles.footer} >
                     <Text> {this.props.item.net_votes} J’aime</Text>
                     <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
                     <Text> {this.props.item.pending_payout_value} </Text>
-                </View>
-            </View>
+                </View >
+            </View >
 
         )
     }
