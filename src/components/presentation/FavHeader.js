@@ -8,11 +8,12 @@
 
 import React from "react"
 import { View, Text,  StyleSheet } from "react-native"
+import { FavHeader } from ".";
 /*
  * users details 
  * feature: add clicked button -> user profile
  */
-export default (DisplayUser = props => (
+export default (FavHeader = props => (
     <View
         style={styles.tempNav} >
         <Text styltouche={{ fontSize: 23 }} style={{ position: 'absolute' }}> Trending Posts </Text>

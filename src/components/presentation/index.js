@@ -8,12 +8,12 @@
 import Post from './Post.js'
 import DisplayUser from './DisplayUser'
 import Fav from './Fav'
-import Header from './Header'
+import PostHeader from './PostHeader'
 import FavHeader from './FavHeader'
 export  {
     Post,
     DisplayUser,
     Fav,
-    Header,
+    PostHeader,
     FavHeader
 }
