@@ -105,19 +105,19 @@ export default class Fav extends PureComponent {
                     <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
                         <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
                     </TouchableOpacity>
+                    <View style={styles.footer} >
+                        <Text> {this.props.item.net_votes} J’aime</Text>
+                        <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
+                        <Text> {this.props.item.pending_payout_value} </Text>
+                    </View >
                 </View >
-
-                {/* comments */}
-                < View style={styles.footer} >
-                    <Text> {this.props.item.net_votes} J’aime</Text>
-                    <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
-                    <Text> {this.props.item.pending_payout_value} </Text>
-                </View >
+                
             </View >
 
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     userBar: {
@@ -157,7 +157,13 @@ const styles = StyleSheet.create({
         borderTopWidth: StyleSheet.hairlineWidth,
         flexDirection: 'row',
         alignItems: 'center',
-    }, 
+    },
+    footer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
     plusIcon: {
         height: 25,
         width: 25,
