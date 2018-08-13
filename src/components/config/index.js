@@ -22,6 +22,9 @@ export default{
         fav: require('../../../assets/fav.png'), 
         param: require('../../../assets/config.png'), 
         upArrow: require('../../../assets/uparrow1.png'), 
+        plus: require('../../../assets/plus.png'), 
+        plusB: require('../../../assets/plus-b.png'), 
+        
     },
     // static styles
     styleConstants: {
