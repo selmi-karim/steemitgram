@@ -30,7 +30,7 @@ export default class Favorite extends PureComponent {
     async componentWillMount() {
         this._getUsername().then((auth) => {
             // Checks if the current visitor is a logged in user.
-            //console.log('auth: ' + auth)
+            console.log('auth: ' + auth)
             if (auth) {
                 //console.log('username->:  '+auth.split("&")[2].split('=')[1])
                 this.setState({
