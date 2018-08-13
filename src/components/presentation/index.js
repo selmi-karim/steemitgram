@@ -10,10 +10,12 @@ import DisplayUser from './DisplayUser'
 import Fav from './Fav'
 import PostHeader from './PostHeader'
 import FavHeader from './FavHeader'
+import UserProfile from './UserProfile'
 export  {
     Post,
     DisplayUser,
     Fav,
     PostHeader,
-    FavHeader
+    FavHeader,
+    UserProfile
 }

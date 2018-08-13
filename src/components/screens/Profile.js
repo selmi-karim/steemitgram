@@ -25,8 +25,8 @@ export default class Profile extends Component {
         super();
         this.state = {
             profilePics: [{ id: 1, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            { id: 2, url: 'https://scontent-frx5-1.cdninstagram.com/vp/0e922a7892459c264043a34ecf148db3/5B5534C0/t51.2885-15/s640x640/sh0.08/e35/29717551_159122921449784_345167142687080448_n.jpg' },
-            { id: 3, url: 'https://scontent-frt3-2.cdninstagram.com/vp/96b9307e01f41d9cf41704e8b7c296a5/5B3A73D3/t51.2885-15/s640x640/sh0.08/e35/28435932_1721952941214989_5033876828268265472_n.jpg' },
+            { id: 2, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
+            { id: 3, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
             { id: 4, url: 'https://www.trollfootball.me/upload/full/2017/10/29/neymar-on-instagram-my-idol-is-my-friend-leo-messi.jpg' },
             { id: 5, url: 'https://i.pinimg.com/originals/49/da/be/49dabefa0f07cac3cd9aca3587396af7.jpg' },
             { id: 6, url: 'https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/Neymar_rtba2j.jpg' },
