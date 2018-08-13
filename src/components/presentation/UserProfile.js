@@ -11,6 +11,21 @@ import config from '../config/index'
 
 export default class Profile extends Component {
 
+
+    /**fake profile pictures */
+    constructor() {
+        super();
+        this.state = {
+            profilePics: [
+                { id: 1, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
+            ],
+            location: null,
+            coverImage: null,
+            imgprofil: null
+        };
+
+    }
+
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
             <Image
@@ -18,34 +33,49 @@ export default class Profile extends Component {
                 style={[styles.barIcon, { tintColor: tintColor }]}
             />
         ),
-    };
-
-    /**fake profile pictures */
-    constructor() {
-        super();
-        this.state = {
-            profilePics: [{ id: 1, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            { id: 2, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            { id: 3, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            { id: 4, url: 'https://www.trollfootball.me/upload/full/2017/10/29/neymar-on-instagram-my-idol-is-my-friend-leo-messi.jpg' },
-            { id: 5, url: 'https://i.pinimg.com/originals/49/da/be/49dabefa0f07cac3cd9aca3587396af7.jpg' },
-            { id: 6, url: 'https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/Neymar_rtba2j.jpg' },
-            { id: 7, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjRwAlPnJsZEeIqSdmoQYpJD4DqDU-CQIV3crPy9M4_yoY7hNz' },
-            { id: 8, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            { id: 9, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            { id: 10, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' }
-            ],
-        };
-
     }
-
     async componentDidMount() {
         const username = this.props.username
-        console.log('received: '+this.props.username)
+        await this.loadData(username);
         this.setState({
             imgprofil: `https://steemitimages.com/u/${username}/avatar`,
         });
     }
+
+
+    /** we generate a fake data for home page */
+    async getFollowCount(username) {
+        const uri = "https://steemend.herokuapp.com/api/users/getFollowCount";
+        const response = await fetch(
+            `${uri}/${username}`
+        );
+        const jsondata = await response.json();
+        return jsondata;
+    }
+
+    /** we generate a fake data for home page */
+    async getUserProfile(username) {
+        const uri = "https://steemend.herokuapp.com/api/users/profile";
+        const response = await fetch(
+            `${uri}/${username}`
+        );
+        const jsondata = await response.json();
+        console.log('user: ' + JSON.stringify(jsondata))
+        return jsondata;
+    }
+
+    async loadData(username) {
+        const followCount = await this.getFollowCount(username);
+        const user = await this.getUserProfile(username);
+        this.setState({
+            follower: followCount.follower_count,
+            following: followCount.following_count,
+            location: user.location,
+            coverImage: user.cover_image
+        });
+    }
+
+
 
     render() {
         return (
@@ -56,7 +86,7 @@ export default class Profile extends Component {
                             <View style={styles.userContainerPicture} >
                                 <Image
                                     style={styles.userPicture}
-                                    source={{ uri: 'https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-9/31946801_1811694005802190_7145020242580733952_n.jpg?_nc_cat=0&oh=08c817fd49ac2d16d4bbad0bae590d21&oe=5B7931F8' }}
+                                    source={{ uri: this.state.imgprofil }}
                                 />
                             </View>
                             <View style={{ flex: 7, height: 100 }} >
@@ -66,11 +96,11 @@ export default class Profile extends Component {
                                         <Text>Posts</Text>
                                     </View>
                                     <View style={styles.statCol}>
-                                        <Text>65</Text>
+                                        <Text>{this.state.follower}</Text>
                                         <Text>Followers</Text>
                                     </View>
                                     <View style={styles.statCol}>
-                                        <Text>80</Text>
+                                        <Text>{this.state.following}</Text>
                                         <Text>Following</Text>
                                     </View>
                                 </View>
@@ -83,8 +113,8 @@ export default class Profile extends Component {
                             </View>
                         </View>
                         <View style={styles.nameDisplay} >
-                            <Text style={styles.fontSm} >kerim SELMI</Text>
-                            <Text style={styles.fontBold} >JS lovers</Text>
+                            <Text style={styles.fontSm} >{this.props.username}</Text>
+                            <Text style={styles.fontBold} >{this.state.location}</Text>
                         </View>
                         <View></View>
                     </View>
