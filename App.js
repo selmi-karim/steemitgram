@@ -31,8 +31,8 @@ export default class App extends Component {
   }
 
 
-  componentWillMount() {
-    this._clearStorage();
+  componentDidMount() {
+    //this._clearStorage();
     this._checkLogged().then((auth) => {
       // Checks if the current visitor is a logged in user.
       if (auth) {
@@ -41,7 +41,6 @@ export default class App extends Component {
         })
       }
     })
-
   }
 
 
@@ -51,7 +50,7 @@ export default class App extends Component {
     })
   }
 
-/*
+
   render() {
     if (this.state.logged) {
       return (
@@ -67,11 +66,7 @@ export default class App extends Component {
         />
       )
     }
-  }*/
-  render() {
-      return (
-        <Insta />
-      );
-    }
+  }
+  
 }
 
