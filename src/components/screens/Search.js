@@ -6,15 +6,14 @@
  */
 
 
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { StyleSheet, View, Image } from "react-native";
-import { Button, SearchBar } from 'react-native-elements';
-import Icon from '@expo/vector-icons/FontAwesome';
+import {  SearchBar } from 'react-native-elements';
 import { SearchUsers } from "../container";
 import _ from "lodash";
 import config from '../config/index'
 
-export default class Search extends Component {
+export default class Search extends PureComponent {
   state = {
     page: 1,
     results: 20,

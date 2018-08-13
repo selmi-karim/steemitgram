@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
 import config from '../config/index'
 
 export default class Profile extends Component {
@@ -36,11 +36,16 @@ export default class Profile extends Component {
             { id: 10, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' }
             ],
         };
+
     }
 
-
-
-
+    async componentDidMount() {
+        const username = this.props.username
+        console.log('received: '+this.props.username)
+        this.setState({
+            imgprofil: `https://steemitimages.com/u/${username}/avatar`,
+        });
+    }
 
     render() {
         return (
@@ -86,11 +91,11 @@ export default class Profile extends Component {
                     <View style={styles.profilePicContainer} >
                         {this.state.profilePics.map((pic, i) => {
                             return (
-                                    <Image
-                                        key={pic.id}
-                                        style={styles.profilePicThumb}
-                                        source={{ uri: pic.url }}
-                                    />
+                                <Image
+                                    key={pic.id}
+                                    style={styles.profilePicThumb}
+                                    source={{ uri: pic.url }}
+                                />
                             )
                         })}
                     </View>

@@ -6,11 +6,17 @@
  */
 
 import React, { PureComponent } from 'react';
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native'
 import config from '../config/index'
 import { UserProfile } from './../presentation'
 
 export default class Favorite extends PureComponent {
+    constructor() {
+        super();
+        this.state = {
+            username: null
+        }
+    }
 
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
@@ -21,12 +27,45 @@ export default class Favorite extends PureComponent {
         ),
     };
 
+    async componentWillMount() {
+        this._getUsername().then((auth) => {
+            // Checks if the current visitor is a logged in user.
+            //console.log('auth: ' + auth)
+            if (auth) {
+                //console.log('username->:  '+auth.split("&")[2].split('=')[1])
+                this.setState({
+                    username: auth.split("&")[2].split('=')[1],
+                });
+            }
+        })
+    }
+
+    _getUsername = async () => {
+        try {
+            return await AsyncStorage.getItem('auth');
+        } catch (e) {
+            console.warn(e)
+            return null
+        }
+    };
+
     render() {
-        return (
-            <View style={{ flex: 1, width: 100 + '%', height: 100 + '%' }}>
-                <UserProfile />
-            </View>
-        )
+        console.log('render: ' + this.state.username)
+        if (this.state.username) {
+            return (
+                <View style={{ flex: 1, width: 100 + '%', height: 100 + '%' }}>
+                    <UserProfile
+                        username={this.state.username}
+                    />
+                </View>
+            )
+        } else {
+            return (
+                <View style={[styles.container, styles.horizontal]}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            )
+        }
     }
 }
 
@@ -36,4 +75,13 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
     },
+    container: {
+        flex: 1,
+        justifyContent: 'center'
+      },
+      horizontal: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+      }
 });
