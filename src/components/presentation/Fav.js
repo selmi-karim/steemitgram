@@ -61,7 +61,7 @@ export default class Fav extends PureComponent {
             });
         })
         return (
-            <View >
+            <View style={{ paddingTop: 10 }} >
                 {/* user bar (icon, username,config button */}
                 < View style={styles.userBar} >
                     <TouchableOpacity onPress={() => { Alert.alert('redirection to profile') }} >
@@ -111,7 +111,7 @@ export default class Fav extends PureComponent {
                         <Text> {this.props.item.pending_payout_value} </Text>
                     </View >
                 </View >
-                
+
             </View >
 
         )
