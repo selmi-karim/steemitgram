@@ -5,10 +5,10 @@
  * @Last Modified time: 2018-06-06 10:59:54
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import config from '../config/index.js'
-export default class Post extends Component {
+export default class Post extends PureComponent {
     constructor() {
         super();
         this.state = {
@@ -74,42 +74,44 @@ export default class Post extends Component {
                             <Text>{this.props.item.author}</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={{
-                         flex: 1,
-                         flexDirection: 'row',
-                         justifyContent: 'flex-end',
-                         alignItems: 'center',
-                         backgroundColor: 'red',
-                    }}>
-                        <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} >
-                            <Text style={{ fontSize: 32 }}>...</Text>
+                    <View >
+                        <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        }} >
+                            <Image
+                                style={styles.plusIcon}
+                                source={config.images.plusB}
+                            />
                         </TouchableOpacity>
-            </View>
+                    </View>
 
                 </View >
-            {/* images display */ }
-            < TouchableOpacity onLongPress = {() => { this.likeToggle() }
-    } >
-        <Image
-            style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain }}
-            source={{ uri: this.props.item.body[0] }}
-        />
+                {/* images display */}
+                < TouchableOpacity onLongPress={() => { this.likeToggle() }
+                } >
+                    <Image
+                        style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain }}
+                        source={{ uri: this.props.item.body[0] }}
+                    />
 
                 </TouchableOpacity >
 
-    {/* footer msg,like,next buttons */ }
-    < View style = { styles.iconBar } >
-        <TouchableOpacity onPress={() => { this.likeToggle() }} >
-            <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
-            <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
-        </TouchableOpacity>
-        <View style={styles.footer} >
-            <Text> {this.props.item.net_votes} J’aime</Text>
-            <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
-            <Text> {this.props.item.pending_payout_value} </Text>
-        </View >
+                {/* footer msg,like,next buttons */}
+                < View style={styles.iconBar} >
+                    <TouchableOpacity onPress={() => { this.likeToggle() }} >
+                        <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
+                        <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
+                    </TouchableOpacity>
+                    <View style={styles.footer} >
+                        <Text> {this.props.item.net_votes} J’aime</Text>
+                        <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
+                        <Text> {this.props.item.pending_payout_value} </Text>
+                    </View >
                 </View >
 
             </View >
@@ -162,5 +164,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
+    },
+    plusIcon: {
+        height: 25,
+        width: 25,
+        borderRadius: 20,
+        marginRight: 8
     }
 })

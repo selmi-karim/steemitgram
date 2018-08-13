@@ -5,10 +5,10 @@
  * @Last Modified time: 2018-06-05 12:28:03
  */
 
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Alert} from 'react-native';
-import config from '../config/index.js' 
-export default class Fav extends Component {
+import React, { PureComponent } from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import config from '../config/index.js'
+export default class Fav extends PureComponent {
     constructor() {
         super();
         this.state = {
@@ -41,7 +41,7 @@ export default class Fav extends Component {
     };
 
 
-    async componentWillMount() {
+    async componentDidMount() {
         const username = this.props.item.author
         this.setState({
             imgprofil: `https://steemitimages.com/u/${username}/avatar`,
@@ -55,7 +55,7 @@ export default class Fav extends Component {
     render() {
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
         Image.getSize(this.props.item.body[0], (width, height) => {
-            const newHeight = height/(width/this.state.width)
+            const newHeight = height / (width / this.state.width)
             this.setState({
                 height: newHeight
             });
@@ -73,9 +73,17 @@ export default class Fav extends Component {
                             <Text>{this.props.item.author}</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={{}}>
-                        <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} >
-                            <Text style={{ fontSize: 32 }}>...</Text>
+                    <View >
+                        <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        }} >
+                            <Image
+                                style={styles.plusIcon}
+                                source={config.images.plusB}
+                            />
                         </TouchableOpacity>
                     </View>
 
@@ -83,7 +91,7 @@ export default class Fav extends Component {
                 {/* images display */}
                 < TouchableOpacity onLongPress={() => { this.likeToggle() }} >
                     <Image
-                        style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain}}
+                        style={{ width: this.state.width, height: this.state.height, resizeMode: Image.resizeMode.contain }}
                         source={{ uri: this.props.item.body[0] }}
                     />
 
@@ -149,9 +157,11 @@ const styles = StyleSheet.create({
         borderTopWidth: StyleSheet.hairlineWidth,
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    footer: {
-        flex: 1,
-        flexDirection: 'row'
+    }, 
+    plusIcon: {
+        height: 25,
+        width: 25,
+        borderRadius: 20,
+        marginRight: 8
     }
 })
