@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, Linking } from 'react-native'
 import config from '../config/index'
 
 export default class Profile extends Component {
@@ -71,7 +71,8 @@ export default class Profile extends Component {
             follower: followCount.follower_count,
             following: followCount.following_count,
             location: user.location,
-            coverImage: user.cover_image
+            website: user.website,
+            posts: user.post_count
         });
     }
 
@@ -92,7 +93,7 @@ export default class Profile extends Component {
                             <View style={{ flex: 7, height: 100 }} >
                                 <View style={{ flexDirection: 'row', flex: 1 }} >
                                     <View style={styles.statCol}>
-                                        <Text>30</Text>
+                                        <Text>{this.state.posts}</Text>
                                         <Text>Posts</Text>
                                     </View>
                                     <View style={styles.statCol}>
@@ -113,10 +114,17 @@ export default class Profile extends Component {
                             </View>
                         </View>
                         <View style={styles.nameDisplay} >
-                            <Text style={styles.fontSm} >{this.props.username}</Text>
-                            <Text style={styles.fontBold} >{this.state.location}</Text>
+                            <Text style={styles.title}>{this.props.username}</Text>
                         </View>
-                        <View></View>
+                        <View style={styles.info} >
+                            <Image style={styles.icon} source={config.images.location} />
+                            <Text> {this.state.location} </Text>
+                            <Image style={styles.icon} source={config.images.website} />
+                            <TouchableOpacity onPress={() => { Linking.openURL(this.state.website) }} >
+                                <Text> {this.state.website} </Text>
+                            </TouchableOpacity>
+
+                        </View >
                     </View>
                     <View style={styles.profilePicContainer} >
                         {this.state.profilePics.map((pic, i) => {
@@ -161,15 +169,10 @@ const styles = StyleSheet.create({
         //backgroundColor: '#655655',
         paddingVertical: 20
     },
-    fontSm: {
-        fontSize: 16,
-        paddingLeft: 20
-
-    },
     fontBold: {
         fontWeight: 'bold',
         fontSize: 16,
-        paddingLeft: 20
+        paddingVertical: 40
 
     },
     userContainerPicture: {
@@ -200,6 +203,22 @@ const styles = StyleSheet.create({
     nameDisplay: {
         flexDirection: 'column',
         width: 100 + '%',
+        paddingLeft: 20,
         //backgroundColor: 'yellow',
-    }
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 28
+    },
+    info: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+    },
+    icon: {
+        height: 20,
+        width: 20,
+        paddingLeft: 20
+    },
 });
