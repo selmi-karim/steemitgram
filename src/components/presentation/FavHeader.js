@@ -16,7 +16,7 @@ import { View, Text,  StyleSheet } from "react-native"
 export default (FavHeader = props => (
     <View
         style={styles.tempNav} >
-        <Text styltouche={{ fontSize: 23 }} style={{ position: 'absolute' }}> Trending Posts </Text>
+        <Text styltouche={{ fontSize: 23 }} style={{ position: 'absolute' }}> New Posts </Text>
         <View style={{
             flexDirection: 'row',
             marginLeft: 'auto'
