@@ -25,6 +25,8 @@ export default{
         plus: require('../../../assets/plus.png'), 
         plusB: require('../../../assets/plus-b.png'), 
         notif: require('../../../assets/notif.png'), 
+        location: require('../../../assets/location.png'), 
+        website: require('../../../assets/website.png'), 
         
     },
     // static styles
