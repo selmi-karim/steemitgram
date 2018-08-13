@@ -8,7 +8,7 @@
 
 import React from "react"
 import { View, Text,  StyleSheet } from "react-native"
-import { FavHeader } from ".";
+
 /*
  * users details 
  * feature: add clicked button -> user profile

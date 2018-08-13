@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import config from './../config/index'
 import { PostFeed } from './../container'
-import { Header } from './../presentation'
+import { PostHeader } from './../presentation'
 
 export default class MainFeed extends Component {
 
@@ -27,7 +27,7 @@ export default class MainFeed extends Component {
         return (
             <View style={{ flex: 1, width: 100 + '%', height: 100 + '%' }}>
                 {/* header: app name,dimension */}
-                <Header />
+                <PostHeader />
                 {/* home page with some posts (randomly posts)*/}
                 <PostFeed />
             </View>
