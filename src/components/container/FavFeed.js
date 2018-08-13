@@ -9,7 +9,6 @@
 import React, { Component } from 'react'
 import { Fav } from '../presentation'
 import { FlatList } from 'react-native'
-import _ from "lodash";
 
 export default class FavFeed extends Component {
 
