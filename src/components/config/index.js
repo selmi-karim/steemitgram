@@ -27,6 +27,7 @@ export default{
         notif: require('../../../assets/notif.png'), 
         location: require('../../../assets/location.png'), 
         website: require('../../../assets/website.png'), 
+        user: require('../../../assets/user.png'), 
         
     },
     // static styles
