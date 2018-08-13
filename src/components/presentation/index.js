@@ -9,9 +9,11 @@ import Post from './Post.js'
 import DisplayUser from './DisplayUser'
 import Fav from './Fav'
 import Header from './Header'
+import FavHeader from './FavHeader'
 export  {
     Post,
     DisplayUser,
     Fav,
-    Header
+    Header,
+    FavHeader
 }
