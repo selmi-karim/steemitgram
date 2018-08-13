@@ -16,7 +16,7 @@ export default class Favorite extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
             <Image
-                source={config.images.fav}
+                source={config.images.notif}
                 style={[styles.icon, { tintColor: tintColor }]}
             />
         ),

@@ -24,6 +24,7 @@ export default{
         upArrow: require('../../../assets/uparrow1.png'), 
         plus: require('../../../assets/plus.png'), 
         plusB: require('../../../assets/plus-b.png'), 
+        notif: require('../../../assets/notif.png'), 
         
     },
     // static styles
