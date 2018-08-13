@@ -40,24 +40,6 @@ export default class PostFeed extends Component {
         });
     }
 
-    fromArrayToSectionData(data) {
-        let ds = _.groupBy(data, d => d.name.last.charAt(0));
-        ds = _.reduce(
-            ds,
-            (acc, next, index) => {
-                acc.push({
-                    key: index,
-                    data: next
-                });
-                return acc;
-            },
-            []
-        );
-        ds = _.orderBy(ds, ["key"]);
-        return ds;
-    }
-
-
     async componentDidMount() {
         await this.loadData(this.state.page);
     }
@@ -78,7 +60,7 @@ export default class PostFeed extends Component {
                 data={this.state.data}
                 keyExtractor={this._renderKey}
                 renderItem={this._renderPost}
-                onEndReachedThreshold={1}
+                onEndReachedThreshold={1200}
                 onEndReached={({ distanceFromEnd }) => {
                     console.log('on end reached ', distanceFromEnd);
                 }}

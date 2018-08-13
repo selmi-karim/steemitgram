@@ -22,9 +22,11 @@ export default class FavFeed extends Component {
     }
 
     /** we generate a fake data for home page */
-    /**this is the fav image of user */
     async fetchData(page) {
-        const response = await fetch('https://steemend.herokuapp.com/api/post/news');
+        const uri = "https://steemend.herokuapp.com/api/post/new";
+        const response = await fetch(
+            `${uri}?size=10`
+        );
         const jsondata = await response.json();
         return jsondata;
     }
@@ -58,7 +60,7 @@ export default class FavFeed extends Component {
                 data={this.state.data}
                 keyExtractor={this._renderKey}
                 renderItem={this._renderPost}
-                onEndReachedThreshold={1}
+                onEndReachedThreshold={1200}
                 onEndReached={({ distanceFromEnd }) => {
                     console.log('on end reached ', distanceFromEnd);
                 }}
