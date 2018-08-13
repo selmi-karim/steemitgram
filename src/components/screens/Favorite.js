@@ -8,32 +8,36 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native'
 import config from '../config/index'
-import {FavFeed} from './../container'
+import { FavFeed } from './../container'
+import { FavHeader } from './../presentation'
 
-export default class Favorite extends Component {  
-    
+export default class Favorite extends Component {
+
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-          <Image
-            source={config.images.fav}
-            style={[styles.icon, {tintColor: tintColor}]}
-          />
+            <Image
+                source={config.images.fav}
+                style={[styles.icon, { tintColor: tintColor }]}
+            />
         ),
     };
 
     render() {
-            return(
-                <View style={{paddingTop:40}}> 
-                    <FavFeed />
-                </View>
-            )
-        } 
+        return (
+            <View style={{ flex: 1, width: 100 + '%', height: 100 + '%' }}>
+                {/* header: app name,dimension */}
+                <FavHeader />
+                {/* home page with some posts (randomly posts)*/}
+                <FavFeed />
+            </View>
+        )
+    }
 }
 
 
 const styles = StyleSheet.create({
     icon: {
-      width: 26,
-      height: 26,
+        width: 26,
+        height: 26,
     },
 });
