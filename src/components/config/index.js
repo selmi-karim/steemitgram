@@ -28,6 +28,7 @@ export default{
         location: require('../../../assets/location.png'), 
         website: require('../../../assets/website.png'), 
         user: require('../../../assets/user.png'), 
+        power: require('../../../assets/power.png'), 
         
     },
     // static styles
@@ -35,6 +36,6 @@ export default{
         rowHeight: 50,
         screenWidth: Dimensions.get('window').width,
         screenHeight: Dimensions.get('window').height,
-        oneThirdWidth: Dimensions.get('window').width/3
+        halfWidth: Dimensions.get('window').width/2
     }  
 }
