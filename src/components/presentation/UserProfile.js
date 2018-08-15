@@ -18,6 +18,9 @@ export default class Profile extends Component {
         this.state = {
             profilePics: [
                 { id: 1, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
+                { id: 2, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
+                { id: 3, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
+                { id: 4, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
             ],
             location: null,
             coverImage: null,
@@ -72,7 +75,8 @@ export default class Profile extends Component {
             following: followCount.following_count,
             location: user.location,
             website: user.website,
-            posts: user.post_count
+            posts: user.post_count,
+            power: user.voting_power
         });
     }
 
@@ -120,8 +124,12 @@ export default class Profile extends Component {
                             <Image style={styles.icon} source={config.images.location} />
                             <Text> {this.state.location} </Text>
                             <Image style={styles.icon} source={config.images.website} />
-                            <TouchableOpacity onPress={() => { Linking.openURL(this.state.website) }} >
+                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL(this.state.website) }} >
                                 <Text> {this.state.website} </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert('Your vote power is ' + this.state.power) }} >
+                                <Image style={styles.icon} source={config.images.power} />
+                                <Text> {this.state.power} </Text>
                             </TouchableOpacity>
 
                         </View >
@@ -158,8 +166,8 @@ const styles = StyleSheet.create({
         height: 26,
     },
     profilePicThumb: {
-        width: config.styleConstants.oneThirdWidth,
-        height: config.styleConstants.oneThirdWidth,
+        width: config.styleConstants.halfWidth,
+        height: config.styleConstants.halfWidth,
     },
     profileInfo: {
         width: 100 + '%',
@@ -200,6 +208,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#efefef',
         borderRadius: 5,
     },
+    clickbtn: {
+        flexDirection: 'row',
+        flex: 1,
+    },
     nameDisplay: {
         flexDirection: 'column',
         width: 100 + '%',
@@ -208,17 +220,19 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 28
+        fontSize: 30,
+        paddingLeft: 5
+
     },
     info: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        paddingLeft: 20
     },
     icon: {
         height: 20,
         width: 20,
-        paddingLeft: 20
     },
 });
