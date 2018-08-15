@@ -11,7 +11,7 @@ export default class App extends Component {
   }
 
   /**
-      *  Fetch the token from storage then navigate to our appropriate place
+      *  Fetch the token from storage then navigate to our appropriate  place
       */
   _checkLogged = async () => {
     try {
@@ -32,7 +32,7 @@ export default class App extends Component {
 
 
   componentDidMount() {
-    //this._clearStorage();
+    this._clearStorage();
     this._checkLogged().then((auth) => {
       // Checks if the current visitor is a logged in user.
       if (auth) {
