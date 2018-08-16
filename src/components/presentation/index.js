@@ -10,12 +10,14 @@ import DisplayUser from './DisplayUser'
 import Fav from './Fav'
 import PostHeader from './PostHeader'
 import FavHeader from './FavHeader'
-import UserProfile from './UserProfile'
+import ImgProfile from './ImgProfile'
+import Img from './Img'
 export  {
     Post,
     DisplayUser,
     Fav,
     PostHeader,
     FavHeader,
-    UserProfile
+    ImgProfile,
+    Img
 }
