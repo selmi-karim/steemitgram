@@ -16,12 +16,7 @@ export default class Profile extends Component {
     constructor() {
         super();
         this.state = {
-            profilePics: [
-                { id: 1, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-                { id: 2, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-                { id: 3, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-                { id: 4, url: 'http://dtlon6z3v1kfl.cloudfront.net/wp-content/uploads/2017/01/22080908/Leo-Messi.jpg' },
-            ],
+            profilePics:null ,
             location: null,
             coverImage: null,
             imgprofil: null
@@ -101,11 +96,16 @@ export default class Profile extends Component {
             power: user.voting_power
         });
         console.log('posts:  '+posts)
-        
+        const imgs;
+        posts.forEach(function(element) {
+            console.log('e: '+JSON.stringify(element));
+            element.body = element.body[0]
+            imgs.push(element)
+        });
+        this.setState({
+            profilePics: imgs
+        })           
     }
-
-
-
     render() {
         return (
             <ScrollView>
@@ -164,7 +164,7 @@ export default class Profile extends Component {
                                 <Image
                                     key={pic.id}
                                     style={styles.profilePicThumb}
-                                    source={{ uri: pic.url }}
+                                    source={{ uri: pic.body }}
                                 />
                             )
                         })}
