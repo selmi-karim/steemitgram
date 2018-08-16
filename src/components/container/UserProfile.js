@@ -8,6 +8,8 @@
 import React, { PureComponent } from 'react';
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, Linking, FlatList } from 'react-native'
 import config from '../config/index'
+import { ImgProfile, Img } from '../presentation';
+import { throws } from 'assert';
 
 export default class Profile extends PureComponent {
 
@@ -101,22 +103,12 @@ export default class Profile extends PureComponent {
         })
     }
 
-    GetItem(flower_name) {
-
-        Alert.alert(flower_name);
-
+    _renderPost({ item }) {
+        return <ImgProfile item={item} />
     }
 
-    FlatListItemSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: .5,
-                    width: "100%",
-                    backgroundColor: "#000",
-                }}
-            />
-        );
+    _renderKey(item) {
+        return item.id.toString()
     }
 
     render() {
@@ -170,30 +162,8 @@ export default class Profile extends PureComponent {
                             </TouchableOpacity>
 
                         </View >
-                    </View>
-                    {/*<View style={styles.profilePicContainer} >
-                        {this.state.profilePics.map((pic, i) => {
-                            console.log('pic: ' + pic.id)
-                            return (
-                                <Image
-                                    key={pic.id}
-                                    style={styles.profilePicThumb}
-                                    source={{ uri: pic.body[0] }}
-                                />
-                            )
-                        })}
-                    </View> */}
-                    <FlatList
-                        data={this.state.profilePics}
-                        ItemSeparatorComponent={this.FlatListItemSeparator}
-                        renderItem={({ item }) =>
-                            <View style={{ flex: 1, flexDirection: 'row' }}>
-                                <Image source={{ uri: item.body[0] }} style={styles.imageView} />
-                                <Text onPress={this.GetItem.bind(this, item.id)} style={styles.textView} >{item.author}</Text>
-                            </View>
-                        }
-                        keyExtractor={(item, index) => index.toString()}
-                    />
+                    </View>                    
+                    <Img item={this.state.profilePics}/>
 
 
                 </View>
@@ -283,18 +253,6 @@ const styles = StyleSheet.create({
     icon: {
         height: 20,
         width: 20,
-    },
-    imageView: {
-        width: '70%',
-        height: 100,
-        margin: 7,
-        borderRadius: 7
-    },
-    textView: {
-        width: '50%',
-        textAlignVertical: 'center',
-        padding: 10,
-        color: '#000'
     }
 
 });

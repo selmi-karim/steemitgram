@@ -8,8 +8,10 @@
 import PostFeed from './PostFeed.js'
 import SearchUsers from './SearchUsers'
 import FavFeed from './FavFeed'
+import UserProfile from './UserProfile'
 export {
     PostFeed,
     SearchUsers,
-    FavFeed
+    FavFeed,
+    UserProfile
 }
