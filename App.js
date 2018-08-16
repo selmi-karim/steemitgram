@@ -31,7 +31,7 @@ export default class App extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     this._clearStorage();
     this._checkLogged().then((auth) => {
       // Checks if the current visitor is a logged in user.
