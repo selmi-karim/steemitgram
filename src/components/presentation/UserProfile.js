@@ -37,16 +37,20 @@ export default class Profile extends Component {
             />
         ),
     }
+
     async componentDidMount() {
-        const username = this.props.username
+        const username = 'borepstein'//this.props.username
         await this.loadData(username);
         this.setState({
             imgprofil: `https://steemitimages.com/u/${username}/avatar`,
         });
     }
 
-
-    /** we generate a fake data for home page */
+    /**
+     * 
+     * @param {String} username 
+     * return user follows count
+     */
     async getFollowCount(username) {
         const uri = "https://steemend.herokuapp.com/api/users/getFollowCount";
         const response = await fetch(
@@ -55,21 +59,39 @@ export default class Profile extends Component {
         const jsondata = await response.json();
         return jsondata;
     }
-
-    /** we generate a fake data for home page */
+    /**
+     * 
+     * @param {String} username 
+     * return user profile from steemend api
+     */
     async getUserProfile(username) {
         const uri = "https://steemend.herokuapp.com/api/users/profile";
         const response = await fetch(
             `${uri}/${username}`
         );
         const jsondata = await response.json();
-        console.log('user: ' + JSON.stringify(jsondata))
+        return jsondata;
+    }
+   
+    /**
+     * 
+     * @param {String} username 
+     * return user posts from steemEnd api
+     */
+    async getUserPosts(username) {
+        const uri = "https://steemend.herokuapp.com/api/users/getUserArticles";
+        const response = await fetch(
+            `${uri}/${username}`
+        );
+        const jsondata = await response.json();
+        //console.log('user: ' + JSON.stringify(jsondata))
         return jsondata;
     }
 
     async loadData(username) {
         const followCount = await this.getFollowCount(username);
         const user = await this.getUserProfile(username);
+        const posts = await this.getUserPosts(username);
         this.setState({
             follower: followCount.follower_count,
             following: followCount.following_count,
@@ -78,6 +100,8 @@ export default class Profile extends Component {
             posts: user.post_count,
             power: user.voting_power
         });
+        console.log('posts:  '+posts)
+        
     }
 
 
