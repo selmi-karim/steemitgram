@@ -8,7 +8,7 @@
 import React, { PureComponent } from 'react';
 import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native'
 import config from '../config/index'
-import { UserProfile } from './../presentation'
+import { UserProfile } from './../container'
 
 export default class Favorite extends PureComponent {
     constructor() {
