@@ -155,10 +155,23 @@ export default class PostHeader extends PureComponent {
                 source={config.images.latech}
                 resizeMode="contain"
                 resizeMethod="scale"
-                style={{ marginBottom: 10, height: 50, width: 100 }} />
+                style={{
+                    marginBottom: 10, height: 50, width: 100, justifyContent: 'center', alignItems: 'center',
+                }} />
             <Text style={{ marginBottom: 10 }}>You can help improve Steemitgram by reporting issues and
                     feature requests.</Text>
-            {this._renderButton('Close', () => this.setState({ reportBug: false }))}
+            <View style={styles.textAreaContainer} >
+                <TextInput
+                    style={styles.textArea}
+                    underlineColorAndroid="transparent"
+                    placeholder={"your feedback"}
+                    placeholderTextColor={"grey"}
+                    numberOfLines={10}
+                    multiline={true}
+                />
+            </View>
+                {this._renderButton('Send', () => this.setState({ reportBug: false }))}
+                {this._renderButton('Close', () => this.setState({ reportBug: false }))}
         </View>
     );
 
@@ -254,8 +267,6 @@ const styles = StyleSheet.create({
     modalContent: {
         backgroundColor: 'white',
         padding: 22,
-        justifyContent: 'center',
-        alignItems: 'center',
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },
@@ -266,4 +277,13 @@ const styles = StyleSheet.create({
     cardText: {
         fontSize: 14,
     },
+    textAreaContainer: {
+        borderColor: 'grey',
+        borderWidth: 1,
+        padding: 5
+    },
+    textArea: {
+        height: 50,
+        justifyContent: "flex-start"
+    }
 });
