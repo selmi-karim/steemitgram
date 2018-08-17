@@ -142,10 +142,12 @@ export default class Profile extends PureComponent {
                             <Text style={styles.title}>{this.props.username}</Text>
                         </View>
                         <View style={styles.info} >
-                            <Image style={styles.icon} source={config.images.location} />
-                            <Text> {this.state.location} </Text>
-                            <Image style={styles.icon} source={config.images.website} />
+                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q='+this.state.location) }} >
+                                <Image style={styles.icon} source={config.images.location} />
+                                <Text> {this.state.location} </Text>
+                            </TouchableOpacity>
                             <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL(this.state.website) }} >
+                                <Image style={styles.icon} source={config.images.website} />
                                 <Text> {this.state.website} </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert('Your vote power is ' + this.state.power) }} >
@@ -154,8 +156,8 @@ export default class Profile extends PureComponent {
                             </TouchableOpacity>
 
                         </View >
-                    </View>                    
-                    <ImgProfile item={this.state.profilePics}/>
+                    </View>
+                    <ImgProfile item={this.state.profilePics} />
 
 
                 </View>
@@ -222,6 +224,8 @@ const styles = StyleSheet.create({
     clickbtn: {
         flexDirection: 'row',
         flex: 1,
+        paddingTop: 5
+
     },
     nameDisplay: {
         flexDirection: 'column',
@@ -244,6 +248,7 @@ const styles = StyleSheet.create({
     icon: {
         height: 20,
         width: 20,
+        marginRight: 7
     }
 
 });
