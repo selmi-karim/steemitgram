@@ -7,10 +7,11 @@
 
 
 import React, { PureComponent } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackAndroid, Button, TextInput } from "react-native"
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackAndroid, Button, TextInput, ScrollView } from "react-native"
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
 import config from '../config/index'
 import Modal from 'react-native-modal'; // 2.4.0
+import ReadMore from 'react-native-read-more-text'
 
 
 /*
@@ -121,10 +122,24 @@ export default class PostHeader extends PureComponent {
                 source={config.images.latech}
                 resizeMode="contain"
                 resizeMethod="scale"
-                style={{ marginBottom: 10, height: 50, width: 100 }} />
+                style={{ marginBottom: 10, height: 50, width: 100, marginTop: 10 }} />
             <ScrollView>
-
-                <Text style={{ marginBottom: 10 }}>{config.text.privacyAndSecurity} </Text>
+                <ReadMore
+                    numberOfLines={8}
+                    onReady={this._handleTextReady}>
+                    <Text style={styles.cardText}>
+                        Most blockchain technology is inherently public. The addresses, balances, and transaction history are available to anyone who desires to look. This presents a unique situation in terms of privacy, and understanding it will help you grasp the reasons why certain simple actions are inadvisable. Youve probably heard that you shouldnt tell others how much cryptocurrency you have, especially if its a lot. The core issue is the risk of associating yourself with your wallet address. This can be done both intentionally (due to your privacy) or accidentally (due to your security), and the association between the address and yourself can happen in varying degrees.
+                        For instance, MetaMask can be used to associate your IP address with your wallet address, making it possible to potentially geolocate the wallet owner and compromise them through the IP attack vector. These attacks include:
+                        Distributed denial of service (DDoS) attacks
+                        Brute forcing SSH to gain access to the machine
+                        Port scanning for vulnerable services to exploit
+                        Mounting a man in the middle (MitM) attack
+                        While the general risk of these attacks is low, your chances increase depending on how much value you have in your wallets. People with greater funds are at a significantly higher risk in this situation since the attacks would be done in a targeted manner (as opposed to botnet-style exploits where risk/reward is removed from the equation). Additionally, wallets that are 1-2 degrees of transactional separation are more likely to be owned by the same user and could potentially also be stolen in one attack. Its easy to identify wallets owned by an exchange or non-user address (like an ICO fund), so assessing the risk/reward ratio can be done with a level of confidence.
+                        These risks are based on the IP attack vector, but this isnt the one you should be most mindful of. Associating other personally identifying information with your public address is vastly more risky for a number of reasons. Firstly, more data can be gathered easily with only a small amount of initial information. Gathering enough personal information to exploit a person can be much easier than trying to exploit the systems they use. This means that privacy is directly linked to your security, and you must take care to keep yourself from being vulnerable at the same level you would treat your systems. Takeaway II: privacy matters.
+                        Lets use myself as an example. In just this post, Ive mentioned the university I attended and degree I earned. Given my username, its not a far-off assumption to determine my first name. My post history includes a photo of myself and other much more revealing information, and all of this is stored on a permanent, public blockchain. I have linked 2 or 3 of my wallets in various posts while fervently asking for donations, and the transaction history on the Ethereum blockchain will link these addresses to even more that I own. Theres actually much more information you could dig up, but Ill let that be an exercise for you (feel free to leave anything interesting you find in the comments though).
+                        You may be thinking so what if I know some useless information now, but this is not the proper mindset to have in the security world. In fact, theres more than enough information to attempt a decent spear phishing attack to try and get me to accidentally download some malware or share sensitive information. Perhaps theres already sensitive information out there that you could leverage as blackmail, or even something that lets you bypass me altogether and gain access to my system directly. This example shows what it means to think with in the security mindset."
+               </Text>
+                </ReadMore>
             </ScrollView>
 
             {this._renderButton('Close', () => this.setState({ privacyAndSecurity: false }))}
@@ -185,14 +200,8 @@ export default class PostHeader extends PureComponent {
                 {/* Privacy and Security dialog*/}
                 <Modal
                     isVisible={this.state.privacyAndSecurity}
-                    backdropColor={'black'}
-                    backdropOpacity={1}
-                    animationIn={'zoomInDown'}
-                    animationOut={'zoomOutUp'}
-                    animationInTiming={1000}
-                    animationOutTiming={1000}
-                    backdropTransitionInTiming={1000}
-                    backdropTransitionOutTiming={1000}
+                    animationIn={'slideInLeft'}
+                    animationOut={'slideOutRight'}
                 >
                     {this._renderPSModal()}
                 </Modal>
@@ -253,5 +262,8 @@ const styles = StyleSheet.create({
     bottomModal: {
         justifyContent: 'flex-end',
         margin: 0,
+    },
+    cardText: {
+        fontSize: 14,
     },
 });
