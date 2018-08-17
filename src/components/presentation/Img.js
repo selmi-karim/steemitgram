@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Dimensions,
     Platform,
+    ActivityIndicator
 } from 'react-native';
 
 import ImageView from 'react-native-image-view';
@@ -18,21 +19,42 @@ export default class Img extends Component {
         super(props);
 
         this.state = {
+            data: [],
             imageIndex: 0,
             isImageViewVisible: false,
-            likes: images.reduce((acc, image) => {
-                acc[image.title] = 0;
-
-                return acc;
-            }, {}),
+            likes: null
         };
 
         this.renderFooter = this.renderFooter.bind(this);
     }
 
-    renderFooter({ title }) {
-        const { likes } = this.state;
+    async fetchData(username) {
+        const uri = "https://steemend.herokuapp.com/api/users/getUserPosts";
+        const response = await fetch(
+            `${uri}/${username}`
+        );
+        const jsondata = await response.json();
+        return jsondata;
+    }
 
+    async loadData(username) {
+        const data = await this.fetchData(username);
+        //const formatedData = this.fromArrayToSectionData(data);
+        this.setState({
+            data: [...this.state.data, ...data],
+            likes: data.reduce((acc, image) => {
+                acc[image.id] = image.net_votes;
+                return acc;
+            }, {}),
+        });
+    }
+
+    async componentDidMount() {
+        await this.loadData('borepstein');
+    }
+
+    renderFooter({ title, id }) {
+        const { likes } = this.state;
         return (
             <View style={styles.footer}>
                 <Text style={styles.footerText}>{title}</Text>
@@ -40,12 +62,12 @@ export default class Img extends Component {
                     style={styles.footerButton}
                     onPress={() => {
                         const imageLikes = likes[title] + 1;
-                        this.setState({ likes: { ...likes, [title]: imageLikes } });
+                        this.setState({ likes: { ...likes, [id]: imageLikes } });
                     }}
                 >
                     <Text style={styles.footerText}>♥</Text>
                     <Text style={[styles.footerText, { marginLeft: 7 }]}>
-                        {likes[title]}
+                        {likes[id]}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -53,39 +75,46 @@ export default class Img extends Component {
     }
 
     render() {
-        const { isImageViewVisible, imageIndex } = this.state;
 
-        return (
-            <View style={styles.container}>
-                <View>
-                    {images.map((image, index) => (
-                        <TouchableOpacity
-                            key={image.title}
-                            onPress={() => {
-                                this.setState({
-                                    imageIndex: index,
-                                    isImageViewVisible: true,
-                                });
-                            }}
-                        >
-                            <Image
-                                style={{ width, height: 200 }}
-                                source={image.source}
-                                resizeMode="cover"
-                            />
-                        </TouchableOpacity>
-                    ))}
+        const { isImageViewVisible, imageIndex, data } = this.state;
+        console.log('img index: ' + imageIndex)
+        if (data.length === 0) {
+            return (
+                <ActivityIndicator />
+            )
+        } else {
+            return (
+                <View style={styles.container}>
+                    <View>
+                        {this.state.data.map((image, index) => (
+                            <TouchableOpacity
+                                key={image.id}
+                                onPress={() => {
+                                    this.setState({
+                                        imageIndex: index,
+                                        isImageViewVisible: true,
+                                    });
+                                }}
+                            >
+                                <Image
+                                    style={{ width, height: 200 }}
+                                    source={image.source}
+                                    resizeMode="cover"
+                                />
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                    <ImageView
+                        glideAlways
+                        images={this.state.data}
+                        imageIndex={imageIndex}
+                        animationType="fade"
+                        isVisible={isImageViewVisible}
+                        renderFooter={this.renderFooter}
+                    />
                 </View>
-                <ImageView
-                    glideAlways
-                    images={images}
-                    imageIndex={imageIndex}
-                    animationType="fade"
-                    isVisible={isImageViewVisible}
-                    renderFooter={this.renderFooter}
-                />
-            </View>
-        );
+            );
+        }
     }
 }
 
@@ -124,10 +153,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         paddingTop: Platform.select({ ios: 0, android: 10 }),
     },
     footer: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         width,
         height: 50,
         flexDirection: 'row',
