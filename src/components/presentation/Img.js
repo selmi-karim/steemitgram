@@ -57,19 +57,13 @@ export default class Img extends Component {
         const { likes } = this.state;
         return (
             <View style={styles.footer}>
-                <Text style={styles.footerText}>{title}</Text>
-                <TouchableOpacity
-                    style={styles.footerButton}
-                    onPress={() => {
-                        const imageLikes = likes[title] + 1;
-                        this.setState({ likes: { ...likes, [id]: imageLikes } });
-                    }}
-                >
+                <View>
+                    <Text style={styles.footerText}>{title}</Text>
                     <Text style={styles.footerText}>♥</Text>
                     <Text style={[styles.footerText, { marginLeft: 7 }]}>
                         {likes[id]}
                     </Text>
-                </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -162,7 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width,
-        height: 50,
+        height: 100,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
