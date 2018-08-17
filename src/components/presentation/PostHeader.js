@@ -7,7 +7,7 @@
 
 
 import React, { PureComponent } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackAndroid, Button, TextInput, ScrollView } from "react-native"
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackAndroid, Button, TextInput, ScrollView, ActivityIndicator } from "react-native"
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
 import config from '../config/index'
 import Modal from 'react-native-modal'; // 2.4.0
@@ -23,7 +23,8 @@ export default class PostHeader extends PureComponent {
     constructor() {
         super();
         this.state = {
-            text: 'Username'
+            text: 'Username',
+            sendmsg: true,
         }
     }
 
@@ -48,6 +49,25 @@ export default class PostHeader extends PureComponent {
 
     hideMenu = () => {
         this._menu.hide()
+    }
+
+
+
+    Feedback = (sendmsg) => {
+        //this._menu.show();
+        if (sendmsg) {
+            return (<View style={styles.textAreaContainer} >
+                <TextInput
+                    style={styles.textArea}
+                    underlineColorAndroid="transparent"
+                    placeholder={"your feedback"}
+                    placeholderTextColor={"grey"}
+                    numberOfLines={10}
+                    multiline={true}
+                />
+            </View>)
+        }
+        return <ActivityIndicator />;
     }
 
     /**
@@ -160,18 +180,9 @@ export default class PostHeader extends PureComponent {
                 }} />
             <Text style={{ marginBottom: 10 }}>You can help improve Steemitgram by reporting issues and
                     feature requests.</Text>
-            <View style={styles.textAreaContainer} >
-                <TextInput
-                    style={styles.textArea}
-                    underlineColorAndroid="transparent"
-                    placeholder={"your feedback"}
-                    placeholderTextColor={"grey"}
-                    numberOfLines={10}
-                    multiline={true}
-                />
-            </View>
-                {this._renderButton('Send', () => this.setState({ reportBug: false }))}
-                {this._renderButton('Close', () => this.setState({ reportBug: false }))}
+            {this.Feedback(this.state.sendmsg)}
+            {this._renderButton('Send', () => this.setState({ sendmsg: false }))}
+            {this._renderButton('Close', () => this.setState({ reportBug: false }))}
         </View>
     );
 
@@ -188,12 +199,13 @@ export default class PostHeader extends PureComponent {
                 </View>
                 <Menu
                     ref={this.setMenuRef}
-                    button={<TouchableOpacity onPress={this.showMenu}>
-                        <Image
-                            style={styles.configIcon}
-                            source={config.images.param}
-                        />
-                    </TouchableOpacity>}
+                    button={
+                        <TouchableOpacity onPress={this.showMenu}>
+                            <Image
+                                style={styles.configIcon}
+                                source={config.images.param}
+                            />
+                        </TouchableOpacity>}
                 >
                     <MenuItem onPress={this.privacyAndSecurity}>Privacy & Security</MenuItem>
                     <MenuItem onPress={this.reportBug}>Report Bug</MenuItem>
