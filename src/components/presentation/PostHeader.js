@@ -12,6 +12,8 @@ import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
 import config from '../config/index'
 import Modal from 'react-native-modal'; // 2.4.0
 import ReadMore from 'react-native-read-more-text'
+import timer from 'react-native-timer'
+
 
 
 /*
@@ -56,18 +58,30 @@ export default class PostHeader extends PureComponent {
     Feedback = (sendmsg) => {
         //this._menu.show();
         if (sendmsg) {
-            return (<View style={styles.textAreaContainer} >
-                <TextInput
-                    style={styles.textArea}
-                    underlineColorAndroid="transparent"
-                    placeholder={"your feedback"}
-                    placeholderTextColor={"grey"}
-                    numberOfLines={10}
-                    multiline={true}
-                />
-            </View>)
+            return (
+                <View>
+                    <Image
+                        source={config.images.latech}
+                        resizeMode="contain"
+                        resizeMethod="scale"
+                        style={{
+                            marginBottom: 10, height: 50, width: 100, justifyContent: 'center', alignItems: 'center',
+                        }} />
+                    <Text style={{ marginBottom: 10 }}>You can help improve Steemitgram by reporting issues and
+                    feature requests.</Text>
+                    <View style={styles.textAreaContainer} >
+                        <TextInput
+                            style={styles.textArea}
+                            underlineColorAndroid="transparent"
+                            placeholder={"your feedback"}
+                            placeholderTextColor={"grey"}
+                            numberOfLines={10}
+                            multiline={true}
+                        />
+                    </View>
+                </View>)
         }
-        return <ActivityIndicator />;
+        return <ActivityIndicator size="large" color="#0000ff" />;
     }
 
     /**
@@ -171,21 +185,21 @@ export default class PostHeader extends PureComponent {
      */
     _renderReportBugModal = () => (
         <View style={styles.modalContent}>
-            <Image
-                source={config.images.latech}
-                resizeMode="contain"
-                resizeMethod="scale"
-                style={{
-                    marginBottom: 10, height: 50, width: 100, justifyContent: 'center', alignItems: 'center',
-                }} />
-            <Text style={{ marginBottom: 10 }}>You can help improve Steemitgram by reporting issues and
-                    feature requests.</Text>
+
             {this.Feedback(this.state.sendmsg)}
-            {this._renderButton('Send', () => this.setState({ sendmsg: false }))}
+            {this._renderButton('Send', () => {
+
+                this.setState({ sendmsg: false }, () => timer.setTimeout(
+                    this, 'hideMsg', () => this.setState({ sendmsg: true, reportBug: false }), 2000
+                ));
+
+            })}
             {this._renderButton('Close', () => this.setState({ reportBug: false }))}
         </View>
     );
-
+    setTimePassed() {
+        this.setState({ sendmsg: true });
+    }
     render() {
         return (
             <View
