@@ -10,6 +10,10 @@ import { Dimensions } from 'react-native'
 
 export default{
     // static images
+    text: {
+        latech: "LaTech is a French company with extensive experience in local project management and nearshore mode. Beyond the customer / supplier relationship, LaTech develops partnerships and commits to the success of projects by adopting an approach based on cooperation and transparency.",
+        privacyAndSecurity: 'sdqsddq'
+    },
     images: {
         heartIcon: require('../../../assets/heart.png'),
         bubbleIcon: require('../../../assets/bubble.png'),
