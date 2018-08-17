@@ -53,7 +53,7 @@ export default class ImgProfile extends Component {
         await this.loadData('borepstein');
     }
 
-    renderFooter({ title, id }) {
+    renderFooter({ title, id, pending_payout_value }) {
         const { likes } = this.state;
         return (
             <View style={styles.footer}>
@@ -61,7 +61,10 @@ export default class ImgProfile extends Component {
                     <Text style={styles.footerText}>{title}</Text>
                     <Text style={styles.footerText}></Text>
                     <Text style={[styles.footerText, { marginLeft: 7 }]}>
-                    ♥  {likes[id]}
+                    ♥  {likes[id]} 
+                    </Text>
+                    <Text style={[styles.footerText, { marginLeft: 7 }]}>
+                     {pending_payout_value}
                     </Text>
                 </View>
             </View>
