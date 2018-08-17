@@ -233,11 +233,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30,
         paddingLeft: 5
-
     },
     info: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         paddingLeft: 20
