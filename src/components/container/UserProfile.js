@@ -8,7 +8,7 @@
 import React, { PureComponent } from 'react';
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, Linking, FlatList } from 'react-native'
 import config from '../config/index'
-import { ImgProfile, Img } from '../presentation';
+import { ImgProfile } from '../presentation';
 
 export default class Profile extends PureComponent {
 
@@ -102,13 +102,6 @@ export default class Profile extends PureComponent {
         })
     }
 
-    _renderPost({ item }) {
-        return <ImgProfile item={item} />
-    }
-
-    _renderKey(item) {
-        return item.id.toString()
-    }
 
     render() {
         return (
@@ -162,7 +155,7 @@ export default class Profile extends PureComponent {
 
                         </View >
                     </View>                    
-                    <Img item={this.state.profilePics}/>
+                    <ImgProfile item={this.state.profilePics}/>
 
 
                 </View>

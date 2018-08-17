@@ -11,7 +11,6 @@ import Fav from './Fav'
 import PostHeader from './PostHeader'
 import FavHeader from './FavHeader'
 import ImgProfile from './ImgProfile'
-import Img from './Img'
 export  {
     Post,
     DisplayUser,
@@ -19,5 +18,4 @@ export  {
     PostHeader,
     FavHeader,
     ImgProfile,
-    Img
 }
