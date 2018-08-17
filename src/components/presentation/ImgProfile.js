@@ -71,10 +71,10 @@ export default class ImgProfile extends Component {
     render() {
 
         const { isImageViewVisible, imageIndex, data } = this.state;
-        console.log('img index: ' + imageIndex)
+        //console.log('img index: ' + imageIndex)
         if (data.length === 0) {
             return (
-                <ActivityIndicator />
+                <ActivityIndicator size="large" color="#0000ff" />
             )
         } else {
             return (
@@ -112,34 +112,6 @@ export default class ImgProfile extends Component {
     }
 }
 
-
-const images = [
-    {
-        source: {
-            uri:
-                'https://avatars.mds.yandex.net/get-pdb/49816/d9152cc6-bf48-4e44-b2d5-de73b2e94454/s800',
-        },
-        title: 'London',
-    },
-    {
-        // eslint-disable-next-line
-        source: {
-            uri:
-                'https://avatars.mds.yandex.net/get-pdb/49816/d9152cc6-bf48-4e44-b2d5-de73b2e94454/s800',
-        }, title: 'St-Petersburg',
-        width: 1200,
-        height: 800,
-    },
-    {
-        source: {
-            uri:
-                'https://cdn.pixabay.com/photo/2017/08/17/10/47/paris-2650808_960_720.jpg',
-        },
-        title: 'Paris',
-        width: 806,
-        height: 720,
-    },
-];
 
 const styles = StyleSheet.create({
     container: {
