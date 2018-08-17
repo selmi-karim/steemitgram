@@ -9,7 +9,6 @@ import React, { PureComponent } from 'react';
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, Linking, FlatList } from 'react-native'
 import config from '../config/index'
 import { ImgProfile, Img } from '../presentation';
-import { throws } from 'assert';
 
 export default class Profile extends PureComponent {
 
