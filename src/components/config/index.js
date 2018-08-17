@@ -29,6 +29,7 @@ export default{
         website: require('../../../assets/website.png'), 
         user: require('../../../assets/user.png'), 
         power: require('../../../assets/power.png'), 
+        latech: require('../../../assets/latech.png'), 
         
     },
     // static styles
