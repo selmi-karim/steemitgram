@@ -163,19 +163,22 @@ export default class PostHeader extends PureComponent {
     /**
      * send mail to steemEnd api
      */
-    SendMail = (username,message) => {
-        
+    SendMail = (username, message) => {
+        this.setState({ sendmsg: false })
         fetch('https://steemend.herokuapp.com/api/mail/send', {
             method: 'POST',
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              username: username,
-              message: message,
+                username: username,
+                message: message,
             }),
-          });
+        }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {console.log('Success:', response),this.setState({ sendmsg: true, reportBug: false })});
+        
     }
 
     /**
@@ -208,10 +211,12 @@ export default class PostHeader extends PureComponent {
                         />
                     </View>
                     {this._renderButton('Send', () => {
-                        if (this.state.text !== '') 
-                            this.setState({ sendmsg: false }, () => timer.setTimeout(
-                                this, 'hideMsg', () => this.setState({ sendmsg: true, reportBug: false }), 2000
-                            ));
+                        if (this.state.text !== '')
+                            /*this.setState({ sendmsg: false }, () => timer.setTimeout(
+                                this, 'reportBug', () => this.setState({ sendmsg: true, reportBug: false }), 2000
+                            ));*/
+
+                            this.SendMail('latech', this.state.text)
 
                     })}
                     {this._renderButton('Close', () => this.setState({ reportBug: false }))}
