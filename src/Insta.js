@@ -6,7 +6,6 @@
  */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import { MainFeed, Login, Profile, CameraEx, Search, Favorite } from './components/screens';
 
