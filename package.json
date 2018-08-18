@@ -31,7 +31,6 @@
     "react-native-modal": "^6.5.0",
     "react-native-read-more-text": "^1.1.0",
     "react-native-steem-signin": "^0.1.2",
-    "react-native-timer": "^1.3.4",
     "react-navigation": "^2.0.1"
   }
 }
