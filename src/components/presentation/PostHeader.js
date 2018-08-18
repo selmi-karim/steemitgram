@@ -25,7 +25,7 @@ export default class PostHeader extends PureComponent {
     constructor() {
         super();
         this.state = {
-            text: 'Username',
+            text: '',
             sendmsg: true,
         }
     }
@@ -53,36 +53,6 @@ export default class PostHeader extends PureComponent {
         this._menu.hide()
     }
 
-
-
-    Feedback = (sendmsg) => {
-        //this._menu.show();
-        if (sendmsg) {
-            return (
-                <View>
-                    <Image
-                        source={config.images.latech}
-                        resizeMode="contain"
-                        resizeMethod="scale"
-                        style={{
-                            marginBottom: 10, height: 50, width: 100, justifyContent: 'center', alignItems: 'center',
-                        }} />
-                    <Text style={{ marginBottom: 10 }}>You can help improve Steemitgram by reporting issues and
-                    feature requests.</Text>
-                    <View style={styles.textAreaContainer} >
-                        <TextInput
-                            style={styles.textArea}
-                            underlineColorAndroid="transparent"
-                            placeholder={"your feedback"}
-                            placeholderTextColor={"grey"}
-                            numberOfLines={10}
-                            multiline={true}
-                        />
-                    </View>
-                </View>)
-        }
-        return <ActivityIndicator size="large" color="#0000ff" />;
-    }
 
     /**
      * about as dialog
@@ -151,7 +121,7 @@ export default class PostHeader extends PureComponent {
      * Privacy and Security native modal
      */
     _renderPSModal = () => (
-        <View style={styles.modalContent}>
+        <View style={[styles.modalContent, { height: 70 + '%' }]}>
             <Image
                 source={config.images.latech}
                 resizeMode="contain"
@@ -172,12 +142,11 @@ export default class PostHeader extends PureComponent {
                         These risks are based on the IP attack vector, but this isnt the one you should be most mindful of. Associating other personally identifying information with your public address is vastly more risky for a number of reasons. Firstly, more data can be gathered easily with only a small amount of initial information. Gathering enough personal information to exploit a person can be much easier than trying to exploit the systems they use. This means that privacy is directly linked to your security, and you must take care to keep yourself from being vulnerable at the same level you would treat your systems. Takeaway II: privacy matters.
                         Lets use myself as an example. In just this post, Ive mentioned the university I attended and degree I earned. Given my username, its not a far-off assumption to determine my first name. My post history includes a photo of myself and other much more revealing information, and all of this is stored on a permanent, public blockchain. I have linked 2 or 3 of my wallets in various posts while fervently asking for donations, and the transaction history on the Ethereum blockchain will link these addresses to even more that I own. Theres actually much more information you could dig up, but Ill let that be an exercise for you (feel free to leave anything interesting you find in the comments though).
                         You may be thinking so what if I know some useless information now, but this is not the proper mindset to have in the security world. In fact, theres more than enough information to attempt a decent spear phishing attack to try and get me to accidentally download some malware or share sensitive information. Perhaps theres already sensitive information out there that you could leverage as blackmail, or even something that lets you bypass me altogether and gain access to my system directly. This example shows what it means to think with in the security mindset."
-               </Text>
+                    </Text>
                 </ReadMore>
             </ScrollView>
-
             {this._renderButton('Close', () => this.setState({ privacyAndSecurity: false }))}
-        </View>
+        </View >
     );
 
     /**
@@ -187,18 +156,72 @@ export default class PostHeader extends PureComponent {
         <View style={styles.modalContent}>
 
             {this.Feedback(this.state.sendmsg)}
-            {this._renderButton('Send', () => {
 
-                this.setState({ sendmsg: false }, () => timer.setTimeout(
-                    this, 'hideMsg', () => this.setState({ sendmsg: true, reportBug: false }), 2000
-                ));
-
-            })}
-            {this._renderButton('Close', () => this.setState({ reportBug: false }))}
         </View>
     );
-    setTimePassed() {
-        this.setState({ sendmsg: true });
+
+    /**
+     * send mail to steemEnd api
+     */
+    SendMail = (username,message) => {
+        
+        fetch('https://steemend.herokuapp.com/api/mail/send', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              username: username,
+              message: message,
+            }),
+          });
+    }
+
+    /**
+     * debug dialog and send mail
+     */
+    Feedback = (sendmsg) => {
+        //this._menu.show();
+        if (sendmsg) {
+            return (
+                <View>
+                    <Image
+                        source={config.images.latech}
+                        resizeMode="contain"
+                        resizeMethod="scale"
+                        style={{
+                            marginBottom: 10, height: 50, width: 100, justifyContent: 'center', alignItems: 'center',
+                        }} />
+                    <Text style={{ marginBottom: 10 }}>You can help improve Steemitgram by reporting issues and
+                    feature requests.</Text>
+                    <View style={styles.textAreaContainer} >
+                        <TextInput
+                            style={styles.textArea}
+                            underlineColorAndroid="transparent"
+                            placeholder={"your feedback"}
+                            placeholderTextColor={"grey"}
+                            numberOfLines={10}
+                            multiline={true}
+                            onChangeText={(text) => this.setState({ text })}
+                            value={this.state.text}
+                        />
+                    </View>
+                    {this._renderButton('Send', () => {
+                        if (this.state.text !== '') 
+                            this.setState({ sendmsg: false }, () => timer.setTimeout(
+                                this, 'hideMsg', () => this.setState({ sendmsg: true, reportBug: false }), 2000
+                            ));
+
+                    })}
+                    {this._renderButton('Close', () => this.setState({ reportBug: false }))}
+                </View>)
+        }
+        return (
+            <View>
+                <Text>Please wait...</Text>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>);
     }
     render() {
         return (
@@ -295,6 +318,7 @@ const styles = StyleSheet.create({
         padding: 22,
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
+
     },
     bottomModal: {
         justifyContent: 'flex-end',
