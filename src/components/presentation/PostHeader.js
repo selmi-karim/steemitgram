@@ -7,12 +7,12 @@
 
 
 import React, { PureComponent } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackAndroid, Button, TextInput, ScrollView, ActivityIndicator } from "react-native"
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackHandler, TextInput, ScrollView, ActivityIndicator } from "react-native"
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
+import {Util} from 'expo'
 import config from '../config/index'
 import Modal from 'react-native-modal'; // 2.4.0
 import ReadMore from 'react-native-read-more-text'
-import timer from 'react-native-timer'
 
 
 
@@ -32,13 +32,14 @@ export default class PostHeader extends PureComponent {
 
     _menu = null
 
-    exit = async () => {
+
+    logout = async () => {
         this._menu.hide()
         try {
             await AsyncStorage.clear();
+            Util.reload()
         } catch (error) {
         }
-        BackAndroid.exitApp()
     }
     showMenu = () => {
         this._menu.show();
@@ -176,9 +177,9 @@ export default class PostHeader extends PureComponent {
                 message: message,
             }),
         }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => {console.log('Success:', response),this.setState({ sendmsg: true, reportBug: false })});
-        
+            .catch(error => console.error('SendMail Error:', error))
+            .then(response => { console.log('SendMail Success:', response), this.setState({ sendmsg: true, reportBug: false }) });
+
     }
 
     /**
@@ -212,9 +213,6 @@ export default class PostHeader extends PureComponent {
                     </View>
                     {this._renderButton('Send', () => {
                         if (this.state.text !== '')
-                            /*this.setState({ sendmsg: false }, () => timer.setTimeout(
-                                this, 'reportBug', () => this.setState({ sendmsg: true, reportBug: false }), 2000
-                            ));*/
 
                             this.SendMail('latech', this.state.text)
 
@@ -253,7 +251,7 @@ export default class PostHeader extends PureComponent {
                     <MenuItem onPress={this.reportBug}>Report Bug</MenuItem>
                     <MenuItem onPress={this.aboutAs}>About as</MenuItem>
                     <MenuDivider />
-                    <MenuItem onPress={this.exit}>Exit</MenuItem>
+                    <MenuItem onPress={this.logout}>Log Out</MenuItem>
                 </Menu>
                 {/* about as dialog*/}
                 <Modal
