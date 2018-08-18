@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react'
 import { Fav } from '../presentation'
-import { FlatList } from 'react-native'
+import { FlatList, ActivityIndicator, View, StyleSheet } from 'react-native'
 
 export default class FavFeed extends Component {
 
@@ -54,6 +54,14 @@ export default class FavFeed extends Component {
 
     render() {
         //console.log(this.state.data)
+        if (this.state.data.length === 0) {
+            return (
+                <View style={styles.ActivityIndicator}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            )
+
+        }
         return (
             <FlatList
                 data={this.state.data}
@@ -67,3 +75,12 @@ export default class FavFeed extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    ActivityIndicator: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})

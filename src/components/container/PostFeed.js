@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react'
 import { Post } from '../presentation'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet,ActivityIndicator, View } from 'react-native'
 import _ from "lodash";
 
 export default class PostFeed extends Component {
@@ -55,6 +55,14 @@ export default class PostFeed extends Component {
 
     render() {
         //console.log(this.state.data)
+        if (this.state.data.length === 0) {
+            return (
+                <View style={styles.ActivityIndicator}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            )
+
+        }
         return (
             <FlatList
                 data={this.state.data}
@@ -68,3 +76,13 @@ export default class PostFeed extends Component {
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    ActivityIndicator: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
