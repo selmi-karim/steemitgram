@@ -70,7 +70,7 @@ export default class PostFeed extends Component {
                 renderItem={this._renderPost}
                 onEndReachedThreshold={1200}
                 onEndReached={({ distanceFromEnd }) => {
-                    console.log('on end reached ', distanceFromEnd);
+                    //console.log('on end reached ', distanceFromEnd);
                 }}
             />
         )

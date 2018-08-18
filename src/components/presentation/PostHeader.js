@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     tempNav: {
         flexDirection: 'row',
         width: 100 + '%',
-        height: 45,
+        height: 10+'%',
         backgroundColor: '#e3e4e5',
         borderBottomColor: '#e3e4e5',
         borderBottomWidth: StyleSheet.hairlineWidth,
