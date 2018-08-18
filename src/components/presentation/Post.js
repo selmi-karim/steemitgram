@@ -8,7 +8,10 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import config from '../config/index.js'
+import Menu, { MenuItem } from 'react-native-material-menu';
+
 export default class Post extends PureComponent {
+
     constructor() {
         super();
         this.state = {
@@ -19,6 +22,28 @@ export default class Post extends PureComponent {
             height: config.styleConstants.screenHeight / 3
         }
     }
+
+    _menu = null;
+    setMenuRef = ref => {
+        this._menu = ref;
+    };
+
+    hideMenu = () => {
+        this._menu.hide();
+    };
+
+    follow = () => {
+        this._menu.hide();
+    }
+
+    unfollow = () => {
+        this._menu.hide();
+    }
+
+    showMenu = () => {
+        this._menu.show();
+    };
+
     // function picture like 
     likeToggle() {
         this.setState({
@@ -74,18 +99,22 @@ export default class Post extends PureComponent {
                             <Text>{this.props.item.author}</Text>
                         </View>
                     </TouchableOpacity>
-                    <View >
-                        <TouchableOpacity onPress={() => { Alert.alert('soo: block,unfollow..') }} style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center',
-                        }} >
-                            <Image
-                                style={styles.plusIcon}
-                                source={config.images.plusB}
-                            />
-                        </TouchableOpacity>
+                    <View style={styles.menu}>
+                        <Menu
+                            style={{ width: 30 + '%' }}
+                            ref={this.setMenuRef}
+                            button={
+                                <TouchableOpacity onPress={this.showMenu} >
+                                    <Image
+                                        style={styles.plusIcon}
+                                        source={config.images.plusB}
+                                    />
+                                </TouchableOpacity>}
+                        >
+                            <MenuItem onPress={this.follow} textStyle={{ fontSize: 14 }}>Follow</MenuItem>
+                            <MenuItem onPress={this.unfollow} textStyle={{ fontSize: 14 }} >Unfollow</MenuItem>
+                        </Menu>
+
                     </View>
 
                 </View >
@@ -170,5 +199,11 @@ const styles = StyleSheet.create({
         width: 25,
         borderRadius: 20,
         marginRight: 8
+    },
+    menu: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     }
 })
