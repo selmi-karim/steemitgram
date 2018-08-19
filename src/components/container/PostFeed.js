@@ -7,13 +7,12 @@
 
 import React, { Component } from 'react'
 import { Post } from '../presentation'
-import { FlatList, StyleSheet,ActivityIndicator, View } from 'react-native'
-import _ from "lodash";
+import { FlatList, StyleSheet, ActivityIndicator, View } from 'react-native'
 
 export default class PostFeed extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             page: 1,
             data: [],
@@ -46,15 +45,16 @@ export default class PostFeed extends Component {
 
 
     _renderPost({ item }) {
-        return <Post item={item} />
+        console.log('qqq: '+this.props)
+        return <Post item={item}  {...this.props}   />
     }
-
+    
     _renderKey(item) {
         return item.id.toString()
     }
 
     render() {
-        //console.log(this.state.data)
+        console.log("**"+this.props.navigation)
         if (this.state.data.length === 0) {
             return (
                 <View style={styles.ActivityIndicator}>
