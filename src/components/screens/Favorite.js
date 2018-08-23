@@ -6,9 +6,10 @@
  */
 
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native'
-import config from '../config/index'
-import { FavFeed } from './../container'
+import { View, Image, StyleSheet } from 'react-native'
+import { createStackNavigator } from 'react-navigation'
+import config from './../config/index'
+import { FavFeed, UserDetails } from './../container'
 import { FavHeader } from './../presentation'
 
 export default class Favorite extends Component {
@@ -28,12 +29,23 @@ export default class Favorite extends Component {
                 {/* header: app name,dimension */}
                 <FavHeader />
                 {/* home page with some posts (randomly posts)*/}
-                <FavFeed />
+                <MainNavigator />
             </View>
         )
     }
 }
 
+
+const MainNavigator = createStackNavigator({
+    PostFeed: { screen: FavFeed },
+    Details: { screen: UserDetails },
+
+}, {
+        headerMode: 'none',
+        cardStyle: {
+            backgroundColor: 'transparent',
+        },
+    });
 
 const styles = StyleSheet.create({
     icon: {

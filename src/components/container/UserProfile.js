@@ -35,7 +35,7 @@ export default class Profile extends PureComponent {
     }
 
     async componentDidMount() {
-        const username = 'borepstein'//this.props.username
+        const username = this.props.username
         await this.loadData(username);
         this.setState({
             imgprofil: `https://steemitimages.com/u/${username}/avatar`,
@@ -101,8 +101,6 @@ export default class Profile extends PureComponent {
             profilePics: posts
         })
     }
-
-
     render() {
         return (
             <ScrollView>
