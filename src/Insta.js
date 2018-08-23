@@ -10,8 +10,8 @@ import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigatio
 import { MainFeed, Login, Profile, CameraEx, Search, Favorite } from './components/screens';
 
 const Tabs = createBottomTabNavigator({
-    search: Search,
     feed: MainFeed,
+    search: Search,
     camera: CameraEx,
     favorite: Favorite,
     profile: Profile
