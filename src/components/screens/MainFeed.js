@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import config from './../config/index'
-import { PostFeed, UserProfile } from './../container'
+import { PostFeed, UserDetails } from './../container'
 import { PostHeader } from './../presentation'
 
 export default class MainFeed extends Component {
@@ -38,7 +38,7 @@ export default class MainFeed extends Component {
 
 const MainNavigator = createStackNavigator({
     PostFeed: { screen: PostFeed },
-    Details: { screen: UserProfile },
+    Details: { screen: UserDetails },
 
 }, {
         headerMode: 'none',
