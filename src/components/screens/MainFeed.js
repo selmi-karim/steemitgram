@@ -41,6 +41,7 @@ const MainNavigator = createStackNavigator({
     Details: { screen: UserProfile },
 
 }, {
+        headerMode: 'none',
         cardStyle: {
             backgroundColor: 'transparent',
         },
