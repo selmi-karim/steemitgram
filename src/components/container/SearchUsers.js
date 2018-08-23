@@ -8,67 +8,29 @@
 import React from "react";
 import {
   FlatList,
-  Text,
   View,
-  ActivityIndicator,
-  Button,
   RefreshControl,
 } from "react-native";
 import { DisplayUser } from '../presentation'
 
-const _renderItem = ({ item }) => (
-  <DisplayUser
-    name={item.username}
-  />
-);
 /** personalized separator in Flatlist */
 const _renderSeparator = () => (
   <View style={{ height: 1, backgroundColor: "grey", marginLeft: 80 }} />
 );
 
-/**personalized header in Flatlist */
-const _renderHeader = () => (
-  <View
-    style={{ backgroundColor: "#4fc3f7", justifyContent: "center" }}
-  >
-
-  </View>
-);
-/**footer (search other users if possible) */
-const _renderFooter = (isFetching, hasMoreResult, loadMore) => {
-  if (isFetching) {
-    return (
-      <ActivityIndicator
-        size="large"
-        animating={true}
-        color="#4fc3f7"
-        style={{ marginBottom: 12 }}
-      />
-    );
-  }
-  if (hasMoreResult) {
-    return <Button color="#4fc3f7" title="Show more" onPress={loadMore} />;
-  }
-
-  return null;
-};
-
-/** show when  */
-const _renderEmpty = () => (
-  <View style={{ height: 40, alignItems: "center", justifyContent: "center" }}>
-    <Text>No result</Text>
-  </View>
-);
-
-
 export default (UserList = props => (
   <FlatList
     data={props.data}
-    renderItem={_renderItem}
+    renderItem={({ item }) => {
+      //console.log('qqq: ' + props.navigation)
+      return <DisplayUser
+        name={item.username} navigation={props.navigation}
+      />
+    }}
     keyExtractor={item => item.username}
     ItemSeparatorComponent={_renderSeparator}
     refreshControl={
-      <RefreshControl refreshing={props.refreshing} onRefresh={props.refresh} />
+      < RefreshControl refreshing={props.refreshing} onRefresh={props.refresh} />
     }
   />
 ));
