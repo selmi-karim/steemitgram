@@ -9,28 +9,23 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { SearchBar } from 'react-native-elements';
-import { SearchUsers } from "../container";
-import _ from "lodash";
+import { SearchUsers, UserDetails } from "../container";
+import { createStackNavigator } from 'react-navigation'
 import config from '../config/index'
 
-export default class Search extends PureComponent {
-  state = {
-    isFetching: false,
-    data: [],
-    hasMoreResult: true,
-    refreshing: false,
-    textInput: '',
-  };
+class Search extends PureComponent {
 
-  // navigation options (icon,title)
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={config.images.search}
-        style={[styles.barIcon, { tintColor: tintColor }]}
-      />
-    ),
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFetching: false,
+      data: [],
+      hasMoreResult: true,
+      refreshing: false,
+      textInput: 'latech',
+    }
+  }
+
 
 
   // get users from data base
@@ -62,6 +57,7 @@ export default class Search extends PureComponent {
         });
         this.setState({
           data: data,
+          textInput: text,
         })
         //console.log('dat:' +data)
       });
@@ -103,7 +99,7 @@ export default class Search extends PureComponent {
    * After filtering data we would set the newly data in dataSource state. */
   //TODO: add string matching algorithme
   onChangeTextInput = (text) => {
-    console.log('change: ' + text);
+    //console.log('change: ' + text);
     this.synchronousFetchData(text.toLowerCase());
   }
 
@@ -114,6 +110,7 @@ export default class Search extends PureComponent {
   }
 
   render() {
+    console.log('nav' + this.props.navigation)
     return (
       <View style={styles.container}>
         {/* search users in database*/}
@@ -128,6 +125,7 @@ export default class Search extends PureComponent {
         {/* we send all users data to Container to be handled*/}
         <SearchUsers
           data={this.state.data}
+          navigation={this.props.navigation}
           isFetching={this.state.isFetching}
           loadMore={() => this.loadData(this.state.textInput)}
           hasMoreResult={this.state.hasMoreResult}
@@ -138,6 +136,37 @@ export default class Search extends PureComponent {
     );
   }
 }
+
+
+const SearchNavigator = createStackNavigator({
+  SearchFeed: { screen: Search },
+  SearchDetails: { screen: UserDetails },
+
+}, {
+    headerMode: 'none',
+    cardStyle: {
+      backgroundColor: 'transparent',
+    },
+  });
+
+
+
+export default class SearchApp extends PureComponent {
+  // navigation options (icon,title)
+  static navigationOptions = {
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={config.images.search}
+        style={[styles.barIcon, { tintColor: tintColor }]}
+      />
+    ),
+  };
+  render() {
+    return (<SearchNavigator />)
+  }
+}
+
+
 
 const styles = StyleSheet.create({
   container: {

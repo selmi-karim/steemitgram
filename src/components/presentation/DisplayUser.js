@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-06-01 10:56:13
  */
 
- import React from "react";
+import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 /*
@@ -14,7 +14,10 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-na
  */
 export default (DisplayUser = props => (
   <View>
-    <TouchableOpacity onPress={() => { Alert.alert(`${props.name}`); }} style={styles.row}>
+    <TouchableOpacity onPress={() => {
+      console.log('bla:'+props.navigation)
+      props.navigation.navigate('SearchDetails', { username: props.name });
+    }} style={styles.row}>
       <Image style={styles.picture} source={{ uri: `https://steemitimages.com/u/${props.name}/avatar` }} />
       <View>
         <Text style={styles.primaryText}>

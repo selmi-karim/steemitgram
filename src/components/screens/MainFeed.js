@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import config from './../config/index'
 import { PostFeed, UserDetails } from './../container'
