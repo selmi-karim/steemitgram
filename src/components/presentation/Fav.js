@@ -87,6 +87,7 @@ export default class Fav extends PureComponent {
     * with params: firstname, lastname, profile-picture and #take-picture#,  
     */
     render() {
+        console.log('this: '+this.props.item)
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
         Image.getSize(this.props.item.body[0], (width, height) => {
             const newHeight = height / (width / this.state.width)

@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react'
-import { Fav } from '../presentation'
+import { Post } from '../presentation'
 import { FlatList, StyleSheet, ActivityIndicator, View } from 'react-native'
 
 export default class FavFeed extends Component {
@@ -45,7 +45,8 @@ export default class FavFeed extends Component {
 
 
     _renderPost({ item }) {
-        return <Fav item={item} navigation={this.props.navigation} />
+        return <Post item={item} navigation={this.props.navigation}
+        />
     }
 
     _renderKey(item) {
@@ -53,7 +54,6 @@ export default class FavFeed extends Component {
     }
 
     render() {
-        //console.log("**" + this.props.navigation)
         if (this.state.data.length === 0) {
             return (
                 <View style={styles.ActivityIndicator}>
