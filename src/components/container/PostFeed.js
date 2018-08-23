@@ -45,7 +45,7 @@ export default class PostFeed extends Component {
 
 
     _renderPost({ item }) {
-        console.log('qqq: '+this.props)
+        //console.log('qqq: '+this.props)
         return <Post item={item}  {...this.props}   />
     }
     
@@ -54,7 +54,7 @@ export default class PostFeed extends Component {
     }
 
     render() {
-        console.log("**"+this.props.navigation)
+        //console.log("**"+this.props.navigation)
         if (this.state.data.length === 0) {
             return (
                 <View style={styles.ActivityIndicator}>
