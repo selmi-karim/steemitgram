@@ -9,9 +9,11 @@ import PostFeed from './PostFeed.js'
 import SearchUsers from './SearchUsers'
 import FavFeed from './FavFeed'
 import UserProfile from './UserProfile'
+import UserDetails from './UserDetails'
 export {
     PostFeed,
     SearchUsers,
     FavFeed,
-    UserProfile
+    UserProfile,
+    UserDetails
 }

@@ -55,7 +55,7 @@ export default class PostFeed extends Component {
     }
 
     render() {
-        console.log("**" + this.props.navigation)
+        //console.log("**" + this.props.navigation)
         if (this.state.data.length === 0) {
             return (
                 <View style={styles.ActivityIndicator}>
