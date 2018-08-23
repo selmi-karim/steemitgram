@@ -63,20 +63,6 @@ export default class Post extends PureComponent {
         })
     };
 
-    /**Double press function- not used yet */
-    onDoublePress = () => {
-        const time = new Date().getTime();
-        const delta = time - this.lastPress;
-
-        const DOUBLE_PRESS_DELAY = 400;
-        if (delta < DOUBLE_PRESS_DELAY) {
-            // Success double press
-            alert.alert('double click :D ')
-
-        }
-        this.lastPress = time;
-    };
-
 
     async componentDidMount() {
         const username = this.props.item.author
