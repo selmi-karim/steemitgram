@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 import { Fav } from '../presentation'
 import { FlatList, StyleSheet, ActivityIndicator, View } from 'react-native'
 
-export default class FAvFeed extends Component {
+export default class FavFeed extends Component {
 
     constructor(props) {
         super(props);
@@ -45,9 +45,7 @@ export default class FAvFeed extends Component {
 
 
     _renderPost({ item }) {
-        //console.log('qqq: '+this.props)
-        return <Fav item={item} navigation={this.props.navigation}
-        />
+        return <Fav item={item} navigation={this.props.navigation} />
     }
 
     _renderKey(item) {

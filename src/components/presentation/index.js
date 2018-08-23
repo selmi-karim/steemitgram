@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-06-05 13:19:51
  */
 
-import Post from './Post.js'
+import Post from './Post'
 import DisplayUser from './DisplayUser'
 import Fav from './Fav'
 import PostHeader from './PostHeader'

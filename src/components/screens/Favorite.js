@@ -29,14 +29,14 @@ export default class Favorite extends Component {
                 {/* header: app name,dimension */}
                 <FavHeader />
                 {/* home page with some posts (randomly posts)*/}
-                <MainNavigator />
+                <FavoriteNavigator />
             </View>
         )
     }
 }
 
 
-const MainNavigator = createStackNavigator({
+const FavoriteNavigator = createStackNavigator({
     PostFeed: { screen: FavFeed },
     Details: { screen: UserDetails },
 

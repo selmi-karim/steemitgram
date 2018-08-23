@@ -18,7 +18,9 @@ export default class Fav extends PureComponent {
             lastPress: 0,
             imgprofil: null,
             width: config.styleConstants.screenWidth,
-            height: config.styleConstants.screenHeight / 3
+            height: config.styleConstants.screenHeight / 3,
+            votes: this.props.item.net_votes
+
         }
     }
 
@@ -44,6 +46,15 @@ export default class Fav extends PureComponent {
     };
     // function picture like 
     likeToggle() {
+        if (this.state.liked) {
+            this.setState({
+                votes: this.state.votes - 1
+            })
+        } else {
+            this.setState({
+                votes: this.state.votes + 1
+            })
+        }
         this.setState({
             liked: !this.state.liked
         })
@@ -87,7 +98,9 @@ export default class Fav extends PureComponent {
             <View style={{ paddingTop: 10 }} >
                 {/* user bar (icon, username,config button */}
                 < View style={styles.userBar} >
-                    <TouchableOpacity onPress={() => { Alert.alert('redirection to profile') }} >
+                <TouchableOpacity onPress={() => {
+                        this.props.navigation.navigate('Details', { username: this.props.item.author });
+                    }} >
                         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
                             <Image
                                 style={styles.userPicture}
@@ -133,7 +146,7 @@ export default class Fav extends PureComponent {
                         <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
                     </TouchableOpacity>
                     <View style={styles.footer} >
-                        <Text> {this.props.item.net_votes} J’aime</Text>
+                        <Text> {this.state.votes} J’aime</Text>
                         <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
                         <Text> {this.props.item.pending_payout_value} </Text>
                     </View >

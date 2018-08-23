@@ -45,9 +45,7 @@ export default class PostFeed extends Component {
 
 
     _renderPost({ item }) {
-        //console.log('qqq: '+this.props)
-        return <Post item={item} navigation={this.props.navigation}
-        />
+        return <Post item={item} navigation={this.props.navigation}/>
     }
 
     _renderKey(item) {
@@ -55,7 +53,6 @@ export default class PostFeed extends Component {
     }
 
     render() {
-        //console.log("**" + this.props.navigation)
         if (this.state.data.length === 0) {
             return (
                 <View style={styles.ActivityIndicator}>
