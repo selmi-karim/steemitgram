@@ -22,7 +22,7 @@ export default class MainFeed extends Component {
                 style={[styles.barIcon, { tintColor: tintColor }]}
             />
         ),
-    }
+    };
 
     render() {
         return (
@@ -30,11 +30,22 @@ export default class MainFeed extends Component {
                 {/* header: app name,dimension */}
                 <PostHeader />
                 {/* home page with some posts (randomly posts)*/}
-                <PostFeed />
+                <MainNavigator />
             </View>
         )
     }
 }
+
+const MainNavigator = createStackNavigator({
+    PostFeed: { screen: PostFeed },
+    Details: { screen: UserProfile },
+
+}, {
+        cardStyle: {
+            backgroundColor: 'transparent',
+        },
+    });
+
 
 const styles = StyleSheet.create({
     barIcon: {

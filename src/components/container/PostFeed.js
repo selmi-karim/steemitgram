@@ -46,15 +46,16 @@ export default class PostFeed extends Component {
 
     _renderPost({ item }) {
         //console.log('qqq: '+this.props)
-        return <Post item={item}  {...this.props}   />
+        return <Post item={item} navigation={this.props.navigation}
+        />
     }
-    
+
     _renderKey(item) {
         return item.id.toString()
     }
 
     render() {
-        //console.log("**"+this.props.navigation)
+        console.log("**" + this.props.navigation)
         if (this.state.data.length === 0) {
             return (
                 <View style={styles.ActivityIndicator}>
@@ -67,7 +68,7 @@ export default class PostFeed extends Component {
             <FlatList
                 data={this.state.data}
                 keyExtractor={this._renderKey}
-                renderItem={this._renderPost}
+                renderItem={this._renderPost.bind(this)}   //<------
                 onEndReachedThreshold={1200}
                 onEndReached={({ distanceFromEnd }) => {
                     //console.log('on end reached ', distanceFromEnd);
