@@ -16,13 +16,14 @@ const { width } = Dimensions.get('window');
 
 export default class ImgProfile extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             data: [],
             imageIndex: 0,
             isImageViewVisible: false,
-            likes: null
+            likes: null,
+            username: this.props.username
         };
 
         this.renderFooter = this.renderFooter.bind(this);
@@ -50,7 +51,7 @@ export default class ImgProfile extends Component {
     }
 
     async componentDidMount() {
-        await this.loadData('borepstein');
+        await this.loadData(this.state.username);
     }
 
     renderFooter({ title, id, pending_payout_value }) {

@@ -90,7 +90,7 @@ export default class Post extends PureComponent {
                 {/* user bar (icon, username,config button */}
                 < View style={styles.userBar} >
                     <TouchableOpacity onPress={() => {
-                        this.props.navigation.navigate('Details');
+                        this.props.navigation.navigate('Details', { username: this.props.item.author });
                     }} >
                         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
                             <Image
