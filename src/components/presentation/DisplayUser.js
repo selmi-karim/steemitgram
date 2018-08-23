@@ -14,13 +14,12 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-na
  */
 export default (DisplayUser = props => (
   <View>
-    <TouchableOpacity onPress={() => { Alert.alert(`${props.name} ${props.firstName}`); }} style={styles.row}>
-      <Image style={styles.picture} source={{ uri: props.picture }} />
+    <TouchableOpacity onPress={() => { Alert.alert(`${props.name}`); }} style={styles.row}>
+      <Image style={styles.picture} source={{ uri: `https://steemitimages.com/u/${props.name}/avatar` }} />
       <View>
         <Text style={styles.primaryText}>
-          {`${props.name} ${props.firstName}`}
+          {`${props.name}`}
         </Text>
-        <Text style={styles.secondaryText}>{props.email}</Text>
       </View>
     </TouchableOpacity>
   </View>

@@ -13,16 +13,12 @@ import {
   ActivityIndicator,
   Button,
   RefreshControl,
-  Alert,
 } from "react-native";
 import { DisplayUser } from '../presentation'
 
 const _renderItem = ({ item }) => (
   <DisplayUser
-    name={item.name.last}
-    firstName={item.name.first}
-    picture={item.picture.thumbnail}
-    email={item.email}
+    name={item.username}
   />
 );
 /** personalized separator in Flatlist */
@@ -33,9 +29,9 @@ const _renderSeparator = () => (
 /**personalized header in Flatlist */
 const _renderHeader = () => (
   <View
-    style={{  backgroundColor: "#4fc3f7", justifyContent: "center" }}
-  > 
-    
+    style={{ backgroundColor: "#4fc3f7", justifyContent: "center" }}
+  >
+
   </View>
 );
 /**footer (search other users if possible) */
@@ -69,11 +65,8 @@ export default (UserList = props => (
   <FlatList
     data={props.data}
     renderItem={_renderItem}
-    keyExtractor={item => item.email}
+    keyExtractor={item => item.username}
     ItemSeparatorComponent={_renderSeparator}
-    ListFooterComponent={() =>
-      _renderFooter(props.isFetching, props.hasMoreResult, props.loadMore)}
-    ListEmptyComponent={_renderEmpty}
     refreshControl={
       <RefreshControl refreshing={props.refreshing} onRefresh={props.refresh} />
     }
