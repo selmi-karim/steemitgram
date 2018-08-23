@@ -6,7 +6,7 @@
  */
 
 import React, { PureComponent } from 'react';
-import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, Linking, FlatList } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, Alert, Linking } from 'react-native'
 import config from '../config/index'
 import { ImgProfile } from '../presentation';
 
@@ -14,13 +14,14 @@ export default class UserDetails extends PureComponent {
 
 
     /**fake profile pictures */
-    constructor() {
-        super();
+    constructor(props) {
+        super(props)
         this.state = {
             profilePics: [],
             location: null,
             coverImage: null,
-            imgprofil: null
+            imgprofil: null,
+            username: null,
         };
 
     }
@@ -35,10 +36,13 @@ export default class UserDetails extends PureComponent {
     }
 
     async componentDidMount() {
-        const username = 'borepstein'//this.props.username
+        const { navigation } = this.props;
+        const username = navigation.getParam('username')
+        //console.log('user: '+username)
         await this.loadData(username);
         this.setState({
             imgprofil: `https://steemitimages.com/u/${username}/avatar`,
+            username: username
         });
     }
 
@@ -69,25 +73,9 @@ export default class UserDetails extends PureComponent {
         return jsondata;
     }
 
-    /**
-     * 
-     * @param {String} username 
-     * return user posts from steemEnd api
-     */
-    async getUserPosts(username) {
-        const uri = "https://steemend.herokuapp.com/api/users/getUserPosts";
-        const response = await fetch(
-            `${uri}/${username}`
-        );
-        const jsondata = await response.json();
-        //console.log('user: ' + JSON.stringify(jsondata))
-        return jsondata;
-    }
-
     async loadData(username) {
         const followCount = await this.getFollowCount(username);
         const user = await this.getUserProfile(username);
-        const posts = await this.getUserPosts(username);
         this.setState({
             follower: followCount.follower_count,
             following: followCount.following_count,
@@ -96,10 +84,7 @@ export default class UserDetails extends PureComponent {
             posts: user.post_count,
             power: user.voting_power
         });
-        //console.log('posts:  '+posts)
-        this.setState({
-            profilePics: posts
-        })
+
     }
 
 
@@ -116,6 +101,9 @@ export default class UserDetails extends PureComponent {
                                 />
                             </View>
                             <View style={{ flex: 7, height: 100 }} >
+                                <View style={styles.editPro} >
+                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }} >{this.state.username}</Text>
+                                </View>
                                 <View style={{ flexDirection: 'row', flex: 1 }} >
                                     <View style={styles.statCol}>
                                         <Text>{this.state.posts}</Text>
@@ -130,26 +118,19 @@ export default class UserDetails extends PureComponent {
                                         <Text>Following</Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity style={styles.editPro} onPress={() => { Alert.alert('soon: edit interface') }} >
-                                    <View style={styles.editPro} >
-                                        <Text>Edit Profile</Text>
-                                    </View>
-                                </TouchableOpacity>
 
                             </View>
                         </View>
-                        <View style={styles.nameDisplay} >
-                            <Text style={styles.title}>{this.props.username}</Text>
-                        </View>
                         <View style={styles.info} >
-                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q='+this.state.location) }} >
+                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q=' + this.state.location) }} >
                                 <Image style={styles.icon} source={config.images.location} />
                                 <Text> {this.state.location} </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL(this.state.website) }} >
+                            {this.state.website === undefined ? null : <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL(this.state.website) }} >
                                 <Image style={styles.icon} source={config.images.website} />
                                 <Text> {this.state.website} </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
+
                             <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert('Your vote power is ' + this.state.power) }} >
                                 <Image style={styles.icon} source={config.images.power} />
                                 <Text> {this.state.power} </Text>
@@ -157,7 +138,8 @@ export default class UserDetails extends PureComponent {
 
                         </View >
                     </View>
-                    <ImgProfile item={this.state.profilePics} />
+                    {this.state.username === null ? null : <ImgProfile username={this.state.username} />}
+
 
 
                 </View>
