@@ -18,7 +18,6 @@ export default class UserDetails extends PureComponent {
         super(props)
         this.state = {
             profilePics: [],
-            location: null,
             coverImage: null,
             imgprofil: null,
             username: null,
@@ -122,19 +121,20 @@ export default class UserDetails extends PureComponent {
                             </View>
                         </View>
                         <View style={styles.info} >
-                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q=' + this.state.location) }} >
+                            {this.state.location === undefined ? null : <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q=' + this.state.location) }} >
                                 <Image style={styles.icon} source={config.images.location} />
                                 <Text> {this.state.location} </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
                             {this.state.website === undefined ? null : <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL(this.state.website) }} >
                                 <Image style={styles.icon} source={config.images.website} />
                                 <Text> {this.state.website} </Text>
                             </TouchableOpacity>}
-
-                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert('Your vote power is ' + this.state.power) }} >
+                            {this.state.power === undefined ? null : <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert('Your vote power is ' + this.state.power) }} >
                                 <Image style={styles.icon} source={config.images.power} />
                                 <Text> {this.state.power} </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
+
+                            
 
                         </View >
                     </View>

@@ -10,8 +10,8 @@ import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigatio
 import { MainFeed, Login, Profile, CameraEx, Search, Favorite } from './components/screens';
 
 const Tabs = createBottomTabNavigator({
-    feed: MainFeed,
     search: Search,
+    feed: MainFeed,
     camera: CameraEx,
     favorite: Favorite,
     profile: Profile
@@ -27,6 +27,8 @@ const MainStack = createSwitchNavigator({
     main: Tabs,
     login: Login
 })
+
+
 
 export default class Insta extends Component {
     render() {

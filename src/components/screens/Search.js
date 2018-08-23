@@ -110,7 +110,6 @@ class Search extends PureComponent {
   }
 
   render() {
-    console.log('nav' + this.props.navigation)
     return (
       <View style={styles.container}>
         {/* search users in database*/}

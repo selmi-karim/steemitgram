@@ -20,6 +20,7 @@ export default class ImgProfile extends Component {
 
         this.state = {
             data: [],
+            loading:true,
             imageIndex: 0,
             isImageViewVisible: false,
             likes: null,
@@ -42,6 +43,7 @@ export default class ImgProfile extends Component {
         const data = await this.fetchData(username);
         //const formatedData = this.fromArrayToSectionData(data);
         this.setState({
+            loading:false,
             data: [...this.state.data, ...data],
             likes: data.reduce((acc, image) => {
                 acc[image.id] = image.net_votes;
@@ -74,13 +76,16 @@ export default class ImgProfile extends Component {
 
     render() {
 
-        const { isImageViewVisible, imageIndex, data } = this.state;
+        const { isImageViewVisible, imageIndex, data,loading } = this.state;
         //console.log('img index: ' + imageIndex)
-        if (data.length === 0) {
+        if (loading) {
             return (
                 <ActivityIndicator size="large" color="#0000ff" />
             )
         } else {
+            if (data.length === 0) {
+                return <View style={styles.msg}><Text>No posts yet</Text></View>
+            }
             return (
                 <View style={styles.container}>
                     <View>
@@ -125,6 +130,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#fff',
         paddingTop: Platform.select({ ios: 0, android: 10 }),
+    },
+    msg: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     footer: {
         flex: 1,

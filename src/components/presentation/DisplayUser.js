@@ -15,7 +15,6 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-na
 export default (DisplayUser = props => (
   <View>
     <TouchableOpacity onPress={() => {
-      console.log('bla:'+props.navigation)
       props.navigation.navigate('SearchDetails', { username: props.name });
     }} style={styles.row}>
       <Image style={styles.picture} source={{ uri: `https://steemitimages.com/u/${props.name}/avatar` }} />
