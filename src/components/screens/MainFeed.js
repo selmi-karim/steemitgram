@@ -5,10 +5,11 @@
  * @Last Modified time: 2018-06-05 14:49:15
  */
 
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import { createStackNavigator } from 'react-navigation'
 import config from './../config/index'
-import { PostFeed } from './../container'
+import { PostFeed, UserProfile } from './../container'
 import { PostHeader } from './../presentation'
 
 export default class MainFeed extends Component {
@@ -29,11 +30,25 @@ export default class MainFeed extends Component {
                 {/* header: app name,dimension */}
                 <PostHeader />
                 {/* home page with some posts (randomly posts)*/}
-                <PostFeed />
+                <MainNavigator />
             </View>
         )
     }
 }
+
+const MainNavigator = createStackNavigator({
+    PostFeed: { screen: PostFeed },
+    Details: { screen: UserProfile },
+
+}, {
+        navigationOptions: {
+            headerTransparent: true,
+            headerStyle: {
+                borderBottomWidth: 0
+            }
+        }
+    });
+
 
 const styles = StyleSheet.create({
     barIcon: {

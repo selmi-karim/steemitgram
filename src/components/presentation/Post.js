@@ -12,8 +12,8 @@ import Menu, { MenuItem } from 'react-native-material-menu';
 
 export default class Post extends PureComponent {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props)
         this.state = {
             liked: false,
             lastPress: 0,
@@ -79,6 +79,7 @@ export default class Post extends PureComponent {
     * with params: firstname, lastname, profile-picture and #take-picture#,  
     */
     render() {
+        console.log(': '+this.props.navigation)
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
         Image.getSize(this.props.item.body[0], (width, height) => {
             const newHeight = height / (width / this.state.width)
@@ -87,10 +88,12 @@ export default class Post extends PureComponent {
             });
         })
         return (
-            <View style={{ paddingTop: 10 }} >
+            <View style={{ paddingTop: 10, backgroundColor: 'white' }} >
                 {/* user bar (icon, username,config button */}
                 < View style={styles.userBar} >
-                    <TouchableOpacity onPress={() => { Alert.alert('redirection to profile') }} >
+                    <TouchableOpacity onPress={() => {
+                        this.props.navigation.navigate('Details');
+                    }} >
                         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
                             <Image
                                 style={styles.userPicture}
