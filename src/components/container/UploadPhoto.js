@@ -38,7 +38,6 @@ export default class UploadPhoto extends Component {
         //this._clearStorage();
         this._checkLogged().then((auth) => {
             // Checks if the current visitor is a logged in user.
-            console.log(auth)
             if (auth) {
                 this.setState({
                     token: auth.split('?')[1].split('=')[1].split('&')[0],
@@ -79,18 +78,32 @@ export default class UploadPhoto extends Component {
             tags.push(item.label);
         });
         let { title, description } = this.state
-        console.log(title + ' ' + description + ' ' + tags)
+        //console.log(title + ' ' + description + ' ' + tags)
         if (title.length === 0 && description.length === 0) {
             this.setState({ loading: false })
             Alert.alert('ops')
         }
         else {
             // todo post to steemitend
-
+            let body = `title=${title}&body=${description}&tags=${tags}`
+            fetch('http://steemend.herokuapp.com/api/post/addPost', {
+                method: 'post',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + this.state.token,
+                }),
+                body: body
+            })
+                .then((response) => response.json())
+                .then((responseData) => {
+                    console.log('resp' + responseData);
+                })
+                .done()
             this.setState({ loading: false })
             this.props.navigation.goBack()
         }
     };
+
 
     _cancel = () => {
         this.props.navigation.goBack()
