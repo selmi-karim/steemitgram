@@ -9,7 +9,8 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native'
 import Modal from 'react-native-modal'
 import { ImagePicker, Permissions } from 'expo'
@@ -43,11 +44,6 @@ export default class TakePhoto extends React.Component {
                     <Text>Take a photo</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._cancel}>
-                <View style={styles.button}>
-                    <Text>Cancel</Text>
-                </View>
-            </TouchableOpacity>
 
         </View>
     );
@@ -70,18 +66,23 @@ export default class TakePhoto extends React.Component {
         }
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Modal
-                    isVisible={this.state.isModalVisible}
-                    animationIn={'slideInLeft'}
-                    animationOut={'slideOutRight'}
-                >
-                    {this._renderModal()}
-                </Modal>
+                <TouchableOpacity onPress={() => this.setState({ isModalVisible: true })}>
+                    <View style={styles.button}>
+                        <Text>Add New Photo</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableWithoutFeedback onPress={() => { this.setState({ isModalVisible: false }) }}>
+                    <Modal
+                        isVisible={this.state.isModalVisible}
+                        animationIn={'slideInLeft'}
+                        animationOut={'slideOutRight'}
+                    >
+                        {this._renderModal()}
+                    </Modal>
+                </TouchableWithoutFeedback>
             </View>
         )
     }
-
-
     _maybeRenderUploadingOverlay = () => {
         if (this.state.uploading) {
             return (
@@ -131,12 +132,8 @@ export default class TakePhoto extends React.Component {
     }
 
 
-    refresh() {
-        this.setState({ isModalVisible: true })
-    }
-
     _handleImagePicked = async pickerResult => {
-        /*let uploadResponse, uploadResult
+        let uploadResponse, uploadResult
         try {
             this.setState({ isModalVisible: false, uploading: true })
 
@@ -151,17 +148,22 @@ export default class TakePhoto extends React.Component {
             console.log({ e })
             alert('Upload failed, sorry :(')
         } finally {
+            let { image } = this.state
             this.setState({ uploading: false })
-            this.props.navigation.navigate('Upload', {
-                image: this.state.image, onGoBack: () => this.refresh(),
-            })
-        }*/
+            if (image) {
+                this.props.navigation.navigate('Upload', {
+                    image: this.state.image})
+            }
+            else {
+                this.setState({ isModalVisible: false })
+            }
+        }/*
         this.setState({ isModalVisible: false, uploading: true })
         const ur = 'https://cdn2.vectorstock.com/i/1000x1000/75/41/abstract-cute-angry-cartoon-pinguin-isolated-on-a-vector-17507541.jpg'
         this.setState({ uploading: false })
         this.props.navigation.navigate('Upload', {
-            image: ur, onGoBack: () => this.refresh(),
-        })
+            image: ur
+        })*/
     }
 }
 

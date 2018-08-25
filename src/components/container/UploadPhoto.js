@@ -24,8 +24,8 @@ export default class UploadPhoto extends Component {
 
     async componentDidMount() {
         const { navigation } = this.props;
-        //const image = navigation.getParam('image')
-        this.setState({ image: 'https://avatarko.ru/img/kartinka/11/multfilm_pingvin_10797.jpg' });
+        const image = navigation.getParam('image')
+        this.setState({ image });
 
     }
 
@@ -44,17 +44,17 @@ export default class UploadPhoto extends Component {
 
     _post = () => {
         //console.log('back' + this.props.navigation)
-        this.props.navigation.goBack()
+        let { title, description } = this.state
+        if (title.length === 0 && description.length === 0)
+            Alert.alert(ops)
+        else 
+            this.props.navigation.goBack()
     };
 
     _cancel = () => {
-        console.log('back' + this.props.navigation)
         this.props.navigation.goBack()
     };
 
-    componentWillUnmount() {
-        this.props.navigation.state.params.onGoBack();
-    }
 
 
     render() {
