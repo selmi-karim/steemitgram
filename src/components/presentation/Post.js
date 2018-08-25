@@ -63,6 +63,11 @@ export default class Post extends PureComponent {
         })
     };
 
+    _getTags = (item) => {
+        const tags = (JSON.parse(item).tags).join(' #')
+        return <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }} >#{tags}</Text>
+    } 
+
 
     async componentDidMount() {
         const username = this.props.item.author
@@ -130,7 +135,7 @@ export default class Post extends PureComponent {
                 </TouchableOpacity >
                 <View style={{ flexDirection: 'column', alignItems: 'flex-start', paddingHorizontal: 10 }}>
                     <Text style={{ fontWeight: 'bold' }} >@{this.props.item.title}  </Text>
-                    <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }} >#{this.props.item.category}</Text>
+                    {this._getTags(this.props.item.json_metadata)}
                 </View>
                 {/* footer msg,like,next buttons */}
                 < View style={styles.iconBar} >

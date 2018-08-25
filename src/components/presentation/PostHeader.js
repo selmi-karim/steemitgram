@@ -13,8 +13,6 @@ import {Util} from 'expo'
 import config from '../config/index'
 import Modal from 'react-native-modal' // 2.4.0
 import ReadMore from 'react-native-read-more-text'
-import Modal from "react-native-modal"
-
 
 
 /*
