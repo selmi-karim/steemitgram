@@ -16,6 +16,7 @@ import { ImagePicker, Permissions } from 'expo'
 
 export default class TakePhoto extends React.Component {
 
+
     constructor(props) {
         super(props)
         this.state = {
@@ -42,6 +43,11 @@ export default class TakePhoto extends React.Component {
                     <Text>Take a photo</Text>
                 </View>
             </TouchableOpacity>
+            <TouchableOpacity onPress={this._cancel}>
+                <View style={styles.button}>
+                    <Text>Cancel</Text>
+                </View>
+            </TouchableOpacity>
 
         </View>
     );
@@ -64,7 +70,6 @@ export default class TakePhoto extends React.Component {
         }
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text> hello</Text>
                 <Modal
                     isVisible={this.state.isModalVisible}
                     animationIn={'slideInLeft'}
@@ -120,8 +125,14 @@ export default class TakePhoto extends React.Component {
         }
     }
 
+    _cancel = () => {
+        this.setState({ isModalVisible: false })
+
+    }
+
+
     refresh() {
-        this.setState({ isModalVisible: true})
+        this.setState({ isModalVisible: true })
     }
 
     _handleImagePicked = async pickerResult => {
@@ -146,11 +157,11 @@ export default class TakePhoto extends React.Component {
             })
         }*/
         this.setState({ isModalVisible: false, uploading: true })
-        const ur ='https://cdn2.vectorstock.com/i/1000x1000/75/41/abstract-cute-angry-cartoon-pinguin-isolated-on-a-vector-17507541.jpg'
+        const ur = 'https://cdn2.vectorstock.com/i/1000x1000/75/41/abstract-cute-angry-cartoon-pinguin-isolated-on-a-vector-17507541.jpg'
         this.setState({ uploading: false })
-            this.props.navigation.navigate('Upload', {
-                image: ur, onGoBack: () => this.refresh(),
-            })
+        this.props.navigation.navigate('Upload', {
+            image: ur, onGoBack: () => this.refresh(),
+        })
     }
 }
 
@@ -212,5 +223,9 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.1)',
 
     },
+    icon: {
+        width: 30,
+        height: 30,
+    }
 
 });

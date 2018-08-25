@@ -25,7 +25,7 @@ export default class PostFeed extends Component {
             `${uri}?size=10`
         );
         const jsondata = await response.json();
-        return jsondata;
+        return jsondata
     }
 
     async loadData(page) {
