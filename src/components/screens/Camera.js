@@ -1,128 +1,31 @@
 /*
  * @Author: kerim-selmi, karimation 
- * @Date: 2018-05-08 10:31:57 
+ * @Date: 2018-07-24 10:33:17 
  * @Last Modified by: kerim-selmi, karimation
- * @Last Modified time: 2018-06-01 14:17:39
  */
 
- import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image, Vibration, AppState} from 'react-native';
-import { Camera, Permissions, FileSystem, } from 'expo';
-import config from '../config/index'
+import React, { Component } from 'react';
+import { View } from 'react-native'
+import { createStackNavigator } from 'react-navigation'
+import takePhoto from './../container/TakePhoto'
+import upload from './../container/UploadPhoto'
 
-export default class CameraEx extends React.Component {
-
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={config.images.camera}
-        style={[styles.barIcon, {tintColor: tintColor}]}
-      />
-    ),
-  };
-  // states for permession and cam type
-  state = {
-    hasCameraPermission: null,
-    type: 'back'
-  };
-
-  // function lanched before components appeared, (ask user for cam-permission)
-  async componentWillMount() {
-    console.log('route name: '+this.props.navigation.state.routeName);
-    console.log('is focused: '+this.props.navigation.isFocused());
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-  }
-
-  // function lanched after components appeared, (we prepare phone local fs to store images)
-  // i will change it with our externel data base
-  componentDidMount() {
-    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-      console.log(e, 'Directory exists');
-    });
-    
-  }
-
-  // async function to take picture and save it in phone local fs
-  takePicture = async function() {
-    if (this.camera) {
-      this.camera.takePictureAsync().then(data => {
-        FileSystem.moveAsync({
-          from: data.uri,
-          to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
-        }).then(() => {
-          this.setState({
-            photoId: this.state.photoId + 1,
-          });
-          Vibration.vibrate();
-        });
-        //console.log(data);
-      });
-    }
-  };
+export default class Camera extends Component {
 
   render() {
-    const { hasCameraPermission } = this.state;
-    if (hasCameraPermission === null) {
-      console.log('hascameraPermission is null')
-      return null;
-    } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <Camera
-            style={{ flex: 1 }}
-            type={this.state.type}
-            ref={ref => {
-              this.camera = ref;
-            }}>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-              }}>
-              <TouchableOpacity
-                style={[
-                  styles.flipButton,
-                  styles.picButton,
-                  { flex: 0.3, alignSelf: 'flex-end' },
-                ]}
-                onPress={this.takePicture.bind(this)}>
-                <Text style={styles.flipText}> SNAP </Text>
-              </TouchableOpacity>
-            </View>
-          </Camera>
-        </View>
-      );
-    }
+    return (
+      <View style={{ flex: 1, width: 100 + '%', height: 100 + '%' }}>
+        <CamNavigation />
+      </View>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  flipButton: {
-    flex: 0.3,
-    height: 40,
-    marginHorizontal: 2,
-    marginBottom: 10,
-    marginTop: 20,
-    borderRadius: 8,
-    borderColor: 'white',
-    borderWidth: 1,
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  flipText: {
-    color: 'white',
-    fontSize: 15,
-  },
-  picButton: {
-    backgroundColor: 'darkseagreen',
-  },
-  barIcon: {
-    width: 26,
-    height: 26,
-  },
-});
+const CamNavigation = createStackNavigator({
+  TakePhoto: { screen: takePhoto },
+  Upload: { screen: upload },
+}, {
+    headerMode: 'none',
+    cardStyle: {
+      backgroundColor: 'transparent',
+    },
+  });
