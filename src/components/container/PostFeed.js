@@ -10,7 +10,6 @@ import { Post } from '../presentation'
 import { FlatList, StyleSheet, ActivityIndicator, View } from 'react-native'
 
 export default class PostFeed extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
