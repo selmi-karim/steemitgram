@@ -23,7 +23,7 @@ export default class FavFeed extends Component {
     async fetchData(page) {
         const uri = "https://steemend.herokuapp.com/api/post/new";
         const response = await fetch(
-            `${uri}?size=1`
+            `${uri}?size=10`
         );
         const jsondata = await response.json();
         return jsondata;
@@ -42,8 +42,6 @@ export default class FavFeed extends Component {
     async componentDidMount() {
         await this.loadData(this.state.page);
     }
-
-
     _renderPost({ item }) {
         return <Post item={item} navigation={this.props.navigation}
         />
