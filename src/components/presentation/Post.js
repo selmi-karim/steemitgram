@@ -64,7 +64,7 @@ export default class Post extends PureComponent {
     };
 
     _getTags = (item) => {
-        const tags = (JSON.parse(item).tags).join(' #')
+        const tags = (JSON.parse(item).tags).join(' #').replace('steepshot','steemitgram')
         return <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }} >#{tags}</Text>
     } 
 
