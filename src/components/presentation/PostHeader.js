@@ -11,8 +11,9 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, BackHand
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu'
 import {Util} from 'expo'
 import config from '../config/index'
-import Modal from 'react-native-modal'; // 2.4.0
+import Modal from 'react-native-modal' // 2.4.0
 import ReadMore from 'react-native-read-more-text'
+import Modal from "react-native-modal"
 
 
 

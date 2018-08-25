@@ -77,7 +77,6 @@ export default class Post extends PureComponent {
     * with params: firstname, lastname, profile-picture and #take-picture#,  
     */
     render() {
-        //console.log(': '+this.props.navigation)
         const heartIconColor = (this.state.liked) ? 'rgb(252,61,57)' : null
         Image.getSize(this.props.item.body[0], (width, height) => {
             const newHeight = height / (width / this.state.width)
@@ -88,11 +87,11 @@ export default class Post extends PureComponent {
         return (
             <View style={{ paddingTop: 10, backgroundColor: 'white' }} >
                 {/* user bar (icon, username,config button */}
-                < View style={styles.userBar} >
+                <View style={styles.userBar} >
                     <TouchableOpacity onPress={() => {
                         this.props.navigation.navigate('Details', { username: this.props.item.author });
                     }} >
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }} >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }} >
                             <Image
                                 style={styles.userPicture}
                                 source={{ uri: this.state.imgprofil }}
@@ -119,6 +118,7 @@ export default class Post extends PureComponent {
                     </View>
 
                 </View >
+
                 {/* images display */}
                 < TouchableOpacity onLongPress={() => { this.likeToggle() }
                 } >
@@ -128,18 +128,21 @@ export default class Post extends PureComponent {
                     />
 
                 </TouchableOpacity >
-
+                <View style={{ flexDirection: 'column', alignItems: 'flex-start', paddingHorizontal: 10 }}>
+                    <Text style={{ fontWeight: 'bold' }} >@{this.props.item.title}  </Text>
+                    <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }} >#{this.props.item.category}</Text>
+                </View>
                 {/* footer msg,like,next buttons */}
                 < View style={styles.iconBar} >
                     <TouchableOpacity onPress={() => { this.likeToggle() }} >
                         <Image style={[styles.icon, { tintColor: heartIconColor }]} source={config.images.heartIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { Alert.alert('soon: add comments') }} >
-                        <Image style={[styles.icon, { height: 35, width: 35 }]} source={config.images.bubbleIcon} />
+                        <Image style={[styles.icon, { height: 30, width: 30 }]} source={config.images.bubbleIcon} />
                     </TouchableOpacity>
                     <View style={styles.footer} >
                         <Text> {this.state.votes} J’aime</Text>
-                        <Image style={[styles.icon, { height: 25, width: 25 }]} source={config.images.upArrow} />
+                        <Image style={[styles.icon, { height: 20, width: 20 }]} source={config.images.upArrow} />
                         <Text> {this.props.item.pending_payout_value} </Text>
                     </View >
                 </View >
@@ -156,7 +159,6 @@ const styles = StyleSheet.create({
         height: config.styleConstants.rowHeight,
         backgroundColor: '#fff',
         flexDirection: 'row',
-        paddingHorizontal: 10,
         justifyContent: 'space-between',
     },
     userPicture: {
@@ -176,8 +178,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     icon: {
-        height: 40,
-        width: 40,
+        height: 35,
+        width: 35,
         marginLeft: 5,
     },
     commentBar: {
@@ -194,6 +196,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
+        paddingRight: 5
     },
     plusIcon: {
         height: 25,
