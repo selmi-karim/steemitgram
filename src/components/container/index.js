@@ -10,10 +10,14 @@ import SearchUsers from './SearchUsers'
 import FavFeed from './FavFeed'
 import UserProfile from './UserProfile'
 import UserDetails from './UserDetails'
+import UploadPhoto from './UploadPhoto'
+import TakePhoto from './TakePhoto'
 export {
     PostFeed,
     SearchUsers,
     FavFeed,
     UserProfile,
-    UserDetails
+    UserDetails,
+    UploadPhoto,
+    TakePhoto
 }
