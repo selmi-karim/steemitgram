@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     Text, View, Image, Clipboard, Share, StyleSheet, Dimensions,
-    ScrollView, Alert, TouchableOpacity, ActivityIndicator
+    ScrollView, Alert, TouchableOpacity, ActivityIndicator, AsyncStorage
 } from 'react-native'
 import { TextField } from 'react-native-material-textfield';
 import { TagSelect } from 'react-native-tag-select';
@@ -22,12 +22,42 @@ export default class UploadPhoto extends Component {
     }
 
 
+    /**
+    *  Fetch the token from storage then navigate to our appropriate  place
+    */
+    _checkLogged = async () => {
+        try {
+            return await AsyncStorage.getItem('auth');
+        } catch (e) {
+            console.warn(e)
+            return null
+        }
+    };
+
+    componentWillMount() {
+        //this._clearStorage();
+        this._checkLogged().then((auth) => {
+            // Checks if the current visitor is a logged in user.
+            console.log(auth)
+            if (auth) {
+                this.setState({
+                    token: auth.split('?')[1].split('=')[1].split('&')[0],
+                })
+            }
+        })
+    }
+
+
     async componentDidMount() {
         const { navigation } = this.props;
         const image = navigation.getParam('image')
         this.setState({ image });
 
     }
+
+
+
+
 
     _share = () => {
         Share.share({
@@ -43,12 +73,23 @@ export default class UploadPhoto extends Component {
     };
 
     _post = () => {
-        //console.log('back' + this.props.navigation)
+        this.setState({ loading: true })
+        let tags = []
+        this.tag.itemsSelected.forEach(function (item) {
+            tags.push(item.label);
+        });
         let { title, description } = this.state
-        if (title.length === 0 && description.length === 0)
-            Alert.alert(ops)
-        else 
+        console.log(title + ' ' + description + ' ' + tags)
+        if (title.length === 0 && description.length === 0) {
+            this.setState({ loading: false })
+            Alert.alert('ops')
+        }
+        else {
+            // todo post to steemitend
+
+            this.setState({ loading: false })
             this.props.navigation.goBack()
+        }
     };
 
     _cancel = () => {
