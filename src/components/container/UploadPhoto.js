@@ -16,7 +16,6 @@ export default class UploadPhoto extends Component {
             width: Dimensions.get('window').width,
             height: Dimensions.get('window').height / 4,
             title: '',
-            description: '',
             loading: false
         }
     }
@@ -25,7 +24,7 @@ export default class UploadPhoto extends Component {
     /**
     *  Fetch the token from storage then navigate to our appropriate  place
     */
-    _checkLogged = async () => {
+    _getToken = async () => {
         try {
             return await AsyncStorage.getItem('auth');
         } catch (e) {
@@ -36,11 +35,12 @@ export default class UploadPhoto extends Component {
 
     componentWillMount() {
         //this._clearStorage();
-        this._checkLogged().then((auth) => {
+        this._getToken().then((auth) => {
             // Checks if the current visitor is a logged in user.
+            console.log('token: ' + auth)
             if (auth) {
                 this.setState({
-                    token: auth.split('?')[1].split('=')[1].split('&')[0],
+                    token: JSON.parse(auth).token,
                 })
             }
         })
@@ -73,30 +73,31 @@ export default class UploadPhoto extends Component {
 
     _post = () => {
         this.setState({ loading: true })
-        let tags = []
+        let tags = ""
         this.tag.itemsSelected.forEach(function (item) {
-            tags.push(item.label);
+            tags += item.label + "#";
         });
-        let { title, description } = this.state
+        let { title, image, token } = this.state
         //console.log(title + ' ' + description + ' ' + tags)
-        if (title.length === 0 && description.length === 0) {
+        if (title.length === 0 && image.length === 0) {
             this.setState({ loading: false })
             Alert.alert('ops')
         }
         else {
             // todo post to steemitend
-            let body = `title=${title}&body=${description}&tags=${tags}`
-            fetch('http://steemend.herokuapp.com/api/post/addPost', {
+            let body = {title: title, description: image,tags:tags} 
+            fetch('https://steemend.herokuapp.com/api/post/addPost', {
                 method: 'post',
                 headers: new Headers({
+                    Accept: 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + this.state.token,
+                    'Authorization': 'Bearer ' + token,
                 }),
-                body: body
+                body: JSON.stringify(body)
             })
                 .then((response) => response.json())
                 .then((responseData) => {
-                    console.log('resp' + responseData);
+                    console.log('resp' + JSON.stringify(responseData));
                 })
                 .done()
             this.setState({ loading: false })
@@ -143,12 +144,6 @@ export default class UploadPhoto extends Component {
                                 value={title}
                                 onChangeText={(title) => this.setState({ title })}
                                 characterRestriction={50}
-                            />
-                            <TextField
-                                label='Description'
-                                value={description}
-                                onChangeText={(description) => this.setState({ description })}
-                                characterRestriction={140}
                             />
                         </View>
                         <View style={{ paddingLeft: 10 }} >
