@@ -32,7 +32,6 @@ export default class Favorite extends PureComponent {
             // Checks if the current visitor is a logged in user.
             //console.log('auth: ' + auth)
             if (auth) {
-                //console.log('username->:  '+auth.split("&")[2].split('=')[1])
                 this.setState({
                     username: JSON.parse(auth).username,
                 });
