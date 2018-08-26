@@ -34,7 +34,7 @@ export default class Favorite extends PureComponent {
             if (auth) {
                 //console.log('username->:  '+auth.split("&")[2].split('=')[1])
                 this.setState({
-                    username: auth.split("&")[2].split('=')[1],
+                    username: JSON.parse(auth).username,
                 });
             }
         })
