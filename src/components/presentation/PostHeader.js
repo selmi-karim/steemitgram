@@ -229,7 +229,7 @@ export default class PostHeader extends PureComponent {
         return (
             <View
                 style={styles.tempNav} >
-                <Text styltouche={{ fontSize: 23 }} style={{ position: 'absolute' }}> SteemitGramm </Text>
+                <Text styltouche={{ fontSize: 23 }} style={{ position: 'absolute' }}> SteemitGram </Text>
                 <View style={{
                     flexDirection: 'row',
                     marginLeft: 'auto'

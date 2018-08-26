@@ -36,6 +36,7 @@ export default class ImgProfile extends Component {
             `${uri}/${username}`
         );
         const jsondata = await response.json();
+        //console.log('js: '+jsondata)
         return jsondata;
     }
 

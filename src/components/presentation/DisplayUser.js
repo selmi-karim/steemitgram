@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: 18
+    marginRight: 18,
+    borderWidth: 2,
+    borderColor: '#61c2e2',
   },
   primaryText: {
     fontWeight: "bold",

@@ -171,6 +171,8 @@ const styles = StyleSheet.create({
         width: 40,
         borderRadius: 20,
         marginRight: 5,
+        borderWidth: 1,
+        borderColor: '#61c2e2',
     },
     iconBar: {
         height: config.styleConstants.rowHeight,
