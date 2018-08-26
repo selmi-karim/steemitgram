@@ -1,4 +1,4 @@
-# Steemitgramm
+# Steemitgram
 <div>
 <img src="screenshots/home.png" width="280" height="400">
 <img src="screenshots/search.png" width="280" height="400">
@@ -6,7 +6,7 @@
 </div>
 
 # Description
-Steemitgramm it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content, 
+Steemitgram it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content, 
 curating quality content by upvoting and by holding Steem based currencies in a vest fund, which generates interest.
 
 # Details
@@ -26,7 +26,7 @@ Steem Power was implemented by the development team with the aim of attracting l
 
 
 # How it works
-So, you’ve published an picture on SteemitGramm. Other users can vote for it, raising its ranking. The users’ votes have different value, depending of number of SP they own. The more votes the images has, the more earn the author and the users who vote for it and actively comment (they are called curators). The end reward is distributed the following way: 75% for author and 25% for curators. Half of reward is paid in Steem Power, and half in Steem Dollars.
+So, you’ve published an picture on Steemitgram. Other users can vote for it, raising its ranking. The users’ votes have different value, depending of number of SP they own. The more votes the images has, the more earn the author and the users who vote for it and actively comment (they are called curators). The end reward is distributed the following way: 75% for author and 25% for curators. Half of reward is paid in Steem Power, and half in Steem Dollars.
 
 One must remember that the published images are stored in the blockchain, so they are impossible to delete. So one should think twice before publish something in the social network.
 
