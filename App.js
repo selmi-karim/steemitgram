@@ -33,8 +33,10 @@ export default class App extends Component {
 
   componentDidMount() {
     //this._clearStorage();
+
     this._checkLogged().then((auth) => {
       // Checks if the current visitor is a logged in user.
+      //console.log('au: '+auth)
       if (auth) {
         this.setState({
           logged: true,
