@@ -14,13 +14,13 @@ export default class Profile extends PureComponent {
 
 
     /**fake profile pictures */
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            profilePics: [],
             location: null,
             coverImage: null,
-            imgprofil: null
+            imgprofil: null,
+            username: this.props.username
         };
 
     }
@@ -35,7 +35,7 @@ export default class Profile extends PureComponent {
     }
 
     async componentDidMount() {
-        const username = this.props.username
+        const username = this.state.username
         await this.loadData(username);
         this.setState({
             imgprofil: `https://steemitimages.com/u/${username}/avatar`,
@@ -87,7 +87,6 @@ export default class Profile extends PureComponent {
     async loadData(username) {
         const followCount = await this.getFollowCount(username);
         const user = await this.getUserProfile(username);
-        const posts = await this.getUserPosts(username);
         this.setState({
             follower: followCount.follower_count,
             following: followCount.following_count,
@@ -96,10 +95,7 @@ export default class Profile extends PureComponent {
             posts: user.post_count,
             power: user.voting_power
         });
-        //console.log('posts:  '+posts)
-        this.setState({
-            profilePics: posts
-        })
+
     }
     render() {
         return (
@@ -113,7 +109,11 @@ export default class Profile extends PureComponent {
                                     source={{ uri: this.state.imgprofil }}
                                 />
                             </View>
+
                             <View style={{ flex: 7, height: 100 }} >
+                                <View style={styles.editPro} >
+                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }} >{this.state.username}</Text>
+                                </View>
                                 <View style={{ flexDirection: 'row', flex: 1 }} >
                                     <View style={styles.statCol}>
                                         <Text>{this.state.posts}</Text>
@@ -128,19 +128,13 @@ export default class Profile extends PureComponent {
                                         <Text>Following</Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity style={styles.editPro} onPress={() => { Alert.alert('soon: edit interface') }} >
-                                    <View style={styles.editPro} >
-                                        <Text>Edit Profile</Text>
-                                    </View>
-                                </TouchableOpacity>
+
 
                             </View>
                         </View>
-                        <View style={styles.nameDisplay} >
-                            <Text style={styles.title}>{this.props.username}</Text>
-                        </View>
+
                         <View style={styles.info} >
-                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q='+this.state.location) }} >
+                            <TouchableOpacity style={styles.clickbtn} onPress={() => { Linking.openURL('http://maps.google.co.in/maps?q=' + this.state.location) }} >
                                 <Image style={styles.icon} source={config.images.location} />
                                 <Text> {this.state.location} </Text>
                             </TouchableOpacity>
@@ -155,8 +149,7 @@ export default class Profile extends PureComponent {
 
                         </View >
                     </View>
-                    <ImgProfile item={this.state.profilePics} />
-
+                    <ImgProfile username={this.state.username} />
 
                 </View>
             </ScrollView>
@@ -204,7 +197,9 @@ const styles = StyleSheet.create({
     userPicture: {
         height: 80,
         borderRadius: 40,
-        width: 80
+        width: 80,
+        borderWidth: 2,
+        borderColor: '#61c2e2',
     },
     statCol: {
         flexDirection: 'column',

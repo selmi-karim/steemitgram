@@ -188,7 +188,9 @@ const styles = StyleSheet.create({
     userPicture: {
         height: 80,
         borderRadius: 40,
-        width: 80
+        width: 80,
+        borderWidth: 2,
+        borderColor: '#61c2e2',
     },
     statCol: {
         flexDirection: 'column',
