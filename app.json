@@ -3,10 +3,14 @@
     "sdkVersion": "27.0.0",
     "name": "steemitgram",
     "description": "Steemitgram it is a blockchain-based social media platform where anyone can earn rewards by posting relevant content curating quality content by upvoting and by holding Steem based currencies in a vest fund which generates interest.",
-
+    "slug":"latech",	
     "privacy": "unlisted",
     "android": {
       "package": "com.latech.steemitgram"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.mycompany.myapp"
     }
   }
 }

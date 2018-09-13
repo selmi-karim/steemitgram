@@ -129,7 +129,7 @@ export default class UserDetails extends PureComponent {
                                 <Image style={styles.icon} source={config.images.website} />
                                 <Text> {this.state.website} </Text>
                             </TouchableOpacity>}
-                            {this.state.power === undefined ? null : <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert('Your vote power is ' + this.state.power) }} >
+                            {this.state.power === undefined ? null : <TouchableOpacity style={styles.clickbtn} onPress={() => { Alert.alert(this.state.username+' vote power is ' + this.state.power) }} >
                                 <Image style={styles.icon} source={config.images.power} />
                                 <Text> {this.state.power} </Text>
                             </TouchableOpacity>}

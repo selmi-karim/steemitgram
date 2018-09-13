@@ -37,7 +37,6 @@ export default class UploadPhoto extends Component {
         //this._clearStorage();
         this._getToken().then((auth) => {
             // Checks if the current visitor is a logged in user.
-            console.log('token: ' + auth)
             if (auth) {
                 this.setState({
                     token: JSON.parse(auth).token,
