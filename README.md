@@ -55,9 +55,7 @@ yarn start
      - comments
      - config
      - like/share   
- - Search screen (ready for tests)
- 
-     - string matching algorithm
+ - Search screen
  - Messaging/new message screens
  - Profile/profile edit & options screens
  - Preview of stories
